@@ -1,0 +1,13 @@
+.top-header{
+    display: flex;
+    justify-content: space-between !important;
+}
+
+.nav-link{
+ margin: 35px; 
+}
+
+.bottom-header{
+    display: flex;
+    justify-content: space-between !important;
+}
