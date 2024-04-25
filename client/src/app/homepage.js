@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import '../style/homepage.css';
 import QuestionList from '../pages/QuestionList';
+import QuestionAdd from '../pages/QuestionAdd';
 
 
 
@@ -14,6 +15,9 @@ function StartButton() {
       <div className="centered-button">
         <nav>
           <Link to="/questions/1" className="start-button">Jetzt Starten</Link>
+        </nav>
+        <nav>
+          <Link to="/question" className="start-button">Add new Question</Link>
         </nav>
       </div>
     )
@@ -28,6 +32,7 @@ function App() {
       <div className="app">
         <StartButton />
         <Routes>
+          <Route path="/question" element={<QuestionAdd />} />
           <Route path="/questions/1" element={<QuestionList id="1"/>} />
           <Route path="/questions/2" element={<QuestionList id="2"/>} />
           <Route path="/questions/3" element={<QuestionList id="3"/>} />

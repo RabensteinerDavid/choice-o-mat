@@ -23,6 +23,7 @@ const QuestionList = ({ id }) => {
                 setQuestions(filteredQuestions); 
             } catch (error) {
                 console.error('Error fetching questions:', error);
+                console.error('Stack trace:', error.stack);
             }
         };
         fetchData();
