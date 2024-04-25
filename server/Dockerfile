@@ -8,7 +8,7 @@ COPY ./package-lock.json ./
 # Make sure you have a package-lock.json file
 
 # Install dependencies using npm
-RUN npm install -g nodemon
+RUN npm install
 
 # Copy the rest of your application code
 COPY . .
@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3001
 
 # Command to run your app
-CMD ["npm", "start" ]
+CMD ["npm", "start","dev" ]

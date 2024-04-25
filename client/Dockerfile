@@ -7,7 +7,7 @@ COPY ./package.json ./
 COPY ./package-lock.json ./
 
 # Install dependencies using npm
-RUN npm install -g nodemon
+RUN npm install
 
 # Copy the rest of your application code
 COPY . .
