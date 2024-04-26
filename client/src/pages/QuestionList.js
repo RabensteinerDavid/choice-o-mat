@@ -11,6 +11,7 @@ import QuestionEight from './questions/QuestionEight';
 import QuestionNine from './questions/QuestionNine';
 import QuestionTen from './questions/QuestionTen';
 import { useParams } from 'react-router-dom';
+import StartSide from './questions/Startside.js';
 
 const QuestionList = () => {
     const { id } = useParams();
@@ -21,6 +22,7 @@ const QuestionList = () => {
             try {
                 const response = await getAllQuestion();
                 const filteredQuestions = response.data.data.filter(question => question.id.toString() === id.toString());
+                console.log('filteredQuestions:', filteredQuestions);
                 setQuestions(filteredQuestions); 
             } catch (error) {
                 console.error('Error fetching questions:', error);
@@ -53,8 +55,7 @@ const QuestionList = () => {
             case '10':
                 return <QuestionTen questions={questions}/>; 
             default:
-                alert("no one")
-                return null;
+                return <StartSide />;
         }
     };
 
