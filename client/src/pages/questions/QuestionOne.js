@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from '../../components/NavBar';
 import FotBar from '../../components/FotBar';
-import '../../style/questionOne.css';
+import '../../style/questions/questionOne.css';
 
 const QuestionOne = ({ questions }) => {
     return (
