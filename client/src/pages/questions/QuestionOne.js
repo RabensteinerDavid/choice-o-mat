@@ -1,10 +1,11 @@
 import React from 'react';
 import NavBar from '../../components/NavBar';
 import FotBar from '../../components/FotBar';
+import '../../style/questionOne.css';
 
 const QuestionOne = ({ questions }) => {
     return (
-    <div className='question-list'>
+    <div className='question-list one'>
         <NavBar />
         <div className="main">
             <h1>Question One</h1>
