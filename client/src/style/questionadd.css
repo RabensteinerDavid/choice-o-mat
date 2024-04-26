@@ -1,5 +1,5 @@
 .wrapper {
-  width: auto;
+  width: var(--width-rapper);
   margin: 1% auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -72,4 +72,16 @@
   display: flex;
   justify-content: space-between;
   gap: 10px;
+}
+
+.question-list {
+  text-align: center;
+}
+
+li {
+  list-style: none;
+}
+
+ul {
+  padding: 0 !important;
 }

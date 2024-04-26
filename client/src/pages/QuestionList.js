@@ -11,8 +11,10 @@ import QuestionSeven from './questions/QuestionSeven';
 import QuestionEight from './questions/QuestionEight';
 import QuestionNine from './questions/QuestionNine';
 import QuestionTen from './questions/QuestionTen';
+import { useParams } from 'react-router-dom';
 
-const QuestionList = ({ id }) => {
+const QuestionList = () => {
+    const { id } = useParams();
     const [questions, setQuestions] = useState([]);
 
     useEffect(() => {
@@ -30,7 +32,7 @@ const QuestionList = ({ id }) => {
     }, [id]); 
 
     const renderList = () => {
-        switch (id.toString()) {
+        switch (id) {
             case '1':
                 return <QuestionOne questions={questions}/>;
             case '2':
@@ -52,6 +54,7 @@ const QuestionList = ({ id }) => {
             case '10':
                 return <QuestionTen questions={questions}/>; 
             default:
+                alert("no one")
                 return null;
         }
     };

@@ -1,15 +1,22 @@
 :root {
   --main: #5e8035;
+  --width-rapper: 50%;
 }
 
 .app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: var(--main);
+}
+
+.main {
+  flex: 1;
 }
 
 .question-list {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .start-button {
@@ -43,4 +50,12 @@
 
 body {
   font-family: 'Poppins';
+}
+
+.fh-logo{
+  margin: 40px;
+}
+
+.app-item{
+  flex: 1 1 auto;
 }
