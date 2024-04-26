@@ -1,17 +1,17 @@
-.question-list{
-    text-align: center;
+.question-list {
+  text-align: center;
 }
 
-li{
-    list-style: none;
+li {
+  list-style: none;
 }
 
-ul{
-    padding: 0 !important;
+ul {
+  padding: 0 !important;
 }
 
-.bottom-header{
-    position: fixed;
+.bottom-header {
+  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;

@@ -118,7 +118,7 @@ const QuestionAdd = () => {
         value={context}
         onChange={handleChangeInputContext}
       />
-      <button className='button' onClick={handleIncludeQuestion}>
+      <button className='add-button' onClick={handleIncludeQuestion}>
         Add Question
       </button>
     </>

@@ -129,7 +129,10 @@ function QuestionUpdate ({ onToggleQuestionAdd }) {
                       <td>{question.rating}</td>
                       <td>{question.context}</td>
                       <td>
-                        <button onClick={() => functionUpdate(question._id)}>
+                        <button
+                          className='update-button'
+                          onClick={() => functionUpdate(question._id)}
+                        >
                           Update
                         </button>
                       </td>
@@ -182,18 +185,29 @@ function QuestionUpdate ({ onToggleQuestionAdd }) {
                     placeholder={question.context}
                   />
 
-                  <button onClick={() => handleUpdate(question)}>Update</button>
-                  <button onClick={() => deleteQuestion(question._id)}>
-                    Delete
-                  </button>
-                  <button
-                    onClick={() => {
-                      onToggleQuestionAdd()
-                      setEdit(false)
-                    }}
-                  >
-                    Cancel
-                  </button>
+                  <div className='button-container'>
+                    <button
+                      className='update-button'
+                      onClick={() => handleUpdate(question)}
+                    >
+                      Update
+                    </button>
+                    <button
+                      className='delete-button'
+                      onClick={() => deleteQuestion(question._id)}
+                    >
+                      Delete
+                    </button>
+                    <button
+                      className='cancel-button'
+                      onClick={() => {
+                        onToggleQuestionAdd()
+                        setEdit(false)
+                      }}
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
