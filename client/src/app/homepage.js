@@ -10,6 +10,7 @@ import '../style/homepage.css'
 import QuestionList from '../pages/QuestionList'
 import QuestionAdd from '../pages/QuestionAdd'
 import QuestionSetting from '../pages/QuestionSetting'
+import "@fontsource/poppins";
 
 function StartButton () {
   const location = useLocation()

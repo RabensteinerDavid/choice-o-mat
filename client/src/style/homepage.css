@@ -36,3 +36,7 @@ text-decoration: none;
 .hide{
     display: none;
 }
+
+body {
+    font-family: "Poppins";
+  }
