@@ -51,9 +51,14 @@ updateQuestion = async (req, res) => {
                 message: 'Question not found!',
             });
         }
-        quest.name = body.name;
-        quest.time = body.time;
+
+        quest.id = body.id;
+        quest.questiontype = body.questiontype;
+        quest.heading = body.heading;
+        quest.subheading = body.subheading;
         quest.rating = body.rating;
+        quest.context = body.context;
+
         await quest.save();
         return res.status(200).json({
             success: true,

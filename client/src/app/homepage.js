@@ -4,14 +4,15 @@ import '../style/homepage.css';
 import QuestionList from '../pages/QuestionList';
 import QuestionAdd from '../pages/QuestionAdd';
 
-
-
 function StartButton() {
+  
   const location = useLocation();
-  const isQuestionOne = location.pathname.includes('/questions');
+  const isQuestion = location.pathname.includes('/questions');
+  const editQuestion = location.pathname.includes('/question');
 
+  const show = !isQuestion && !editQuestion;
   return (
-    !isQuestionOne && (
+    show && (
       <div className="centered-button">
         <nav>
           <Link to="/questions/1" className="start-button">Jetzt Starten</Link>
@@ -25,8 +26,6 @@ function StartButton() {
 }
 
 function App() {
-
-
   return (
     <BrowserRouter>
       <div className="app">

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { insertQuestion } from '../api';
-import '../style/questionlist.css';
+import "../style/questionadd.css";
+import QuestionUpdate from './QuestionUpdate';
+import NavBar from '../components/NavBar';
 
 const QuestionAdd = () => {
     const [id, setID] = useState('');
@@ -10,9 +12,10 @@ const QuestionAdd = () => {
     const [rating, setRating] = useState('');
     const [context, setContext] = useState('');
 
-
     const handleChangeInputId = (event) => {
-        setID(event.target.value);
+        var id = event.target.value;
+        id = id.replace(/[^0-9]/g, '');
+        setID(id);
     };
     const handleChangeInputQuestionType = (event) => {
         setQuestionType(event.target.value);
@@ -25,11 +28,12 @@ const QuestionAdd = () => {
     const handleChangeInputSubHeading = (event) => {
         setSubHeading(event.target.value);
     };
-
     const handleChangeInputRating = (event) => {
-        setRating(event.target.value);
+        let inputValue = event.target.value;
+        inputValue = inputValue.replace(/[^0-9,]/g, '');
+        setRating(inputValue);
     };
-
+    
     const handleChangeInputContext = (event) => {
         setContext(event.target.value);
     };
@@ -58,6 +62,7 @@ const QuestionAdd = () => {
         }
 
         const payload = { id: idParse, questiontype: questionType, heading, subheading: subHeading, rating: ratingArray, context: contextArray };
+
         try {
             await insertQuestion(payload);
             alert('Question inserted successfully');
@@ -74,58 +79,64 @@ const QuestionAdd = () => {
         }
     };
 
-    return (
+    return (<>
+    <NavBar /> 
         <div className="wrapper">
-            <h1>Create Question</h1>
+            <QuestionUpdate />
 
-            <label>Id</label>
+            <h1 className="title">Create Question</h1>
+
+            <label className="label">Id</label>
             <input
+                className="inputField"
                 type="text"
                 value={id}
                 onChange={handleChangeInputId}
             />
 
-            <label>Question Type:</label>
+            <label className="label">Question Type:</label>
             <input
+                className="inputField"
                 type="text"
                 value={questionType}
                 onChange={handleChangeInputQuestionType}
             />
 
-            <label>Heading:</label>
+            <label className="label">Heading:</label>
             <input
+                className="inputField"
                 type="text"
                 value={heading}
                 onChange={handleChangeInputHeading}
             />
 
-            <label>Sub Heading:</label>
+            <label className="label">Sub Heading:</label>
             <input
+                className="inputField"
                 type="text"
                 value={subHeading}
                 onChange={handleChangeInputSubHeading}
             />
 
-            <label>Rating:</label>
+            <label className="label">Rating:</label>
             <input
-                type="number"
-                step="0.1"
-                min="0"
-                max="10"
+                className="inputField"
+                type="text"
                 value={rating}
                 onChange={handleChangeInputRating}
             />
 
-            <label>Context:</label>
+            <label className="label">Context:</label>
             <input
+                className="inputField"
                 type="text"
                 value={context}
                 onChange={handleChangeInputContext}
             />
 
-            <button onClick={handleIncludeQuestion}>Add Question</button>
+            <button className="button" onClick={handleIncludeQuestion}>Add Question</button>
         </div>
-    );
+    </>);
 };
 
 export default QuestionAdd;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { getAllQuestion } from '../api';
 import QuestionOne from './questions/QuestionOne';
 import QuestionTwo from './questions/QuestionTwo';
@@ -13,9 +13,9 @@ import QuestionNine from './questions/QuestionNine';
 import QuestionTen from './questions/QuestionTen';
 
 const QuestionList = ({ id }) => {
-    const [questions, setQuestions] = React.useState([]);
+    const [questions, setQuestions] = useState([]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await getAllQuestion();
