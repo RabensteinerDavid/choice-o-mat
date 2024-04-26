@@ -1,7 +1,72 @@
-.fh-logo{
-    margin: 40px;
-  }
-  
-  .app-item{
-    flex: 1 1 auto;
-  }
+.fh-logo {
+  margin: 40px;
+}
+
+.app-item {
+  flex: 1 1 auto;
+}
+
+.hero {
+  color: white;
+}
+
+.hero-heading {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  padding-left: var(--hero-section-width);
+}
+
+.hero-p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  width: 60%;
+  padding-left: var(--hero-section-width);
+}
+
+.start-button {
+  display: inline-block;
+  width: 140px;
+  background-color: #ffffff;
+  color: var(--main-green);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 16px;
+  margin-left: var(--hero-section-width);
+  padding: 12px;
+  box-shadow: 0 12px 12px rgba(0, 0, 0, 0.1);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7.41' height='12' viewBox='0 0 7.41 12'%3E%3Cpath d='M10,6,8.59,7.41,13.17,12,8.59,16.59,10,18l6-6Z' transform='translate(-8.59 -6)' fill='5e8035'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+.add-question-button {
+  background-color: #ffffff;
+  color: var(--main-green);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 12px;
+  position: fixed;
+  margin: 20px;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1;
+  text-align: center;
+  transition: 0.25s;
+}
+
+.background-image {
+  background-image: url('../images/background-startside.png');
+  background-size: cover;
+  background-position: right;
+  width: 50%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 0;
+}

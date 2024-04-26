@@ -3,21 +3,19 @@ import { Link } from 'react-router-dom'
 import '../../style/startside.css'
 import '@fontsource/poppins'
 import fhLogo from '../../images/fh_ooe_logo.png'
+import bg from '../../images/background-startside.png'
 import '../../style/homepage.css'
 
 function StartButton () {
   return (
     <div className='app-item centered-button'>
-      <nav>
-        <Link to='/questions/1' className='start-button'>
-          Jetzt Starten
-        </Link>
-      </nav>
-      <nav>
-        <Link to='/question' className='start-button'>
-          Add new Question
-        </Link>
-      </nav>
+      <Link to='/questions/1' className='start-button'>
+        Jetzt Starten
+      </Link>
+      <br></br>
+      <Link to='/question' className='add-question-button'>
+        Add new Question
+      </Link>
     </div>
   )
 }
@@ -29,13 +27,14 @@ function Startside () {
         <img className='fh-logo' src={fhLogo} alt='fhooe.logo' width='20%' />
       </div>
       <div className='app-item hero'>
-        <h1>MTD oder Da?</h1>
-        <p>
+        <h1 className='hero-heading'>MTD oder DA?</h1>
+        <p className='hero-p'>
           Wir helfen dir bei deiner Entscheidung und bringen dich auf deinen
           richtigen Karrierepfad{' '}
         </p>
         <StartButton />
       </div>
+      <div className='background-image'></div>
     </div>
   )
 }
