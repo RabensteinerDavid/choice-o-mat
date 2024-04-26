@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { getAllQuestion,updateQuestionById,deleteQuestionById } from '../api';
 import "../style/questionupdate.css";
+import InputField from '../components/InputField';
 
 function QuestionUpdate() {
+    
     const [questions, setQuestions] = useState([]);
     const [edit, setEdit] = useState(false);
 
@@ -32,21 +34,20 @@ function QuestionUpdate() {
                 setHeading('');
                 setQuestionType('');
                 setID('');
-                window.alert(`Movie updated successfully`, res)
                 setEdit(false);
             }).catch(err => {
-                alert('Failed to update question. Please check console for details.');
+                alert('Failed to update question. Please check console for details.', err);
             }
             )
         }
 
-        const deleteQuestion = async (id) => {
-            await deleteQuestionById(id).then(res => {
-                window.alert(`Movie deleted successfully`, res)
-                setEdit(false);
-                return;
-            })
-        }        
+    const deleteQuestion = async (id) => {
+        await deleteQuestionById(id).then(res => {
+            window.alert(`Movie deleted successfully`, res)
+            setEdit(false);
+            return;
+        })
+    }        
 
     const functionUpdate = (id) => {
         setEditID(id);
@@ -134,59 +135,14 @@ function QuestionUpdate() {
                             {question._id === editId && (
                                 <div>
                                     <h1 className="title-question">Update Questions</h1>
-                                    <label className="label">Id</label>
-                                    <input
-                                        className="inputField"
-                                        type="text"
-                                        value={id}
-                                        onChange={handleChangeInputId}
-                                        placeholder={question.id}
-                                    />
 
-                                    <label className="label">Question Type:</label>
-                                    <input
-                                        className="inputField"
-                                        type="text"
-                                        value={questionType}
-                                        onChange={handleChangeInputQuestionType}
-                                        placeholder={question.questiontype}
-                                    />
-
-                                    <label className="label">Heading:</label>
-                                    <input
-                                        className="inputField"
-                                        type="text"
-                                        value={heading}
-                                        onChange={handleChangeInputHeading}
-                                        placeholder={question.heading}
-                                    />
-
-                                    <label className="label">Sub Heading:</label>
-                                    <input
-                                        className="inputField"
-                                        type="text"
-                                        value={subHeading}
-                                        onChange={handleChangeInputSubHeading}
-                                        placeholder={question.subheading}
-                                    />
-
-                                    <label className="label">Rating:</label>
-                                    <input
-                                        className="inputField"
-                                        type="text"
-                                        value={rating}
-                                        onChange={handleChangeInputRating}
-                                        placeholder={question.rating}
-                                    />
-
-                                    <label className="label">Context:</label>
-                                    <input
-                                        className="inputField"
-                                        type="text"
-                                        value={context}
-                                        onChange={handleChangeInputContext}
-                                        placeholder={question.context}
-                                    />
+                                    <InputField label="Ifdsad" value={id} onChange={handleChangeInputId} placeholder={question.id} />
+                                    <InputField label="Question Type" value={questionType} onChange={handleChangeInputQuestionType} placeholder={question.questiontype} />
+                                    <InputField label="Heading" value={heading} onChange={handleChangeInputHeading} placeholder={question.heading} />
+                                    <InputField label="Sub Heading" value={subHeading} onChange={handleChangeInputSubHeading} placeholder={question.subheading} />
+                                    <InputField label="Rating" value={rating} onChange={handleChangeInputRating} placeholder={question.rating} />
+                                    <InputField label="Context" value={context} onChange={handleChangeInputContext} placeholder={question.context} />
+                                
                                    <button onClick={() => handleUpdate(question)}>Update</button>
                                    <button onClick={() => deleteQuestion(question._id)}>Delete</button>
                                    <button onClick={() => setEdit(false)}>Cancel</button>

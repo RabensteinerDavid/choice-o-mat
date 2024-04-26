@@ -3,8 +3,10 @@ import { insertQuestion } from '../api';
 import "../style/questionadd.css";
 import QuestionUpdate from './QuestionUpdate';
 import NavBar from '../components/NavBar';
+import InputField from '../components/InputField';
 
 const QuestionAdd = () => {
+    
     const [id, setID] = useState('');
     const [questionType, setQuestionType] = useState('');
     const [heading, setHeading] = useState('');
@@ -83,57 +85,13 @@ const QuestionAdd = () => {
     <NavBar /> 
         <div className="wrapper">
             <QuestionUpdate />
-
-            <h1 className="title">Create Question</h1>
-
-            <label className="label">Id</label>
-            <input
-                className="inputField"
-                type="text"
-                value={id}
-                onChange={handleChangeInputId}
-            />
-
-            <label className="label">Question Type:</label>
-            <input
-                className="inputField"
-                type="text"
-                value={questionType}
-                onChange={handleChangeInputQuestionType}
-            />
-
-            <label className="label">Heading:</label>
-            <input
-                className="inputField"
-                type="text"
-                value={heading}
-                onChange={handleChangeInputHeading}
-            />
-
-            <label className="label">Sub Heading:</label>
-            <input
-                className="inputField"
-                type="text"
-                value={subHeading}
-                onChange={handleChangeInputSubHeading}
-            />
-
-            <label className="label">Rating:</label>
-            <input
-                className="inputField"
-                type="text"
-                value={rating}
-                onChange={handleChangeInputRating}
-            />
-
-            <label className="label">Context:</label>
-            <input
-                className="inputField"
-                type="text"
-                value={context}
-                onChange={handleChangeInputContext}
-            />
-
+            <h1 className="title">Create Question</h1>              
+            <InputField label="Id" value={id} onChange={handleChangeInputId} />
+            <InputField label="Question Type" value={questionType} onChange={handleChangeInputQuestionType} />
+            <InputField label="Heading" value={heading} onChange={handleChangeInputHeading} />
+            <InputField label="Sub Heading" value={subHeading} onChange={handleChangeInputSubHeading} />
+            <InputField label="Rating" value={rating} onChange={handleChangeInputRating} />
+            <InputField label="Context" value={context} onChange={handleChangeInputContext} />
             <button className="button" onClick={handleIncludeQuestion}>Add Question</button>
         </div>
     </>);
