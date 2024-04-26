@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { getAllQuestion } from '../api';
 import QuestionOne from './questions/QuestionOne';
 import QuestionTwo from './questions/QuestionTwo';
-import '../style/questionlist.css';
 import QuestionThree from './questions/QuestionThree';
 import QuestionFour from './questions/QuestionFour';
 import QuestionFive from './questions/QuestionFive';
