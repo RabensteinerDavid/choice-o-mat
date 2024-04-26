@@ -8,7 +8,6 @@ import {
 } from 'react-router-dom'
 import '../style/homepage.css'
 import QuestionList from '../pages/QuestionList'
-import QuestionAdd from '../pages/QuestionAdd'
 import QuestionSetting from '../pages/QuestionSetting'
 import "@fontsource/poppins";
 
@@ -40,8 +39,8 @@ function App () {
   return (
     <BrowserRouter>
       <div className='app'>
-        <StartButton />
         <Routes>
+        <Route path='/' element={<StartButton />} />
           <Route path='/question' element={<QuestionSetting />} />
           <Route path='/questions/1' element={<QuestionList id='1' />} />
           <Route path='/questions/2' element={<QuestionList id='2' />} />
