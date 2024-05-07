@@ -5,7 +5,7 @@ services:
     build: ./client
     stdin_open: true
     ports:
-      - "3000:3000"
+      - "3005:3000"
     networks:
       - choice-o-mat-app
     volumes:

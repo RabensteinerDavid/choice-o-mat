@@ -28,7 +28,7 @@ const QuestionOne = ({ questions }) => {
   return (
     <div className='question-list'>
       <NavBar />
-      <div className='main'>
+      <div className='main'>vvcbxvc
         <HeadingQuestion questions={questions} />
         {questions.length > 0 ? (
           <ul>
