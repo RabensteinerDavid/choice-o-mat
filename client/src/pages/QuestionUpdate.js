@@ -6,52 +6,45 @@ import InputField from '../components/InputField'
 function QuestionUpdate ({ onToggleQuestionAdd }) {
   const [questions, setQuestions] = useState([])
   const [edit, setEdit] = useState(false)
-
-  const [id, setID] = useState('')
   const [editId, setEditID] = useState('')
   const [questionType, setQuestionType] = useState('')
   const [heading, setHeading] = useState('')
   const [subHeading, setSubHeading] = useState('')
-  const [rating, setRating] = useState('')
-  const [context, setContext] = useState('')
+
+  const [editedAnswers, setEditedAnswers] = useState([])
 
   const handleUpdate = async questionItem => {
     const payload = {
-      id: id || questionItem.id,
-      questiontype: questionType || questionItem.questiontype,
+      type: questionType || questionItem.type,
       heading: heading || questionItem.heading,
       subheading: subHeading || questionItem.subheading,
-      rating: rating || questionItem.rating,
-      context: context || questionItem.context
+      answers: editedAnswers.length > 0 ? editedAnswers : questionItem.answers
     }
 
-    await updateQuestionById(editId, payload)
-      .then(res => {
-        setEditID('')
-        setContext('')
-        setRating('')
-        setSubHeading('')
-        setHeading('')
-        setQuestionType('')
-        setID('')
-        setEdit(false)
-        onToggleQuestionAdd()
-      })
-      .catch(err => {
-        alert(
-          'Failed to update question. Please check console for details.',
-          err
-        )
-      })
+    try {
+      await updateQuestionById(editId, payload)
+      setEditID('')
+      setSubHeading('')
+      setHeading('')
+      setQuestionType('')
+      setEdit(false)
+      onToggleQuestionAdd()
+    } catch (error) {
+      console.error('Failed to update question:', error)
+      alert('Failed to update question. Please check console for details.')
+    }
   }
 
   const deleteQuestion = async id => {
-    await deleteQuestionById(id).then(res => {
-      window.alert(`Movie deleted successfully`, res)
+    try {
+      await deleteQuestionById(id)
+      window.alert('Question deleted successfully')
       setEdit(false)
       onToggleQuestionAdd()
-      return
-    })
+    } catch (error) {
+      console.error('Failed to delete question:', error)
+      alert('Failed to delete question. Please check console for details.')
+    }
   }
 
   const functionUpdate = id => {
@@ -72,12 +65,6 @@ function QuestionUpdate ({ onToggleQuestionAdd }) {
     fetchData()
   }, [questions])
 
-  const handleChangeInputId = event => {
-    var id = event.target.value
-    id = id.replace(/[^0-9]/g, '')
-    setID(id)
-  }
-
   const handleChangeInputQuestionType = event => {
     setQuestionType(event.target.value)
   }
@@ -89,14 +76,26 @@ function QuestionUpdate ({ onToggleQuestionAdd }) {
   const handleChangeInputSubHeading = event => {
     setSubHeading(event.target.value)
   }
-  const handleChangeInputRating = event => {
-    let inputValue = event.target.value
-    inputValue = inputValue.replace(/[^0-9,]/g, '')
-    setRating(inputValue)
+
+  const handleChangeInputAnswerText = (event, index) => {
+    const value = event
+    setEditedAnswers(prevAnswers => {
+      const updatedAnswers = [...prevAnswers]
+      updatedAnswers[index] = { ...updatedAnswers[index], text: value }
+      return updatedAnswers
+    })
   }
 
-  const handleChangeInputContext = event => {
-    setContext(event.target.value)
+  const handleChangeInputPoints = (value, question, index, pointType) => {
+    const updatedAnswers = [...editedAnswers]
+    if (!updatedAnswers[index]) {
+      updatedAnswers[index] = { ...question.answers[index] }
+    }
+    updatedAnswers[index].points = {
+      ...updatedAnswers[index].points,
+      [pointType]: parseInt(value.replace(/[^0-9]/g, ''), 10) || 0
+    }
+    setEditedAnswers(updatedAnswers)
   }
 
   return (
@@ -108,12 +107,10 @@ function QuestionUpdate ({ onToggleQuestionAdd }) {
             <table>
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Question Type</th>
+                  <th>Type</th>
                   <th>Heading</th>
                   <th>Sub Heading</th>
-                  <th>Rating</th>
-                  <th>Context</th>
+                  <th colSpan={4}>Answers</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -122,12 +119,17 @@ function QuestionUpdate ({ onToggleQuestionAdd }) {
                   .sort((a, b) => a.id - b.id)
                   .map(question => (
                     <tr key={question._id}>
-                      <td>{question.id}</td>
-                      <td>{question.questiontype}</td>
+                      <td>{question.type}</td>
                       <td>{question.heading}</td>
                       <td>{question.subheading}</td>
-                      <td>{question.rating}</td>
-                      <td>{question.context}</td>
+                      <td colSpan='4'>
+                        {question.answers
+                          .map(
+                            answer =>
+                              `${answer.text} ( DA: ${answer.points.da}, MTD: ${answer.points.mtd})`
+                          )
+                          .join(', ')}
+                      </td>
                       <td>
                         <button
                           className='update-button'
@@ -149,16 +151,10 @@ function QuestionUpdate ({ onToggleQuestionAdd }) {
                   <h1 className='title-question'>Update Questions</h1>
 
                   <InputField
-                    label='Id'
-                    value={id}
-                    onChange={handleChangeInputId}
-                    placeholder={question.id}
-                  />
-                  <InputField
                     label='Question Type'
                     value={questionType}
                     onChange={handleChangeInputQuestionType}
-                    placeholder={question.questiontype}
+                    placeholder={question.type}
                   />
                   <InputField
                     label='Heading'
@@ -172,18 +168,44 @@ function QuestionUpdate ({ onToggleQuestionAdd }) {
                     onChange={handleChangeInputSubHeading}
                     placeholder={question.subheading}
                   />
-                  <InputField
-                    label='Rating'
-                    value={rating}
-                    onChange={handleChangeInputRating}
-                    placeholder={question.rating}
-                  />
-                  <InputField
-                    label='Context'
-                    value={context}
-                    onChange={handleChangeInputContext}
-                    placeholder={question.context}
-                  />
+                  {question.answers.map((answer, index) => (
+                    <div key={index}>
+                      <InputField
+                        label={`Answer ${index + 1}`}
+                        value={editedAnswers.text}
+                        onChange={event =>
+                          handleChangeInputAnswerText(event.target.value, index)
+                        }
+                        placeholder={answer.text}
+                      />
+                      <InputField
+                        label={`DA Points ${index + 1}`}
+                        value={editedAnswers[index]?.points?.da || ''}
+                        onChange={event =>
+                          handleChangeInputPoints(
+                            event.target.value,
+                            question,
+                            index,
+                            'da'
+                          )
+                        }
+                        placeholder={answer.points.da}
+                      />
+                      <InputField
+                        label={`MTD Points ${index + 1}`}
+                        value={editedAnswers[index]?.points?.mtd || ''}
+                        onChange={event =>
+                          handleChangeInputPoints(
+                            event.target.value,
+                            question,
+                            index,
+                            'mtd'
+                          )
+                        }
+                        placeholder={answer.points.mtd}
+                      />
+                    </div>
+                  ))}
 
                   <div className='button-container'>
                     <button
@@ -217,4 +239,5 @@ function QuestionUpdate ({ onToggleQuestionAdd }) {
     </div>
   )
 }
+
 export default QuestionUpdate

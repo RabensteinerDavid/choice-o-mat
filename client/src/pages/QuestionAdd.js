@@ -1,23 +1,16 @@
 import React, { useState } from 'react'
-import { insertQuestion } from '../api'
+import { deleteAllQuestions, insertQuestion } from '../api'
 import '../style/questionadd.css'
-import QuestionUpdate from './QuestionUpdate'
-import NavBar from '../components/NavBar'
 import InputField from '../components/InputField'
+import { prefilledQuestions } from './questions/PrefillQuestion'
 
 const QuestionAdd = () => {
-  const [id, setID] = useState('')
   const [questionType, setQuestionType] = useState('')
   const [heading, setHeading] = useState('')
   const [subHeading, setSubHeading] = useState('')
-  const [rating, setRating] = useState('')
-  const [context, setContext] = useState('')
+  const [answerCount, setAnswerCount] = useState(0)
+  const [answers, setAnswers] = useState([])
 
-  const handleChangeInputId = event => {
-    var id = event.target.value
-    id = id.replace(/[^0-9]/g, '')
-    setID(id)
-  }
   const handleChangeInputQuestionType = event => {
     setQuestionType(event.target.value)
   }
@@ -29,59 +22,69 @@ const QuestionAdd = () => {
   const handleChangeInputSubHeading = event => {
     setSubHeading(event.target.value)
   }
-  const handleChangeInputRating = event => {
-    let inputValue = event.target.value
-    inputValue = inputValue.replace(/[^0-9,]/g, '')
-    setRating(inputValue)
+
+  const handleSetNumberAnswers = event => {
+    let count = parseInt(event.target.value.replace(/[^0-9]/g, ''))
+    if (isNaN(count) || count <= 0) {
+      count = 0
+    }
+    setAnswerCount(count)
+    setAnswers(Array(count).fill({ text: '', points: { DA: '', MTD: '' } }))
   }
 
-  const handleChangeInputContext = event => {
-    setContext(event.target.value)
+  const handleChangeAnswer = (index, key, value) => {
+    const updatedAnswers = answers.map((answer, i) => {
+      if (i === index) {
+        return { ...answer, [key]: value }
+      }
+      return answer
+    })
+    setAnswers(updatedAnswers)
   }
 
   const handleIncludeQuestion = async () => {
-    if (!questionType || !heading || !subHeading || !rating || !context) {
-      alert('Please fill in all fields')
+    if (
+      !questionType ||
+      !heading ||
+      !subHeading ||
+      !answers.length ||
+      answerCount == 0
+    ) {
+      alert('Please fill in all fields and add an Answer')
       return
     }
 
-    const idParse = parseInt(id)
-    if (isNaN(idParse)) {
-      alert('Please enter a valid number for the ID')
+    const hasEmptyAnswer = answers.some(
+      answer => !answer.text || !answer.points.DA || !answer.points.MTD
+    )
+    if (hasEmptyAnswer) {
+      alert('Please provide text and points for all answers')
       return
     }
 
-    const ratingArray = rating.split(',').map(value => parseFloat(value.trim()))
-    if (ratingArray.some(isNaN)) {
-      alert(
-        'Invalid rating format. Please provide a comma-separated list of numbers.'
-      )
-      return
-    }
-    const contextArray = context.split(',').map(value => value.trim())
-    if (contextArray.length === 0) {
-      alert('Please provide at least one context.')
-      return
-    }
+    const answerArray = answers.map(ans => ({
+      text: ans.text,
+      points: {
+        da: ans.points.DA,
+        mtd: ans.points.MTD
+      }
+    }))
 
     const payload = {
-      id: idParse,
-      questiontype: questionType,
-      heading,
+      heading: heading,
       subheading: subHeading,
-      rating: ratingArray,
-      context: contextArray
+      type: questionType,
+      answers: answerArray
     }
 
     try {
       await insertQuestion(payload)
       alert('Question inserted successfully')
-      setID('')
       setQuestionType('')
       setHeading('')
       setSubHeading('')
-      setRating('')
-      setContext('')
+      setAnswers([])
+      setAnswerCount(0)
     } catch (error) {
       console.log(payload)
       console.error('Error inserting question:', error)
@@ -89,10 +92,63 @@ const QuestionAdd = () => {
     }
   }
 
+  const prefillQuestion = async () => {
+    try {
+      for (const question of prefilledQuestions) {
+        await insertQuestion(question)
+      }
+      alert('Questions inserted successfully')
+    } catch (error) {
+      console.error('Error inserting questions:', error)
+      alert('Failed to insert questions. Please check console for details.')
+    }
+  }
+
+  const deleteQuestions = async () => {
+    try {
+      await deleteAllQuestions()
+      alert('All Questions deleted successfully')
+    } catch (error) {
+      console.error('Error inserting questions:', error)
+      alert('Failed to insert questions. Please check console for details.')
+    }
+  }
+
+  const answerInputs = answers.map((answer, index) => (
+    <div key={index}>
+      <InputField
+        label={`Answer ${index + 1}`}
+        value={answer.text}
+        onChange={event =>
+          handleChangeAnswer(index, 'text', event.target.value)
+        }
+      />
+      <InputField
+        label={`DA Points ${index + 1}`}
+        value={answer.points.DA}
+        onChange={event =>
+          handleChangeAnswer(index, 'points', {
+            ...answer.points,
+            DA: event.target.value.replace(/\D/g, '')
+          })
+        }
+      />
+      <InputField
+        label={`MTD Points ${index + 1}`}
+        value={answer.points.MTD}
+        onChange={event =>
+          handleChangeAnswer(index, 'points', {
+            ...answer.points,
+            MTD: event.target.value.replace(/\D/g, '')
+          })
+        }
+      />
+    </div>
+  ))
+
   return (
     <>
       <h1 className='title'>Create Question</h1>
-      <InputField label='Id' value={id} onChange={handleChangeInputId} />
       <InputField
         label='Question Type'
         value={questionType}
@@ -109,18 +165,22 @@ const QuestionAdd = () => {
         onChange={handleChangeInputSubHeading}
       />
       <InputField
-        label='Rating'
-        value={rating}
-        onChange={handleChangeInputRating}
+        label='Number of Answers'
+        value={answerCount}
+        onChange={handleSetNumberAnswers}
       />
-      <InputField
-        label='Context'
-        value={context}
-        onChange={handleChangeInputContext}
-      />
-      <button className='add-button' onClick={handleIncludeQuestion}>
-        Add Question
-      </button>
+      {answerInputs}
+      <div className='question-buttons'>
+        <button className='add-button' onClick={handleIncludeQuestion}>
+          Add Question
+        </button>
+        <button className='prefill-button' onClick={prefillQuestion}>
+          Add Prefilled Questions
+        </button>
+        <button className='delete-button' onClick={deleteQuestions}>
+          Delete All Questions
+        </button>
+      </div>
     </>
   )
 }

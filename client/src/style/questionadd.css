@@ -39,6 +39,21 @@
 .add-button:hover {
   background-color: #4f6b2c;
 }
+.prefill-button {
+  background-color: #493580;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.prefill-button:hover {
+  background-color: #2c204f;
+}
+
+.add-button:hover {
+  background-color: #4f6b2c;
+}
 
 .update-button {
   background-color: #344680;
@@ -56,6 +71,9 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+.delete-button:hover {
+  background-color: #512c22;
 }
 
 .cancel-button {
@@ -84,4 +102,9 @@ li {
 
 ul {
   padding: 0 !important;
+}
+
+.question-buttons{
+  display: flex;
+  gap: 10px;
 }
