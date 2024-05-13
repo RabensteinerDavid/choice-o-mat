@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import '../../style/startside.css'
 import '@fontsource/poppins'
 import fhLogo from '../../images/fh_ooe_logo.png'
-import bg from '../../images/background-startside.png'
 import '../../style/homepage.css'
 
 function StartButton () {

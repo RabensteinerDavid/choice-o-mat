@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { deleteAllQuestions, getMaxPage, insertQuestion } from '../api'
+import { deleteAllQuestions, insertQuestion } from '../api'
 import '../style/questionadd.css'
 import InputField from '../components/InputField'
 import { prefilledQuestions } from './questions/PrefillQuestion'
@@ -50,7 +50,7 @@ const QuestionAdd = () => {
       !heading ||
       !subHeading ||
       !answers.length ||
-      answerCount == 0
+      answerCount === 0
     ) {
       alert('Please fill in all fields and add an Answer')
       return
