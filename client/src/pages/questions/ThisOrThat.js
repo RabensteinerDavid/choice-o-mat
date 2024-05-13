@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import NavBar from '../../components/NavBar'
 import FotBar from '../../components/FotBar'
-import '../../style/questions/ThisOrThat.css'
+import '../../style/questions/thisorthat.css'
 import HeadingQuestion from '../../components/HeadingQuestion'
-import { loadQuestionType } from '../../components/LoadQuestion'
 
-const ThisOrThat = ({ questions, version, pageNumber }) => {
-
-  const question = loadQuestionType(questions,version)
+const ThisOrThat = ({ question, pageNumber, maxPage }) => {
+  
+  const { heading, subheading, answers } = question
 
   return (
     <div className='question-list'>
@@ -15,14 +14,14 @@ const ThisOrThat = ({ questions, version, pageNumber }) => {
       <div className='main'>
         {question ? (
           <React.Fragment>
-            <HeadingQuestion
-              heading={question.heading}
-              subheading={question.subheading}
-            />
-            <p>{question.type}</p>
+            <HeadingQuestion heading={heading} subheading={subheading} />
             <div>
-              {question.answers.map(answer => (
-                <p key={answer._id}>{answer.text} </p>
+              {answers.map(answer => (
+                <div key={answer._id}>
+                  <p>{answer.text}</p>
+                  <p>Points DA: {answer.points.da}</p>
+                  <p>Points MTD: {answer.points.mtd}</p>
+                </div>
               ))}
             </div>
           </React.Fragment>
@@ -31,8 +30,8 @@ const ThisOrThat = ({ questions, version, pageNumber }) => {
         )}
       </div>
       <FotBar
-        prevQuestion={pageNumber == 1 ? 1 : pageNumber - 1}
-        nextQuestion={pageNumber == 10 ? 10 : pageNumber + 1}
+        prevQuestion={pageNumber === 1 ? 1 : pageNumber - 1}
+        nextQuestion={pageNumber === maxPage ? maxPage : pageNumber + 1}
       />
     </div>
   )

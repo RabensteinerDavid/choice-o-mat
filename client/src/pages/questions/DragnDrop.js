@@ -1,10 +1,10 @@
 import React from 'react'
 import NavBar from '../../components/NavBar'
 import FotBar from '../../components/FotBar'
-import '../../style/questions/selection.css'
+import '../../style/questions/dragndrop.css'
 import HeadingQuestion from '../../components/HeadingQuestion'
 
-const Selection = ({ question, pageNumber, maxPage }) => {
+const DragnDrop = ({ question, pageNumber, maxPage }) => {
   
   const { heading, subheading, answers } = question
 
@@ -37,4 +37,4 @@ const Selection = ({ question, pageNumber, maxPage }) => {
   )
 }
 
-export default Selection
+export default DragnDrop

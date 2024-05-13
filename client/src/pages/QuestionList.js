@@ -1,53 +1,139 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import StartSide from './questions/Startside.js'
 import ThisOrThat from './questions/ThisOrThat'
 import Selection from './questions/Selection'
-// import QuestionThree from './questions/QuestionThree'
-// import QuestionFour from './questions/QuestionFour'
-// import QuestionFive from './questions/QuestionFive'
-// import QuestionSix from './questions/QuestionSix'
-// import QuestionSeven from './questions/QuestionSeven'
-// import QuestionEight from './questions/QuestionEight'
-// import QuestionNine from './questions/QuestionNine'
-// import QuestionTen from './questions/QuestionTen'
-import { loadQuestions, loadQuestionsID } from '../components/LoadQuestion'
+import ChoiceRole from './questions/ChoiceRole'
+import VerticalSlider from './questions/VerticalSlider.js'
+import Carousel from './questions/Carousel.js'
+import ImageSelection from './questions/ImageSelection.js'
+import OrderSelection from './questions/OrderSelection.js'
+import DragnDrop from './questions/DragnDrop.js'
+import ThisOrThatPicture from './questions/ThisOrThatPicture.js'
+
+import {
+  getMaxPageValue,
+  loadQuestionsOrderData
+} from '../components/LoadQuestion'
 
 const QuestionList = () => {
   const { id: page_id } = useParams()
+  const [maxPage, setMaxPage] = useState(null)
+  const [order, setOrder] = useState(null)
 
-  const renderList = () => {
-    switch (page_id) {
-      case '1':
-        // const ThisOrThatData = loadQuestionsID('663e84be129278476a92d536')
-        const ThisOrThatData = loadQuestions('ThisOrThat')
-        return <ThisOrThat questions={ThisOrThatData} version={0} pageNumber={1}/>
-      case '2':
-        const SelectionData = loadQuestions('Selection')
-        return <Selection questions={SelectionData} version={0}  pageNumber={2}/>
-      case '3':
-        return <ThisOrThat questions={ThisOrThatData} version={0}  pageNumber={3}/>
-      //   case '2':
-      //     return <QuestionTwo questions={data['VerticalSlider']} />
-      //   case '3':
-      //     return <QuestionThree questions={data['Carousel']} />
-      //   case '4':
-      //     return <QuestionFour questions={data['ImageSelection']} />
-      //   case '5':
-      //     return <QuestionFive questions={data['OrderSelection']} />
-      //   case '6':
-      //     return <QuestionSix questions={data['DragnDrop']} />
-      //   case '7':
-      //     return <QuestionSeven questions={data['ThisOrThat']} />
-      //   case '8':
-      //     return <QuestionEight questions={data['ChoiceRole']} />
-      //   case '9':
-      //     return <QuestionNine questions={data['SomeOtherType']} />
-      //   case '10':
-      //     return <QuestionTen questions={data['AnotherType']} />
+  useEffect(() => {
+    const fetchMaxPage = async () => {
+      const order = await loadQuestionsOrderData()
+      const maxPageValue = await getMaxPageValue()
+      setMaxPage(maxPageValue)
+      setOrder(order)
+    }
+
+    fetchMaxPage()
+  }, [page_id])
+
+  const renderQuestion = (question, index) => {
+    switch (question.type) {
+      case 'ThisOrThat':
+        return (
+          <ThisOrThat
+            key={index}
+            question={question}
+            version={0}
+            pageNumber={index + 1}
+            maxPage={maxPage}
+          />
+        )
+      case 'Selection':
+        return (
+          <Selection
+            key={index}
+            question={question}
+            pageNumber={index + 1}
+            maxPage={maxPage}
+          />
+        )
+      case 'VerticalSlider':
+        return (
+          <VerticalSlider
+            key={index}
+            question={question}
+            pageNumber={index + 1}
+            maxPage={maxPage}
+          />
+        )
+      case 'Carousel':
+        return (
+          <Carousel
+            key={index}
+            question={question}
+            pageNumber={index + 1}
+            maxPage={maxPage}
+          />
+        )
+      case 'ImageSelection':
+        return (
+          <ImageSelection
+            key={index}
+            question={question}
+            pageNumber={index + 1}
+            maxPage={maxPage}
+          />
+        )
+      case 'OrderSelection':
+        return (
+          <OrderSelection
+            key={index}
+            question={question}
+            pageNumber={index + 1}
+            maxPage={maxPage}
+          />
+        )
+      case 'DragnDrop':
+        return (
+          <DragnDrop
+            key={index}
+            question={question}
+            pageNumber={index + 1}
+            maxPage={maxPage}
+          />
+        )
+      case 'ChoiceRole':
+        return (
+          <ChoiceRole
+            key={index}
+            question={question}
+            pageNumber={index + 1}
+            maxPage={maxPage}
+          />
+        )
+      case 'ThisOrThatPicture':
+        return (
+          <ThisOrThatPicture
+            key={index}
+            question={question}
+            pageNumber={index + 1}
+            maxPage={maxPage}
+          />
+        )
       default:
         return <StartSide />
     }
+  }
+
+  const renderList = () => {
+    if (!order) return null
+
+    return (
+      <div>
+        {order.map((question, index) => {
+          if (question.page === parseInt(page_id)) {
+            return renderQuestion(question, index)
+          }
+          return null
+        })}
+      </div>
+    )
   }
 
   return renderList()

@@ -3,6 +3,7 @@ import { deleteAllQuestions, getMaxPage, insertQuestion } from '../api'
 import '../style/questionadd.css'
 import InputField from '../components/InputField'
 import { prefilledQuestions } from './questions/PrefillQuestion'
+import { getMaxPageValue } from '../components/LoadQuestion'
  
 const QuestionAdd = () => {
   const [questionType, setQuestionType] = useState('')
@@ -10,18 +11,6 @@ const QuestionAdd = () => {
   const [subHeading, setSubHeading] = useState('')
   const [answerCount, setAnswerCount] = useState(0)
   const [answers, setAnswers] = useState([])
-
-
-  const getMaxPageValue = async () => {
-    try {
-      const data = await getMaxPage(); // Assuming getMaxPage returns a Promise
-      return data.data.maxPage; // Return the maximum page number
-    } catch (error) {
-      console.error('Error:', error);
-      return null; // Return null or handle the error as needed
-    }
-  };
-  
   
   const handleChangeInputQuestionType = event => {
     setQuestionType(event.target.value)

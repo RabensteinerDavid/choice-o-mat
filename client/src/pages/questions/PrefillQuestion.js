@@ -79,7 +79,7 @@ export const prefilledQuestions = [
     {
       "heading": "Entscheide dich",
       "subheading": "Klicke...",
-      "type": "ThisOrThat",
+      "type": "ThisOrThatPicture",
       "page": 8,
       "answers": [
         { "text": "Mobile App", "points": { "da": 2, "mtd": 2 } },

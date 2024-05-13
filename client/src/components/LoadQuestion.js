@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getAllQuestion } from '../api'
+import { getAllQuestion, getMaxPage } from '../api'
 
 export const loadQuestions = selectedType => {
   const [questions, setQuestions] = useState([])
@@ -25,7 +25,7 @@ export const loadQuestions = selectedType => {
   return questions
 }
 
-export const loadQuestionType = (questions,version) => {
+export const loadQuestionType = (questions, version) => {
   const [question, setQuestion] = useState(null)
 
   useEffect(() => {
@@ -64,3 +64,43 @@ export const loadQuestionsID = id => {
 
   return questions
 }
+
+export const loadQuestionsOrderID = async () => {
+  const [questionsID, setQuestionsID] = useState([])
+  try {
+    const response = await getAllQuestion()
+    const fetchedQuestions = response.data.data
+
+    const sortedQuestions = fetchedQuestions.sort((a, b) => a.page - b.page)
+    const questionIds = sortedQuestions.map(question => question._id)
+
+    setQuestionsID(questionIds)
+    return questionsID
+  } catch (error) {
+    console.error('Error fetching questions:', error)
+    return []
+  }
+}
+export const loadQuestionsOrderData = async () => {
+
+  try {
+    const response = await getAllQuestion()
+    const fetchedQuestions = response.data.data
+    const sortedQuestions = fetchedQuestions.sort((a, b) => a.page - b.page)
+    return sortedQuestions
+  } catch (error) {
+    console.error('Error fetching questions:', error)
+    return []
+  }
+}
+
+export const getMaxPageValue = async () => {
+  try {
+    const data = await getMaxPage();
+    console.log(data)
+    return data.data.maxPage;
+  } catch (error) {
+    console.error('Error:', error);
+    return null; 
+  }
+};

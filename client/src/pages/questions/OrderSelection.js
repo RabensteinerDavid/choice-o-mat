@@ -1,11 +1,10 @@
 import React from 'react'
 import NavBar from '../../components/NavBar'
 import FotBar from '../../components/FotBar'
-import '../../style/questions/selection.css'
+import '../../style/questions/orderselection.css'
 import HeadingQuestion from '../../components/HeadingQuestion'
 
-const Selection = ({ question, pageNumber, maxPage }) => {
-  
+const OrderSelection = ({ question, pageNumber, maxPage }) => {
   const { heading, subheading, answers } = question
 
   return (
@@ -33,8 +32,9 @@ const Selection = ({ question, pageNumber, maxPage }) => {
         prevQuestion={pageNumber === 1 ? 1 : pageNumber - 1}
         nextQuestion={pageNumber === maxPage ? maxPage : pageNumber + 1}
       />
+      {console.log(pageNumber === maxPage ? maxPage : pageNumber + 1)}
     </div>
   )
 }
 
-export default Selection
+export default OrderSelection
