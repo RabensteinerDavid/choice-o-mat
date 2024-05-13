@@ -16,7 +16,7 @@ COPY . .
 ENV REACT_APP_BASE_URL=http://localhost:3001/api
 
 # Expose the port your app runs on
-EXPOSE 3000
+EXPOSE 3005
 
 # Command to run your app
 CMD [ "npm", "start" ]
