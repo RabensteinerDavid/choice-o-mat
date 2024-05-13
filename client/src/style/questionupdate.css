@@ -41,3 +41,26 @@ tbody tr:hover {
   color: white;
   text-align: center;
 }
+
+.reorder{
+  width: 100%;
+  margin-top: 25px;
+}
+
+.info-text{
+  position: fixed;
+  bottom: 0;
+  background-color: rgb(182, 49, 49);
+  width: 100%;
+  left: 0;
+  right: 0;
+  padding: 50px;
+  color: white;
+  animation: fadeOut 10s forwards;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  99% { opacity: 1; }
+  100% { opacity: 0; }
+}

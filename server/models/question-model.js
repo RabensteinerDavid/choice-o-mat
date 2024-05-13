@@ -6,6 +6,7 @@ const Questions = new Schema(
     heading: { type: String, required: true },
     subheading: { type: String, required: true },
     type: { type: String, required: true },
+    page: {type: Number, required: true},
     answers: [
       {
         text: { type: String, required: true },

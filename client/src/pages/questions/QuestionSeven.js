@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import NavBar from '../../components/NavBar';
 import FotBar from '../../components/FotBar';
 import '../../style/questions/questionOne.css';
-import HeadingQuestion from '../../components/HeadingQuestion';
+// import HeadingQuestion from '../../components/HeadingQuestion';
 
 const QuestionSeven = ({ questions }) => {
   const [heading, setHeading] = useState([]);

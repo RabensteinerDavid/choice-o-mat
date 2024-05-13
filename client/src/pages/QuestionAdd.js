@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { deleteAllQuestions, insertQuestion } from '../api'
+import { deleteAllQuestions, getMaxPage, insertQuestion } from '../api'
 import '../style/questionadd.css'
 import InputField from '../components/InputField'
 import { prefilledQuestions } from './questions/PrefillQuestion'
-
+ 
 const QuestionAdd = () => {
   const [questionType, setQuestionType] = useState('')
   const [heading, setHeading] = useState('')
@@ -11,6 +11,18 @@ const QuestionAdd = () => {
   const [answerCount, setAnswerCount] = useState(0)
   const [answers, setAnswers] = useState([])
 
+
+  const getMaxPageValue = async () => {
+    try {
+      const data = await getMaxPage(); // Assuming getMaxPage returns a Promise
+      return data.data.maxPage; // Return the maximum page number
+    } catch (error) {
+      console.error('Error:', error);
+      return null; // Return null or handle the error as needed
+    }
+  };
+  
+  
   const handleChangeInputQuestionType = event => {
     setQuestionType(event.target.value)
   }
@@ -43,6 +55,7 @@ const QuestionAdd = () => {
   }
 
   const handleIncludeQuestion = async () => {
+
     if (
       !questionType ||
       !heading ||
@@ -70,16 +83,18 @@ const QuestionAdd = () => {
       }
     }))
 
+    const maxPage = await getMaxPageValue();
     const payload = {
       heading: heading,
       subheading: subHeading,
       type: questionType,
+      page: maxPage+1,
       answers: answerArray
     }
 
     try {
       await insertQuestion(payload)
-      alert('Question inserted successfully')
+      alert('Question inserted successfully on the last page')
       setQuestionType('')
       setHeading('')
       setSubHeading('')

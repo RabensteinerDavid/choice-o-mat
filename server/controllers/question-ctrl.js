@@ -55,6 +55,7 @@ updateQuestion = async (req, res) => {
     quest.type = body.type
     quest.heading = body.heading
     quest.subheading = body.subheading
+    quest.page = body.page
 
     if (body.answers && body.answers.length > 0) {
       body.answers.forEach((updatedAnswer, index) => {
@@ -143,9 +144,26 @@ deleteAllQuestions = async (req, res) => {
   }
 }
 
+getMaxPage = async (req, res) => {
+  try {
+    const maxPage = await Question.aggregate([
+      { $group: { _id: null, maxPage: { $max: "$page" } } }
+    ]);
+
+    if (!maxPage || maxPage.length === 0) {
+      return res.status(404).json({ success: false, error: `No questions found` });
+    }
+
+    return res.status(200).json({ success: true, maxPage: maxPage[0].maxPage });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+}
+
 module.exports = {
   createQuestion,
   updateQuestion,
+  getMaxPage,
   deleteQuestion,
   getQuestion,
   getQuestionById,

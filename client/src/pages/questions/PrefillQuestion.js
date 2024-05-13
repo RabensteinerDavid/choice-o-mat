@@ -3,6 +3,7 @@ export const prefilledQuestions = [
       "heading": "Was magst du?",
       "subheading": "Klicke so viel an wie du willst",
       "type": "Selection",
+      "page": 1,
       "answers": [
         { "text": "Podcast hören", "points": { "da": 2, "mtd": 2 } },
         { "text": "Social Media", "points": { "da": 2, "mtd": 2 } },
@@ -13,6 +14,7 @@ export const prefilledQuestions = [
       "heading": "Wie gut sind deine Skills?",
       "subheading": "Verschiebe den Regler, so...",
       "type": "VerticalSlider",
+      "page": 2,
       "answers": [
         { "text": "Technisches Verständnis", "points": { "da": 2, "mtd": 2 } },
         { "text": "Ideen Entwicklung", "points": { "da": 2, "mtd": 2 } },
@@ -23,6 +25,7 @@ export const prefilledQuestions = [
       "heading": "Was willst du werden?",
       "subheading": "Klicke maximal 2 an",
       "type": "Carousel",
+      "page": 3,
       "answers": [
         { "text": "Software Developer", "points": { "da": 2, "mtd": 2 } },
         { "text": "Game Designer", "points": { "da": 2, "mtd": 2 } },
@@ -33,6 +36,7 @@ export const prefilledQuestions = [
       "heading": "Deine kürzlichen Aktivitäten",
       "subheading": "Klicke so viel an wie du willst",
       "type": "ImageSelection",
+      "page": 4,
       "answers": [
         { "text": "Kino", "url": "www.google.at", "points": { "da": 2, "mtd": 2 } },
         { "text": "Museum", "url": "www.google.at", "points": { "da": 2, "mtd": 2 } },
@@ -43,6 +47,7 @@ export const prefilledQuestions = [
       "heading": "Was sind deine Interessen?",
       "subheading": "Klicke...",
       "type": "OrderSelection",
+      "page": 5,
       "answers": [
         { "text": "Musik Produktion", "points": { "da": 2, "mtd": 2 } },
         { "text": "Virtual Reality", "points": { "da": 2, "mtd": 2 } },
@@ -53,6 +58,7 @@ export const prefilledQuestions = [
       "heading": "Schätze deine Stärken ein?",
       "subheading": "Klicke...",
       "type": "VerticalSlider",
+      "page": 6,
       "answers": [
         { "text": "Organisatorisches Talent", "points": { "da": 2, "mtd": 2 } },
         { "text": "Analytische Fähigkeiten", "points": { "da": 2, "mtd": 2 } },
@@ -63,6 +69,7 @@ export const prefilledQuestions = [
       "heading": "Stelle deinen Tag zusammen?",
       "subheading": "Klicke...",
       "type": "DragnDrop",
+      "page": 7,
       "answers": [
         { "text": "Webentwicklung", "points": { "da": 2, "mtd": 2 } },
         { "text": "Video Design", "points": { "da": 2, "mtd": 2 } },
@@ -73,6 +80,7 @@ export const prefilledQuestions = [
       "heading": "Entscheide dich",
       "subheading": "Klicke...",
       "type": "ThisOrThat",
+      "page": 8,
       "answers": [
         { "text": "Mobile App", "points": { "da": 2, "mtd": 2 } },
         { "text": "3D Animationsfilm", "points": { "da": 2, "mtd": 2 } },
@@ -83,6 +91,7 @@ export const prefilledQuestions = [
       "heading": "Entscheide dich",
       "subheading": "Klicke...",
       "type": "ThisOrThat",
+      "page": 9,
       "answers": [
         { "text": "Ich spiele gerne Videospiele und bin daran interessiert zu erfahren, wie sie entwickelt werden.", "points": { "da": 2, "mtd": 2 } },
         { "text": "Ich würde gerne HTML-Code verstehen.", "points": { "da": 2, "mtd": 2 } },
@@ -93,6 +102,7 @@ export const prefilledQuestions = [
       "heading": "In welcher Rolle siehst du dich?",
       "subheading": "Klicke...",
       "type": "ChoiceRole",
+      "page": 10,
       "answers": [
         { "text": "Videoschnitt", "points": { "da": 2, "mtd": 2 } },
         { "text": "Drehbuch Autor/in", "points": { "da": 2, "mtd": 2 } },

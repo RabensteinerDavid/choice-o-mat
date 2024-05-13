@@ -8,7 +8,6 @@ import QuestionSetting from './pages/QuestionSetting';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Startside />} />
@@ -16,5 +15,4 @@ root.render(
         <Route path='/questions/:id' element={<QuestionList />} />
       </Routes>
     </BrowserRouter>
-  </React.StrictMode>
 );
