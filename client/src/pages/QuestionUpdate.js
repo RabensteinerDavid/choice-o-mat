@@ -223,7 +223,8 @@ function QuestionUpdate ({ onToggleQuestionAdd }) {
 
       {info ? (
         <div className='info-text'>
-          To save order changes, you have to apply with a click on Update-Reorder-Button.
+          To save order changes, you have to apply with a click on
+          Update-Reorder-Button.
         </div>
       ) : null}
 
@@ -293,19 +294,19 @@ function QuestionUpdate ({ onToggleQuestionAdd }) {
 
                   <div className='button-container'>
                     <button
-                      className='update-button'
+                      className='update-button big'
                       onClick={() => handleUpdate(question)}
                     >
                       Update
                     </button>
                     <button
-                      className='delete-button'
+                      className='delete-button big'
                       onClick={() => deleteQuestion(question._id)}
                     >
                       Delete
                     </button>
                     <button
-                      className='cancel-button'
+                      className='cancel-button big'
                       onClick={() => {
                         onToggleQuestionAdd()
                         setEdit(false)
