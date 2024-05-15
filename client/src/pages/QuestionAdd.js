@@ -11,6 +11,13 @@ const QuestionAdd = () => {
   const [subHeading, setSubHeading] = useState('')
   const [answerCount, setAnswerCount] = useState(0)
   const [answers, setAnswers] = useState([])
+  const [photos, setPhoto] = useState([])
+
+  const handlerPhoto = event => {
+    const files = event.target.files
+    const fileArray = Array.from(files)
+    setPhoto(prevPhotos => [...prevPhotos, ...fileArray])
+  }
 
   const handleChangeInputQuestionType = event => {
     setQuestionType(event.target.value)
@@ -80,13 +87,25 @@ const QuestionAdd = () => {
       answers: answerArray
     }
 
+    const data = new FormData()
+    photos.forEach(photo => {
+      data.append('photos', photo)
+    })
+
+    data.append('heading', heading)
+    data.append('subheading', subHeading)
+    data.append('type', questionType)
+    data.append('page', maxPage + 1)
+    data.append('answers', JSON.stringify(answerArray))
+
     try {
-      await insertQuestion(payload)
+      await insertQuestion(data)
       alert('Question inserted successfully on the last page')
       setQuestionType('')
       setHeading('')
       setSubHeading('')
       setAnswers([])
+      setPhoto([])
       setAnswerCount(0)
     } catch (error) {
       console.log(payload)
@@ -98,7 +117,13 @@ const QuestionAdd = () => {
   const prefillQuestion = async () => {
     try {
       for (const question of prefilledQuestions) {
-        await insertQuestion(question)
+        const data = new FormData()
+        data.append('heading', question.heading)
+        data.append('subheading', question.subheading)
+        data.append('type', question.type)
+        data.append('page', question.page)
+        data.append('answers', JSON.stringify(question.answers))
+        await insertQuestion(data)
       }
       alert('Questions inserted successfully')
     } catch (error) {
@@ -146,6 +171,8 @@ const QuestionAdd = () => {
           })
         }
       />
+
+      <input type='file' name='photo' onChange={handlerPhoto} />
     </div>
   ))
 

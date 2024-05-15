@@ -21,6 +21,8 @@ const QuestionUpdateFunction = () => {
   const [editedAnswers, setEditedAnswers] = useState([])
   const [answerCount, setAnswerCount] = useState(0)
   const [newAnswers, setNewAnswers] = useState([])
+  const [photos, setPhoto] = useState([])
+
   const answersLength = question.answers ? question.answers.length : 0
 
   useEffect(() => {
@@ -42,6 +44,12 @@ const QuestionUpdateFunction = () => {
     }
     fetchData()
   }, [id])
+
+  const handlerPhoto = event => {
+    const files = event.target.files
+    const fileArray = Array.from(files)
+    setPhoto(prevPhotos => [...prevPhotos, ...fileArray])
+  }
 
   const handleChangeInputQuestionType = event => {
     setQuestionType(event.target.value)
@@ -275,6 +283,16 @@ const QuestionUpdateFunction = () => {
             }
             placeholder={answer.points.mtd}
           />
+
+          {answer.photo && (
+            <img
+              src={`http://localhost:3001/images/${answer.photo}`}
+              width={600}
+              alt='answer'
+            />
+          )}
+
+          <input type='file' name='photo' onChange={handlerPhoto} />
         </div>
       ))}
 

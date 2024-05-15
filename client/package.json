@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@bytescale/upload-widget": "^4.27.0",
     "@fontsource/poppins": "^5.0.14",
     "@testing-library/jest-dom": "^6.4.5",
     "@testing-library/react": "^15.0.7",

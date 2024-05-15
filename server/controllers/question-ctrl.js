@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 
 createQuestion = (req, res) => {
   const body = req.body
+  const filenames = req.files.map(file => file.filename)
 
   if (!body) {
     return res.status(400).json({
@@ -11,11 +12,17 @@ createQuestion = (req, res) => {
     })
   }
 
-  const question = new Question(body)
-
-  if (!question) {
-    return res.status(400).json({ success: false, error: err })
-  }
+  const answersArray = JSON.parse(body.answers)
+  answersArray.forEach(answer => {
+    answer.photo = filenames[answersArray.indexOf(answer)]
+  })
+  const question = new Question({
+    heading: body.heading,
+    subheading: body.subheading,
+    type: body.type,
+    page: body.page,
+    answers: answersArray
+  })
 
   question
     .save()

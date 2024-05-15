@@ -11,6 +11,7 @@ const apiPort = 3001
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 app.use(bodyParser.json())
+app.use('/images', express.static('public/images'))
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
