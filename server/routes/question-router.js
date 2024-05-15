@@ -11,5 +11,6 @@ router.delete('/question/:id', QuestionCtrl.deleteQuestion)
 router.get('/question/:id', QuestionCtrl.getQuestionById)
 router.get('/questions', QuestionCtrl.getQuestion)
 router.delete('/question', QuestionCtrl.deleteAllQuestions)
+router.patch('/question-update/:id', QuestionCtrl.patchQuestion)
 
 module.exports = router

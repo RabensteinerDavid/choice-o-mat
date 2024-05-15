@@ -11,6 +11,7 @@ export const deleteQuestionById = id => api.delete(`/question/${id}`)
 export const getQuestionById = id => api.get(`/question/${id}`)
 export const deleteAllQuestions = () => api.delete(`/question`)
 export const getMaxPage = () => api.get(`/question/maxPage`)
+export const patchQuestion = (id, payload) => api.patch(`/question-update/${id}`, payload)
 
 const apis = {
   insertQuestion,
@@ -19,6 +20,7 @@ const apis = {
   getMaxPage,
   deleteQuestionById,
   getQuestionById,
+  patchQuestion,
   deleteAllQuestions
 }
 

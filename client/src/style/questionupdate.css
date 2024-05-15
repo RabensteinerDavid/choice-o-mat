@@ -62,5 +62,21 @@ tbody tr:hover {
 @keyframes fadeOut {
   0% { opacity: 1; }
   99% { opacity: 1; }
-  100% { opacity: 0; }
+  100% { opacity: 0; display: none}
+}
+
+.update-link{
+  color: white;
+  text-decoration: none ;
+  background-color: #344680;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  white-space: nowrap;
+}
+
+
+.update-link:hover {
+  background-color: #3c5197;
 }

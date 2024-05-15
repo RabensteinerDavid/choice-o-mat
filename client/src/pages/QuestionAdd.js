@@ -4,14 +4,14 @@ import '../style/questionadd.css'
 import InputField from '../components/InputField'
 import { prefilledQuestions } from './questions/PrefillQuestion'
 import { getMaxPageValue } from '../components/LoadQuestion'
- 
+
 const QuestionAdd = () => {
   const [questionType, setQuestionType] = useState('')
   const [heading, setHeading] = useState('')
   const [subHeading, setSubHeading] = useState('')
   const [answerCount, setAnswerCount] = useState(0)
   const [answers, setAnswers] = useState([])
-  
+
   const handleChangeInputQuestionType = event => {
     setQuestionType(event.target.value)
   }
@@ -44,7 +44,6 @@ const QuestionAdd = () => {
   }
 
   const handleIncludeQuestion = async () => {
-
     if (
       !questionType ||
       !heading ||
@@ -72,12 +71,12 @@ const QuestionAdd = () => {
       }
     }))
 
-    const maxPage = await getMaxPageValue();
+    const maxPage = await getMaxPageValue()
     const payload = {
       heading: heading,
       subheading: subHeading,
       type: questionType,
-      page: maxPage+1,
+      page: maxPage + 1,
       answers: answerArray
     }
 
