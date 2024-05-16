@@ -4,6 +4,7 @@ import '../style/questionadd.css'
 import InputField from '../components/InputField'
 import { prefilledQuestions } from './questions/PrefillQuestion'
 import { getMaxPageValue } from '../components/LoadQuestion'
+import ImageUploader from '../components/questions_images/ImageUploader'
 
 const QuestionAdd = () => {
   const [questionType, setQuestionType] = useState('')
@@ -13,11 +14,9 @@ const QuestionAdd = () => {
   const [answers, setAnswers] = useState([])
   const [photos, setPhoto] = useState([])
 
-  const handlerPhoto = event => {
-    const files = event.target.files
-    const fileArray = Array.from(files)
-    setPhoto(prevPhotos => [...prevPhotos, ...fileArray])
-  }
+  const handlePhotosSelected = (selectedPhotos) => {
+    setPhoto(prevPhotos => [...prevPhotos, ...selectedPhotos]);
+  };  
 
   const handleChangeInputQuestionType = event => {
     setQuestionType(event.target.value)
@@ -87,10 +86,16 @@ const QuestionAdd = () => {
       answers: answerArray
     }
 
+    console.log(photos)
+
     const data = new FormData()
     photos.forEach(photo => {
       data.append('photos', photo)
     })
+
+    for (const [key, value] of data.entries()) {
+      console.log(`${key}:`, value);
+    }
 
     data.append('heading', heading)
     data.append('subheading', subHeading)
@@ -171,8 +176,7 @@ const QuestionAdd = () => {
           })
         }
       />
-
-      <input type='file' name='photo' onChange={handlerPhoto} />
+      <ImageUploader onPhotosSelected={handlePhotosSelected} aspectratio={2048/1365}/>
     </div>
   ))
 

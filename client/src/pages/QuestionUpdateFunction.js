@@ -9,6 +9,7 @@ import {
 } from '../api'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import ImageUploader from '../components/questions_images/ImageUploader'
 
 const QuestionUpdateFunction = () => {
   let navigate = useNavigate()
@@ -45,10 +46,8 @@ const QuestionUpdateFunction = () => {
     fetchData()
   }, [id])
 
-  const handlerPhoto = event => {
-    const files = event.target.files
-    const fileArray = Array.from(files)
-    setPhoto(prevPhotos => [...prevPhotos, ...fileArray])
+  const handlePhotosSelected = selectedPhotos => {
+    setPhoto(prevPhotos => [...prevPhotos, ...selectedPhotos])
   }
 
   const handleChangeInputQuestionType = event => {
@@ -284,15 +283,12 @@ const QuestionUpdateFunction = () => {
             placeholder={answer.points.mtd}
           />
 
-          {answer.photo && (
-            <img
-              src={`http://localhost:3001/images/${answer.photo}`}
-              width={600}
-              alt='answer'
-            />
-          )}
-
-          <input type='file' name='photo' onChange={handlerPhoto} />
+          {console.log(answer.photo)}
+          <ImageUploader
+            onPhotosSelected={handlePhotosSelected}
+            aspectratio={2048 / 1365}
+            defaultPhotoProp={answer.photo}
+          />
         </div>
       ))}
 
