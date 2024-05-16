@@ -3,6 +3,7 @@ import NavBar from '../../components/NavBar'
 import FotBar from '../../components/FotBar'
 import '../../style/questions/carousel.css'
 import HeadingQuestion from '../../components/HeadingQuestion'
+import CarouselImage from '../../components/questions_images/CarouselImage'
 
 const Carousel = ({ question, pageNumber, maxPage }) => {
   
@@ -21,6 +22,7 @@ const Carousel = ({ question, pageNumber, maxPage }) => {
                   <p>{answer.text}</p>
                   <p>Points DA: {answer.points.da}</p>
                   <p>Points MTD: {answer.points.mtd}</p>
+                  <CarouselImage photo={answer.photo} />
                 </div>
               ))}
             </div>

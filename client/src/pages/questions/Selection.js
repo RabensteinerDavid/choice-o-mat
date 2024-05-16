@@ -3,9 +3,9 @@ import NavBar from '../../components/NavBar'
 import FotBar from '../../components/FotBar'
 import '../../style/questions/selection.css'
 import HeadingQuestion from '../../components/HeadingQuestion'
+import SelectionImage from '../../components/questions_images/SelectionImage'
 
 const Selection = ({ question, pageNumber, maxPage }) => {
-  
   const { heading, subheading, answers } = question
 
   return (
@@ -21,6 +21,7 @@ const Selection = ({ question, pageNumber, maxPage }) => {
                   <p>{answer.text}</p>
                   <p>Points DA: {answer.points.da}</p>
                   <p>Points MTD: {answer.points.mtd}</p>
+                  <SelectionImage photo={answer.photo} />
                 </div>
               ))}
             </div>

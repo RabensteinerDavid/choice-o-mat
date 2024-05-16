@@ -3,6 +3,7 @@ import NavBar from '../../components/NavBar'
 import FotBar from '../../components/FotBar'
 import '../../style/questions/thisorthatpicture.css'
 import HeadingQuestion from '../../components/HeadingQuestion'
+import ThisOrThatPictureImage from '../../components/questions_images/ThisOrThatPictureImage'
 
 const ThisOrThatPicture = ({ question, pageNumber, maxPage }) => {
   
@@ -21,6 +22,7 @@ const ThisOrThatPicture = ({ question, pageNumber, maxPage }) => {
                   <p>{answer.text}</p>
                   <p>Points DA: {answer.points.da}</p>
                   <p>Points MTD: {answer.points.mtd}</p>
+                  <ThisOrThatPictureImage photo={answer.photo} />
                 </div>
               ))}
             </div>
