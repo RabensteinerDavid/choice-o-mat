@@ -176,7 +176,8 @@ const QuestionAdd = () => {
           })
         }
       />
-      <ImageUploader onPhotosSelected={handlePhotosSelected} aspectratio={2048/1365}/>
+      {console.log(index)}
+      <ImageUploader answerNumber={index} onPhotosSelected={handlePhotosSelected} aspectratio={2048/1365}/>
     </div>
   ))
 

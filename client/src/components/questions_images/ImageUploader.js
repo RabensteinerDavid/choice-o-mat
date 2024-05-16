@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import '../../style/imageuploader.css'
+import { useParams } from 'react-router-dom'
+import { deleteAnswerPhoto } from '../../api'
 
-const ImageUploader = ({ onPhotosSelected, defaultPhotoProp }) => {
+const ImageUploader = ({ onPhotosSelected, defaultPhotoProp, answerNumber, answerId }) => {
   const [photo, setPhoto] = useState([])
   const [error, setError] = useState(null)
   const [defaultPhoto, setDefaultPhoto] = useState(null)
+  const {id} = useParams()
 
   useEffect(() => {
     setDefaultPhoto(defaultPhotoProp)
@@ -20,9 +23,11 @@ const ImageUploader = ({ onPhotosSelected, defaultPhotoProp }) => {
       const parts = filename.split('.')
       const fileExtension = parts.pop()
 
-      file = new File([file], `${uniqueSuffix}.${fileExtension}`, {
+      file = new File([file], `${answerNumber}_${uniqueSuffix}.${fileExtension}`, {
         type: file.type
       })
+
+      console.log(`${answerNumber}_${uniqueSuffix}.${fileExtension}`)
 
       const image = new Image()
       image.onload = () => {
@@ -35,9 +40,12 @@ const ImageUploader = ({ onPhotosSelected, defaultPhotoProp }) => {
   }
 
   const handleRemovePhoto = index => {
+  
     const updatedPhotos = [...photo]
     updatedPhotos.splice(index, 1)
     setPhoto(updatedPhotos)
+    console.log("updatedPhotos")
+    console.log(updatedPhotos)
     onPhotosSelected(updatedPhotos)
   }
 
@@ -54,12 +62,12 @@ const ImageUploader = ({ onPhotosSelected, defaultPhotoProp }) => {
           className='remove-button-image'
           onClick={() => handleRemovePhoto(index)}
         >
-          <div class='trash-box'>
-            <div class='trash-top'></div>
-            <div class='trash-btm'>
-              <div class='trash-lines'>
-                <div class='trash-line'></div>
-                <div class='trash-line'></div>
+          <div className='trash-box'>
+            <div className='trash-top'></div>
+            <div className='trash-btm'>
+              <div className='trash-lines'>
+                <div className='trash-line'></div>
+                <div className='trash-line'></div>
               </div>
             </div>
           </div>
@@ -94,14 +102,17 @@ const ImageUploader = ({ onPhotosSelected, defaultPhotoProp }) => {
 
               <div
                 className='remove-button-image'
-                onClick={() => setDefaultPhoto(null)}
+                onClick={() => {
+                  deleteAnswerPhoto(id, answerId)
+                  setDefaultPhoto(null)}
+                }
               >
-                <div class='trash-box'>
-                  <div class='trash-top'></div>
-                  <div class='trash-btm'>
-                    <div class='trash-lines'>
-                      <div class='trash-line'></div>
-                      <div class='trash-line'></div>
+                <div className='trash-box'>
+                  <div className='trash-top'></div>
+                  <div className='trash-btm'>
+                    <div className='trash-lines'>
+                      <div className='trash-line'></div>
+                      <div className='trash-line'></div>
                     </div>
                   </div>
                 </div>

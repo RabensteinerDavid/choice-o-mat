@@ -9,7 +9,14 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + Math.round(Math.random() * 1e9)
-    cb(null, uniqueSuffix + '.' + file.originalname.split('.')[1])
+    cb(
+      null,
+      file.originalname.split('_')[0] +
+        '_' +
+        uniqueSuffix +
+        '.' +
+        file.originalname.split('.').pop()
+    )
   }
 })
 const upload = multer({ storage: storage })
@@ -27,6 +34,14 @@ router.delete('/question/:id', QuestionCtrl.deleteQuestion)
 router.get('/question/:id', QuestionCtrl.getQuestionById)
 router.get('/questions', QuestionCtrl.getQuestion)
 router.delete('/question', QuestionCtrl.deleteAllQuestions)
-router.patch('/question-update/:id', QuestionCtrl.patchQuestion)
+router.patch('/delete-answer-photo/:questionId/:answerId', QuestionCtrl.deleteAnswerPhoto)
+
+router.patch('/question-update/:id', upload.any('photo'), (req, res) => {
+  QuestionCtrl.patchQuestion(
+    req,
+    res,
+    req.files.map(file => file.filename)
+  )
+})
 
 module.exports = router

@@ -13,9 +13,20 @@ createQuestion = (req, res) => {
   }
 
   const answersArray = JSON.parse(body.answers)
-  answersArray.forEach(answer => {
-    answer.photo = filenames[answersArray.indexOf(answer)]
+  const filenameMap = {}
+
+  filenames.forEach(filename => {
+    const indexFileName = parseInt(filename.split('_')[0])
+    filenameMap[indexFileName] = filename
   })
+
+  answersArray.forEach((answer, index) => {
+    const filename = filenameMap[index]
+    if (filename !== undefined) {
+      answer.photo = filename
+    }
+  })
+
   const question = new Question({
     heading: body.heading,
     subheading: body.subheading,
@@ -89,6 +100,7 @@ updateQuestion = async (req, res) => {
 
 patchQuestion = async (req, res) => {
   const body = req.body
+  const filenames = req.files.map(file => file.filename)
 
   if (!body) {
     return res.status(400).json({
@@ -106,24 +118,47 @@ patchQuestion = async (req, res) => {
       })
     }
 
-    quest.type = body.type
-    quest.heading = body.heading
-    quest.subheading = body.subheading
-    quest.page = body.page
+    const answersArray = JSON.parse(body.answers)
+    const filenameMap = {}
+
+    filenames.forEach(filename => {
+      const indexFileName = parseInt(filename.split('_')[0])
+      filenameMap[indexFileName] = filename
+    })
+
+    answersArray.forEach((answer, index) => {
+      const filename = filenameMap[index]
+      if (filename !== undefined) {
+        answer.photo = filename
+      }
+    })
+
+    const question = new Question({
+      heading: body.heading,
+      subheading: body.subheading,
+      type: body.type,
+      page: body.page,
+      answers: answersArray
+    })
+
+    quest.type = question.type
+    quest.heading = question.heading
+    quest.subheading = question.subheading
+    quest.page = question.page
 
     quest.answers = quest.answers.filter(ans => {
-      return body.answers.some(
+      return question.answers.some(
         updatedAnswer => updatedAnswer._id.toString() === ans._id.toString()
       )
     })
 
     let newAnswers
     try {
-      newAnswers = body.answers.filter(updatedAnswer => {
+      newAnswers = question.answers.filter(updatedAnswer => {
         return quest.answers.every(ans => !ans._id.equals(updatedAnswer._id))
       })
 
-      for (const updatedAnswer of body.answers) {
+      for (const updatedAnswer of question.answers) {
         if (updatedAnswer && updatedAnswer._id) {
           const index = quest.answers.findIndex(ans => {
             return (
@@ -134,6 +169,7 @@ patchQuestion = async (req, res) => {
           if (index !== -1) {
             quest.answers[index].points = updatedAnswer.points
             quest.answers[index].text = updatedAnswer.text
+            quest.answers[index].photo = updatedAnswer.photo
           }
         }
       }
@@ -142,6 +178,7 @@ patchQuestion = async (req, res) => {
         quest.answers.push({
           points: newAnswer.points,
           text: newAnswer.text,
+          photo: newAnswer.photo,
           _id: new mongoose.Types.ObjectId()
         })
       }
@@ -250,6 +287,30 @@ getMaxPage = async (req, res) => {
   }
 }
 
+deleteAnswerPhoto = async (req, res) => {
+  try {
+    const { questionId, answerId } = req.params;
+    console.log('Question ID:', questionId);
+    console.log('Answer ID:', answerId);
+
+    const quest = await Question.findOne({ _id: questionId })
+
+    quest.answers.filter(ans => {
+      if(ans._id.toString() === answerId){
+        console.log(ans.photo)
+        ans.photo = null;
+      }
+    })
+    console.log(quest)
+    await quest.save();
+    return res.status(200).json({ success: true, message: 'Deleted successfully' });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+
+
 module.exports = {
   createQuestion,
   updateQuestion,
@@ -258,5 +319,6 @@ module.exports = {
   getQuestion,
   getQuestionById,
   deleteAllQuestions,
-  patchQuestion
+  patchQuestion,
+  deleteAnswerPhoto
 }

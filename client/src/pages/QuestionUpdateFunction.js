@@ -124,11 +124,25 @@ const QuestionUpdateFunction = () => {
       return false
     }
 
-    console.log(id)
-    console.log(JSON.stringify(payload))
+    const data = new FormData()
+    photos.forEach(photo => {
+      data.append('photos', photo)
+    })
+    
+    data.append('_id', questionItem._id)
+    data.append('type', questionType || questionItem.type)
+    data.append('heading', heading || questionItem.heading)
+    data.append('subheading', subHeading || questionItem.subheading)
+    data.append('page', newPage)
+    data.append(
+      'answers',
+      JSON.stringify(
+        editedAnswers.length === 0 ? questionItem.answers : editedAnswers
+      )
+    )
 
     try {
-      await patchQuestion(id, payload)
+      await patchQuestion(id, data)
       setSubHeading('')
       setHeading('')
       setQuestionType('')
@@ -199,7 +213,6 @@ const QuestionUpdateFunction = () => {
 
   const handleChangeInputPoints = (value, index, pointType) => {
     let parsedValue = parseInt(value.replace(/\D/g, ''), 10)
-    console.log(parsedValue)
     parsedValue = Math.min(100, Math.max(0, parsedValue || 0))
 
     const updatedAnswers = [...editedAnswers]
@@ -283,11 +296,12 @@ const QuestionUpdateFunction = () => {
             placeholder={answer.points.mtd}
           />
 
-          {console.log(answer.photo)}
           <ImageUploader
+            answerNumber={index}
             onPhotosSelected={handlePhotosSelected}
             aspectratio={2048 / 1365}
             defaultPhotoProp={answer.photo}
+            answerId={answer._id}
           />
         </div>
       ))}
