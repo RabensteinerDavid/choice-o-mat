@@ -8,6 +8,7 @@ const ImageUploader = ({
   photoDelete,
   defaultPhotoProp,
   answerNumber,
+  aspectratio,
   answerId
 }) => {
   const [photo, setPhoto] = useState([])
@@ -37,10 +38,12 @@ const ImageUploader = ({
         }
       )
 
-      console.log(`${answerNumber}_${uniqueSuffix}.${fileExtension}`)
-
       const image = new Image()
       image.onload = () => {
+        if (image.width / image.height !== aspectratio) {
+          setError(`Aspect ratio of all images must be ${aspectratio}`)
+          return
+        }
         setPhoto(prevPhotos => [...prevPhotos, file])
         setError(null)
         photoAdd([...photo, file])

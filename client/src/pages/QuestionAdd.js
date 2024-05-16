@@ -14,9 +14,9 @@ const QuestionAdd = () => {
   const [answers, setAnswers] = useState([])
   const [photos, setPhoto] = useState([])
 
-  const handlePhotosSelected = (selectedPhotos) => {
-    setPhoto(prevPhotos => [...prevPhotos, ...selectedPhotos]);
-  };  
+  const handlePhotosAdd = selectedPhotos => {
+    setPhoto(prevPhotos => [...prevPhotos, ...selectedPhotos])
+  }
 
   const handleChangeInputQuestionType = event => {
     setQuestionType(event.target.value)
@@ -86,16 +86,10 @@ const QuestionAdd = () => {
       answers: answerArray
     }
 
-    console.log(photos)
-
     const data = new FormData()
     photos.forEach(photo => {
       data.append('photos', photo)
     })
-
-    for (const [key, value] of data.entries()) {
-      console.log(`${key}:`, value);
-    }
 
     data.append('heading', heading)
     data.append('subheading', subHeading)
@@ -113,7 +107,6 @@ const QuestionAdd = () => {
       setPhoto([])
       setAnswerCount(0)
     } catch (error) {
-      console.log(payload)
       console.error('Error inserting question:', error)
       alert('Failed to insert question. Please check console for details.')
     }
@@ -147,6 +140,10 @@ const QuestionAdd = () => {
     }
   }
 
+  const handlePhotosDelete = index => {
+    // questions.answers[index].photo = 'no photo'
+  }
+
   const answerInputs = answers.map((answer, index) => (
     <div key={index}>
       <InputField
@@ -176,8 +173,15 @@ const QuestionAdd = () => {
           })
         }
       />
-      {console.log(index)}
-      <ImageUploader answerNumber={index} onPhotosSelected={handlePhotosSelected} aspectratio={2048/1365}/>
+
+      <ImageUploader
+        answerNumber={index}
+        photoAdd={handlePhotosAdd}
+        aspectratio={2048 / 1365}
+        photoDelete={handlePhotosDelete}
+        defaultPhotoProp={answer.photo != 'no photo' ? answer.photo : null}
+        answerId={answer._id}
+      />
     </div>
   ))
 
