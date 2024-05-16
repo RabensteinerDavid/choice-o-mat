@@ -1,6 +1,6 @@
 const SelectionImage = ({ photo }) => {
     return (
-      photo ? (
+      photo!=null ? (
         <div>
           <img
             src={`http://localhost:3001/images/${photo}`}

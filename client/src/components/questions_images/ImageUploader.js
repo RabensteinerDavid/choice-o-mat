@@ -3,11 +3,17 @@ import '../../style/imageuploader.css'
 import { useParams } from 'react-router-dom'
 import { deleteAnswerPhoto } from '../../api'
 
-const ImageUploader = ({ onPhotosSelected, defaultPhotoProp, answerNumber, answerId }) => {
+const ImageUploader = ({
+  photoAdd,
+  photoDelete,
+  defaultPhotoProp,
+  answerNumber,
+  answerId
+}) => {
   const [photo, setPhoto] = useState([])
   const [error, setError] = useState(null)
   const [defaultPhoto, setDefaultPhoto] = useState(null)
-  const {id} = useParams()
+  const { id } = useParams()
 
   useEffect(() => {
     setDefaultPhoto(defaultPhotoProp)
@@ -23,9 +29,13 @@ const ImageUploader = ({ onPhotosSelected, defaultPhotoProp, answerNumber, answe
       const parts = filename.split('.')
       const fileExtension = parts.pop()
 
-      file = new File([file], `${answerNumber}_${uniqueSuffix}.${fileExtension}`, {
-        type: file.type
-      })
+      file = new File(
+        [file],
+        `${answerNumber}_${uniqueSuffix}.${fileExtension}`,
+        {
+          type: file.type
+        }
+      )
 
       console.log(`${answerNumber}_${uniqueSuffix}.${fileExtension}`)
 
@@ -33,20 +43,18 @@ const ImageUploader = ({ onPhotosSelected, defaultPhotoProp, answerNumber, answe
       image.onload = () => {
         setPhoto(prevPhotos => [...prevPhotos, file])
         setError(null)
-        onPhotosSelected([...photo, file])
+        photoAdd([...photo, file])
       }
       image.src = URL.createObjectURL(file)
     })
   }
 
   const handleRemovePhoto = index => {
-  
     const updatedPhotos = [...photo]
     updatedPhotos.splice(index, 1)
     setPhoto(updatedPhotos)
-    console.log("updatedPhotos")
-    console.log(updatedPhotos)
-    onPhotosSelected(updatedPhotos)
+    photoDelete(index)
+    deleteAnswerPhoto(id, answerId)
   }
 
   const renderPreview = () => {
@@ -60,7 +68,9 @@ const ImageUploader = ({ onPhotosSelected, defaultPhotoProp, answerNumber, answe
 
         <div
           className='remove-button-image'
-          onClick={() => handleRemovePhoto(index)}
+          onClick={() => {
+            handleRemovePhoto(index)
+          }}
         >
           <div className='trash-box'>
             <div className='trash-top'></div>
@@ -103,9 +113,10 @@ const ImageUploader = ({ onPhotosSelected, defaultPhotoProp, answerNumber, answe
               <div
                 className='remove-button-image'
                 onClick={() => {
+                  handleRemovePhoto(answerNumber)
                   deleteAnswerPhoto(id, answerId)
-                  setDefaultPhoto(null)}
-                }
+                  setDefaultPhoto(null)
+                }}
               >
                 <div className='trash-box'>
                   <div className='trash-top'></div>

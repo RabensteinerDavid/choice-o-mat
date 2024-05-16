@@ -27,6 +27,7 @@ const QuestionUpdateFunction = () => {
   const answersLength = question.answers ? question.answers.length : 0
 
   useEffect(() => {
+    console.log('Updated photo state:', photos)
     const fetchData = async () => {
       try {
         const response = await loadQuestionsID(id)
@@ -46,8 +47,12 @@ const QuestionUpdateFunction = () => {
     fetchData()
   }, [id])
 
-  const handlePhotosSelected = selectedPhotos => {
+  const handlePhotosAdd = selectedPhotos => {
     setPhoto(prevPhotos => [...prevPhotos, ...selectedPhotos])
+  }
+
+  const handlePhotosDelete = index => {
+    question.answers[index].photo = 'no photo'
   }
 
   const handleChangeInputQuestionType = event => {
@@ -128,7 +133,7 @@ const QuestionUpdateFunction = () => {
     photos.forEach(photo => {
       data.append('photos', photo)
     })
-    
+
     data.append('_id', questionItem._id)
     data.append('type', questionType || questionItem.type)
     data.append('heading', heading || questionItem.heading)
@@ -298,9 +303,10 @@ const QuestionUpdateFunction = () => {
 
           <ImageUploader
             answerNumber={index}
-            onPhotosSelected={handlePhotosSelected}
+            photoAdd={handlePhotosAdd}
+            photoDelete={handlePhotosDelete}
             aspectratio={2048 / 1365}
-            defaultPhotoProp={answer.photo}
+            defaultPhotoProp={answer.photo != 'no photo' ? answer.photo : null}
             answerId={answer._id}
           />
         </div>

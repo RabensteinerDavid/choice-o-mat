@@ -37,7 +37,7 @@ const QuestionList = () => {
       case 'ThisOrThat':
         return (
           <ThisOrThat
-            key={index}
+            key={question._id}
             question={question}
             version={0}
             pageNumber={index + 1}
@@ -47,7 +47,7 @@ const QuestionList = () => {
       case 'Selection':
         return (
           <Selection
-            key={index}
+            key={question._id}
             question={question}
             pageNumber={index + 1}
             maxPage={maxPage}
@@ -56,7 +56,7 @@ const QuestionList = () => {
       case 'VerticalSlider':
         return (
           <VerticalSlider
-            key={index}
+            key={question._id}
             question={question}
             pageNumber={index + 1}
             maxPage={maxPage}
@@ -65,7 +65,7 @@ const QuestionList = () => {
       case 'Carousel':
         return (
           <Carousel
-            key={index}
+            key={question._id}
             question={question}
             pageNumber={index + 1}
             maxPage={maxPage}
@@ -74,7 +74,7 @@ const QuestionList = () => {
       case 'ImageSelection':
         return (
           <ImageSelection
-            key={index}
+            key={question._id}
             question={question}
             pageNumber={index + 1}
             maxPage={maxPage}
@@ -83,7 +83,7 @@ const QuestionList = () => {
       case 'OrderSelection':
         return (
           <OrderSelection
-            key={index}
+            key={question._id}
             question={question}
             pageNumber={index + 1}
             maxPage={maxPage}
@@ -92,7 +92,7 @@ const QuestionList = () => {
       case 'DragnDrop':
         return (
           <DragnDrop
-            key={index}
+            key={question._id}
             question={question}
             pageNumber={index + 1}
             maxPage={maxPage}
@@ -101,7 +101,7 @@ const QuestionList = () => {
       case 'ChoiceRole':
         return (
           <ChoiceRole
-            key={index}
+            key={question._id}
             question={question}
             pageNumber={index + 1}
             maxPage={maxPage}
@@ -110,7 +110,7 @@ const QuestionList = () => {
       case 'ThisOrThatPicture':
         return (
           <ThisOrThatPicture
-            key={index}
+            key={question._id}
             question={question}
             pageNumber={index + 1}
             maxPage={maxPage}

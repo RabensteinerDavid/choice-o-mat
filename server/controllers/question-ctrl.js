@@ -289,27 +289,23 @@ getMaxPage = async (req, res) => {
 
 deleteAnswerPhoto = async (req, res) => {
   try {
-    const { questionId, answerId } = req.params;
-    console.log('Question ID:', questionId);
-    console.log('Answer ID:', answerId);
-
+    const { questionId, answerId } = req.params
     const quest = await Question.findOne({ _id: questionId })
 
     quest.answers.filter(ans => {
-      if(ans._id.toString() === answerId){
-        console.log(ans.photo)
-        ans.photo = null;
+      if (ans._id.toString() === answerId) {
+        ans.photo = 'no photo'
       }
     })
-    console.log(quest)
-    await quest.save();
-    return res.status(200).json({ success: true, message: 'Deleted successfully' });
+
+    await quest.save()
+    return res
+      .status(200)
+      .json({ success: true, message: 'Deleted successfully' })
   } catch (error) {
-    return res.status(500).json({ success: false, error: error.message });
+    return res.status(500).json({ success: false, error: error.message })
   }
-};
-
-
+}
 
 module.exports = {
   createQuestion,
