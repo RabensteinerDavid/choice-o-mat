@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../../style/imageuploader.css'
 import { useParams } from 'react-router-dom'
 import { deleteAnswerPhoto } from '../../api'
+import { Player } from '@lottiefiles/react-lottie-player'
 
 const ImageUploader = ({
   photoAdd,
@@ -21,7 +22,7 @@ const ImageUploader = ({
     setDefaultPhoto(defaultPhotoProp)
   }, [defaultPhotoProp])
 
-  const handlerPhoto = event => {
+  const handlerUpload = event => {
     const files = event.target.files
     const fileArray = Array.from(files)
     const uniqueSuffix = Date.now() + Math.round(Math.random() * 1e9)
@@ -31,7 +32,7 @@ const ImageUploader = ({
       const parts = filename.split('.')
       const fileExtension = parts.pop()
 
-      file = new File(
+      const newFile = new File(
         [file],
         `${answerNumber}_${uniqueSuffix}.${fileExtension}`,
         {
@@ -39,19 +40,33 @@ const ImageUploader = ({
         }
       )
 
-      const image = new Image()
-      image.onload = () => {
-        console.log(aspectratio)
-        console.log(image.width / image.height)
-        if (image.width / image.height !== aspectratio) {
-          setError(`Aspect ratio of all images must be ${aspectratio}`)
-          return
+      if (file.type === 'application/json') {
+        const reader = new FileReader()
+        reader.onload = () => {
+          try {
+            const jsonData = JSON.parse(reader.result)
+            console.log(jsonData)
+            setPhoto(prevPhotos => [...prevPhotos, newFile])
+            setError(null)
+            photoAdd([...photo, newFile])
+          } catch (e) {
+            setError('Error parsing JSON file.')
+          }
         }
-        setPhoto(prevPhotos => [...prevPhotos, file])
-        setError(null)
-        photoAdd([...photo, file])
+        reader.readAsText(file)
+      } else {
+        const image = new Image()
+        image.onload = () => {
+          if (image.width / image.height !== aspectratio) {
+            setError(`Aspect ratio of all images must be ${aspectratio}`)
+            return
+          }
+          setPhoto(prevPhotos => [...prevPhotos, newFile])
+          setError(null)
+          photoAdd([...photo, newFile])
+        }
+        image.src = URL.createObjectURL(file)
       }
-      image.src = URL.createObjectURL(file)
     })
   }
 
@@ -68,17 +83,24 @@ const ImageUploader = ({
   const renderPreview = () => {
     return photo.map((file, index) => (
       <div key={index} className='image-preview-item'>
-        <img
-          src={URL.createObjectURL(file)}
-          alt={`Uploaded image ${index}`}
-          className='image-preview'
-        />
-
+        {file.type.startsWith('image/') ? (
+          <img
+            src={URL.createObjectURL(file)}
+            alt=''
+            className='image-preview'
+          />
+        ) : (
+          <Player
+            src={URL.createObjectURL(file)}
+            className='player'
+            loop
+            autoplay
+            style={{ height: '300px', width: '300px' }}
+          />
+        )}
         <div
           className='remove-button-image'
-          onClick={() => {
-            handleRemovePhoto(index)
-          }}
+          onClick={() => handleRemovePhoto(index)}
         >
           <div className='trash-box'>
             <div className='trash-top'></div>
@@ -102,9 +124,9 @@ const ImageUploader = ({
           <label className='file-input-label'>
             <input
               type='file'
-              accept='image/*'
+              accept='image/*,application/json'
               multiple
-              onChange={handlerPhoto}
+              onChange={handlerUpload}
               className='inputspace'
             />
             Click here to upload images
@@ -113,10 +135,20 @@ const ImageUploader = ({
         {defaultPhoto && (
           <div className='image-preview-container'>
             <div className='image-preview-item'>
-              <img
-                src={`http://localhost:3001/images/${defaultPhoto}`}
-                className='image-preview'
-              />
+              {defaultPhoto.endsWith('.json') ? (
+                <Player
+                  src={`http://localhost:3001/lottie/${defaultPhoto}`}
+                  className='player'
+                  loop
+                  autoplay
+                  style={{ height: '300px', width: '300px' }}
+                />
+              ) : (
+                <img
+                  src={`http://localhost:3001/images/${defaultPhoto}`}
+                  className='image-preview'
+                />
+              )}
 
               <div
                 className='remove-button-image'

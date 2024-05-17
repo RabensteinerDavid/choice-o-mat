@@ -3,9 +3,9 @@ import NavBar from '../../components/NavBar'
 import FotBar from '../../components/FotBar'
 import '../../style/questions/choicerole.css'
 import HeadingQuestion from '../../components/HeadingQuestion'
+import { Player } from '@lottiefiles/react-lottie-player'
 
 const ChoiceRole = ({ question, pageNumber, maxPage }) => {
-  
   const { heading, subheading, answers } = question
 
   return (
@@ -24,6 +24,13 @@ const ChoiceRole = ({ question, pageNumber, maxPage }) => {
                 </div>
               ))}
             </div>
+            <Player
+              src='http://localhost:3001/lottie/animation.json'
+              className='player'
+              loop
+              autoplay
+              style={{ height: '300px', width: '300px' }}
+            />
           </React.Fragment>
         ) : (
           <p>No questions found at question </p>
