@@ -316,5 +316,5 @@ module.exports = {
   getQuestionById,
   deleteAllQuestions,
   patchQuestion,
-  deleteAnswerPhoto
+  deleteAnswerPhoto,
 }

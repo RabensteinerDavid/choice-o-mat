@@ -9,7 +9,8 @@ const ImageUploader = ({
   defaultPhotoProp,
   answerNumber,
   aspectratio,
-  answerId
+  answerId,
+  initial
 }) => {
   const [photo, setPhoto] = useState([])
   const [error, setError] = useState(null)
@@ -40,6 +41,8 @@ const ImageUploader = ({
 
       const image = new Image()
       image.onload = () => {
+        console.log(aspectratio)
+        console.log(image.width / image.height)
         if (image.width / image.height !== aspectratio) {
           setError(`Aspect ratio of all images must be ${aspectratio}`)
           return
@@ -57,7 +60,9 @@ const ImageUploader = ({
     updatedPhotos.splice(index, 1)
     setPhoto(updatedPhotos)
     photoDelete(index)
-    deleteAnswerPhoto(id, answerId)
+    if (id && answerId && initial) {
+      deleteAnswerPhoto(id, answerId)
+    }
   }
 
   const renderPreview = () => {
@@ -117,7 +122,10 @@ const ImageUploader = ({
                 className='remove-button-image'
                 onClick={() => {
                   handleRemovePhoto(answerNumber)
-                  deleteAnswerPhoto(id, answerId)
+                  console.log(initial)
+                  if (id && answerId && initial) {
+                    deleteAnswerPhoto(id, answerId)
+                  }
                   setDefaultPhoto(null)
                 }}
               >

@@ -4,12 +4,14 @@ import InputField from '../components/InputField'
 import {
   deleteQuestionById,
   getAllQuestion,
+  getQuestionTypes,
   patchQuestion,
   updateQuestionById
 } from '../api'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import ImageUploader from '../components/questions_images/ImageUploader'
+import DropDownField from '../components/DropDown'
 
 const QuestionUpdateFunction = () => {
   let navigate = useNavigate()
@@ -23,11 +25,11 @@ const QuestionUpdateFunction = () => {
   const [answerCount, setAnswerCount] = useState(0)
   const [newAnswers, setNewAnswers] = useState([])
   const [photos, setPhoto] = useState([])
+  const [aspectratio, setAspectRatio] = useState([])
 
   const answersLength = question.answers ? question.answers.length : 0
 
   useEffect(() => {
-    console.log('Updated photo state:', photos)
     const fetchData = async () => {
       try {
         const response = await loadQuestionsID(id)
@@ -47,6 +49,23 @@ const QuestionUpdateFunction = () => {
     fetchData()
   }, [id])
 
+  useEffect(() => {
+    checkQuestionType()
+  }, [questionType])
+
+  const checkQuestionType = async () => {
+    const response = await getQuestionTypes()
+    response.data.types.forEach(type => {
+      Object.entries(type.formats).forEach(([key, value]) => {
+        if (questionType === key) {
+          const [v1, v2] = value.split('/').map(Number)
+          const aspectRatio = v1 / v2
+          setAspectRatio(aspectRatio)
+        }
+      })
+    })
+  }
+
   const handlePhotosAdd = selectedPhotos => {
     setPhoto(prevPhotos => [...prevPhotos, ...selectedPhotos])
   }
@@ -55,8 +74,8 @@ const QuestionUpdateFunction = () => {
     question.answers[index].photo = 'no photo'
   }
 
-  const handleChangeInputQuestionType = event => {
-    setQuestionType(event.target.value)
+  const handleChangeInputQuestionType = type => {
+    setQuestionType(type)
   }
 
   const deleteQuestion = async () => {
@@ -249,11 +268,11 @@ const QuestionUpdateFunction = () => {
     <div className='wrapper'>
       <h1 className='title-question'>Update Questions</h1>
 
-      <InputField
+      <DropDownField
         label='Question Type'
         value={questionType}
         onChange={handleChangeInputQuestionType}
-        placeholder={question.type}
+        defaultValue={question.type}
       />
       <InputField
         label='Heading'
@@ -305,9 +324,10 @@ const QuestionUpdateFunction = () => {
             answerNumber={index}
             photoAdd={handlePhotosAdd}
             photoDelete={handlePhotosDelete}
-            aspectratio={2048 / 1365}
+            aspectratio={aspectratio}
             defaultPhotoProp={answer.photo != 'no photo' ? answer.photo : null}
             answerId={answer._id}
+            initial={true}
           />
         </div>
       ))}

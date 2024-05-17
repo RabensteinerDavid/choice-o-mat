@@ -126,3 +126,12 @@ ul {
   display: flex;
   gap: 10px;
 }
+
+.dropdown-select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}

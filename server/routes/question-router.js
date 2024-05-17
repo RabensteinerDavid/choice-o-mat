@@ -1,5 +1,6 @@
 const express = require('express')
 const QuestionCtrl = require('../controllers/question-ctrl')
+const QuestionCtrlTypes = require('../controllers/question-ctrl-types')
 const router = express.Router()
 
 const multer = require('multer')
@@ -34,7 +35,10 @@ router.delete('/question/:id', QuestionCtrl.deleteQuestion)
 router.get('/question/:id', QuestionCtrl.getQuestionById)
 router.get('/questions', QuestionCtrl.getQuestion)
 router.delete('/question', QuestionCtrl.deleteAllQuestions)
-router.patch('/delete-answer-photo/:questionId/:answerId', QuestionCtrl.deleteAnswerPhoto)
+router.patch(
+  '/delete-answer-photo/:questionId/:answerId',
+  QuestionCtrl.deleteAnswerPhoto
+)
 
 router.patch('/question-update/:id', upload.any('photo'), (req, res) => {
   QuestionCtrl.patchQuestion(
@@ -43,5 +47,7 @@ router.patch('/question-update/:id', upload.any('photo'), (req, res) => {
     req.files.map(file => file.filename)
   )
 })
+
+router.get('/question-types', QuestionCtrlTypes.getQuestionTypes)
 
 module.exports = router

@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import { deleteAllQuestions, insertQuestion } from '../api'
+import React, { useEffect, useState } from 'react'
+import { deleteAllQuestions, getQuestionTypes, insertQuestion } from '../api'
 import '../style/questionadd.css'
 import InputField from '../components/InputField'
 import { prefilledQuestions } from './questions/PrefillQuestion'
 import { getMaxPageValue } from '../components/LoadQuestion'
 import ImageUploader from '../components/questions_images/ImageUploader'
+import DropDownField from '../components/DropDown'
 
 const QuestionAdd = () => {
   const [questionType, setQuestionType] = useState('')
@@ -13,13 +14,31 @@ const QuestionAdd = () => {
   const [answerCount, setAnswerCount] = useState(0)
   const [answers, setAnswers] = useState([])
   const [photos, setPhoto] = useState([])
+  const [aspectratio, setAspectRatio] = useState([])
+
+  useEffect(() => {
+    checkQuestionType()
+  }, [questionType])
+
+  const handleChangeInputQuestionType = type => {
+    setQuestionType(type)
+  }
 
   const handlePhotosAdd = selectedPhotos => {
     setPhoto(prevPhotos => [...prevPhotos, ...selectedPhotos])
   }
 
-  const handleChangeInputQuestionType = event => {
-    setQuestionType(event.target.value)
+  const checkQuestionType = async () => {
+    const response = await getQuestionTypes()
+    response.data.types.forEach(type => {
+      Object.entries(type.formats).forEach(([key, value]) => {
+        if (questionType === key) {
+          const [v1, v2] = value.split('/').map(Number)
+          const aspectRatio = v1 / v2
+          setAspectRatio(aspectRatio)
+        }
+      })
+    })
   }
 
   const handleChangeInputHeading = event => {
@@ -177,7 +196,7 @@ const QuestionAdd = () => {
       <ImageUploader
         answerNumber={index}
         photoAdd={handlePhotosAdd}
-        aspectratio={2048 / 1365}
+        aspectratio={aspectratio}
         photoDelete={handlePhotosDelete}
         defaultPhotoProp={answer.photo != 'no photo' ? answer.photo : null}
         answerId={answer._id}
@@ -188,10 +207,12 @@ const QuestionAdd = () => {
   return (
     <>
       <h1 className='title'>Create Question</h1>
-      <InputField
+      <DropDownField
         label='Question Type'
         value={questionType}
         onChange={handleChangeInputQuestionType}
+        defaultValue='Selection'
+        initial={false}
       />
       <InputField
         label='Heading'

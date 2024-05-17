@@ -15,6 +15,7 @@ import {
   getMaxPageValue,
   loadQuestionsOrderData
 } from '../components/LoadQuestion'
+import HorizontalSlider from './questions/HorizontalSlider.js'
 
 const QuestionList = () => {
   const { id: page_id } = useParams()
@@ -110,6 +111,15 @@ const QuestionList = () => {
       case 'ThisOrThatPicture':
         return (
           <ThisOrThatPicture
+            key={question._id}
+            question={question}
+            pageNumber={index + 1}
+            maxPage={maxPage}
+          />
+        )
+      case 'HorizontalSlider':
+        return (
+          <HorizontalSlider
             key={question._id}
             question={question}
             pageNumber={index + 1}

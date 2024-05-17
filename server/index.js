@@ -16,7 +16,7 @@ app.use('/images', express.static('public/images'))
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 app.get('/', (req, res) => {
-    res.send('Server is running')
+  res.send('Server is running')
 })
 
 app.use('/api', questionRouter)
