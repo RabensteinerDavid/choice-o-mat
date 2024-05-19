@@ -147,6 +147,7 @@ const ImageUploader = ({
                 <img
                   src={`http://localhost:3001/images/${defaultPhoto}`}
                   className='image-preview'
+                  alt=''
                 />
               )}
 
