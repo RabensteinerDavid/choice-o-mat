@@ -72,7 +72,12 @@ export const prefilledQuestions = [
       "page": 7,
       "answers": [
         { "text": "Webentwicklung", "points": { "da": 2, "mtd": 2 } },
+        { "text": "UX/UI Design", "points": { "da": 2, "mtd": 2 } },
+        { "text": "Film Sound", "points": { "da": 2, "mtd": 2 } },
+        { "text": "Character Animation", "points": { "da": 2, "mtd": 2 } },
         { "text": "Video Design", "points": { "da": 2, "mtd": 2 } },
+        { "text": "Datenanalyse", "points": { "da": 2, "mtd": 2 } },
+        { "text": "Business Managment", "points": { "da": 2, "mtd": 2 } },
         { "text": "Game Art", "points": { "da": 2, "mtd": 2 } }
       ]
     },
