@@ -36,6 +36,8 @@ const QuestionAdd = () => {
           const [v1, v2] = value.split('/').map(Number)
           const aspectRatio = v1 / v2
           setAspectRatio(aspectRatio)
+        } else {
+          setAspectRatio([])
         }
       })
     })

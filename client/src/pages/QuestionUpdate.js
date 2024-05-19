@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { getAllQuestion, updateQuestionById } from '../api'
 import '../style/questionupdate.css'
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
+import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd'
 import { Link } from 'react-router-dom'
 
 function QuestionUpdate () {
@@ -24,7 +24,6 @@ function QuestionUpdate () {
 
   const handleUpdateReorder = async () => {
     try {
-      console.log(order)
       for (let index = 0; index < order.length; index++) {
         const question = order[index]
         const payload = {
@@ -65,73 +64,68 @@ function QuestionUpdate () {
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId='droppable'>
           {provided => (
-            <li {...provided.droppableProps} ref={provided.innerRef}>
-              <div>
-                <h1 className='title'>Questions</h1>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Page</th>
-                      <th>Type</th>
-                      <th>Heading</th>
-                      <th>Sub Heading</th>
-                      <th colSpan={4}>Answers</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {order
-                      .sort((a, b) => a.page - b.page)
-                      .map((question, index) => (
-                        <Draggable
-                          key={question._id}
-                          draggableId={question._id}
-                          index={index}
-                        >
-                          {provided => (
-                            <tr
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                              ref={provided.innerRef}
-                            >
-                              <td>{question.page}</td>
-                              <td>{question.type}</td>
-                              <td>{question.heading}</td>
-                              <td>{question.subheading}</td>
-
-                              <td colSpan='4'>
-                                {question.answers
-                                  .map(
-                                    answer =>
-                                      `${answer.text} ( DA: ${answer.points.da}, MTD: ${answer.points.mtd})`
-                                  )
-                                  .join(', ')}
-                              </td>
-                              <td>
-                                <Link
-                                  className='update-link'
-                                  to={`/question-update/${question._id}`}
-                                >
-                                  Update
-                                </Link>
-                              </td>
-                            </tr>
-                          )}
-                        </Draggable>
-                      ))}
-                  </tbody>
-                </table>
-                {provided.placeholder}
-                <button
-                  className='update-button reorder'
-                  onClick={() => {
-                    handleUpdateReorder()
-                  }}
-                >
-                  Update Reorder
-                </button>
-              </div>
-            </li>
+            <div>
+              <h1 className='title'>Questions</h1>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Page</th>
+                    <th>Type</th>
+                    <th>Heading</th>
+                    <th>Sub Heading</th>
+                    <th colSpan={4}>Answers</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody {...provided.droppableProps} ref={provided.innerRef}>
+                  {order
+                    .sort((a, b) => a.page - b.page)
+                    .map((question, index) => (
+                      <Draggable
+                        key={question._id}
+                        draggableId={question._id}
+                        index={index}
+                      >
+                        {provided => (
+                          <tr
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            ref={provided.innerRef}
+                          >
+                            <td>{question.page}</td>
+                            <td>{question.type}</td>
+                            <td>{question.heading}</td>
+                            <td>{question.subheading}</td>
+                            <td colSpan='4'>
+                              {question.answers
+                                .map(
+                                  answer =>
+                                    `${answer.text} ( DA: ${answer.points.da}, MTD: ${answer.points.mtd})`
+                                )
+                                .join(', ')}
+                            </td>
+                            <td>
+                              <Link
+                                className='update-link'
+                                to={`/question-update/${question._id}`}
+                              >
+                                Update
+                              </Link>
+                            </td>
+                          </tr>
+                        )}
+                      </Draggable>
+                    ))}
+                  {provided.placeholder}
+                </tbody>
+              </table>
+              <button
+                className='update-button reorder'
+                onClick={handleUpdateReorder}
+              >
+                Update Reorder
+              </button>
+            </div>
           )}
         </Droppable>
       </DragDropContext>

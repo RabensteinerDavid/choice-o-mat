@@ -62,6 +62,9 @@ const QuestionUpdateFunction = () => {
           const aspectRatio = v1 / v2
           setAspectRatio(aspectRatio)
         }
+        else{
+          setAspectRatio([])
+        }
       })
     })
   }
