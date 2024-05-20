@@ -21,16 +21,18 @@ const ChoiceRole = ({ question, pageNumber, maxPage }) => {
                   <p>{answer.text}</p>
                   <p>Points DA: {answer.points.da}</p>
                   <p>Points MTD: {answer.points.mtd}</p>
+                  {answer.photo && (
+                    <Player
+                      src={`http://localhost:3001/lottie/${answer.photo}`}
+                      className='player'
+                      loop
+                      autoplay
+                      style={{ height: '300px', width: '300px' }}
+                    />
+                  )}
                 </div>
               ))}
             </div>
-            <Player
-              src='http://localhost:3001/lottie/animation.json'
-              className='player'
-              loop
-              autoplay
-              style={{ height: '300px', width: '300px' }}
-            />
           </React.Fragment>
         ) : (
           <p>No questions found at question </p>
