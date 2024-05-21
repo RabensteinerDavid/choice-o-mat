@@ -13,7 +13,16 @@ export const prefilledQuestions = [
         { "text": "Filme", "points": { "da": 2, "mtd": 2 } },
         { "text": "3D Modelling", "points": { "da": 2, "mtd": 2 } },
         { "text": "Poster/Flyer erstellen", "points": { "da": 2, "mtd": 2 } },
-      ]
+        { "text": "VR Gaming", "points": { "da": 2, "mtd": 2 } },
+        { "text": "Bildbearbeitung", "points": { "da": 2, "mtd": 2 } },
+        { "text": "Computer zusammenbauen", "points": { "da": 2, "mtd": 2 } },
+        { "text": "Fotografie", "points": { "da": 2, "mtd": 2 } },
+        { "text": "Cosplay / Kostümdesign", "points": { "da": 2, "mtd": 2 } },
+        { "text": "Basteln / DIY", "points": { "da": 2, "mtd": 2 } },
+        { "text": "Typografie", "points": { "da": 2, "mtd": 2 } },
+        { "text": "3D Druck", "points": { "da": 2, "mtd": 2 } }
+      
+    ]
     },
     {
       "heading": "Wie gut sind deine Skills?",
@@ -25,7 +34,6 @@ export const prefilledQuestions = [
         { "text": "Ideen Entwicklung", "points": { "da": 2, "mtd": 2 } },
         { "text": "Künstlerischefähigkeiten", "points": { "da": 2, "mtd": 2 } },
         { "text": "Lösungsorienttiertes Denken", "points": { "da": 2, "mtd": 2 } }
-
       ]
     },
     {

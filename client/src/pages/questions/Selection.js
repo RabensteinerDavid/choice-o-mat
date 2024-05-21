@@ -19,9 +19,7 @@ const Selection = ({ question, pageNumber, maxPage }) => {
               {answers.map(answer => (
                 <div key={answer._id}>
                   <p>{answer.text}</p>
-                  <p>Points DA: {answer.points.da}</p>
-                  <p>Points MTD: {answer.points.mtd}</p>
-                  <SelectionImage photo={answer.photo} />
+                  
                 </div>
               ))}
             </div>
