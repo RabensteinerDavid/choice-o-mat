@@ -12,8 +12,6 @@ const DragnDropItem = ({
 }) => {
   const [controlledPosition, setControlledPosition] = useState({ x: defaultX, y: defaultY });
 
-  console.log(defaultX)
-  console.log(defaultY)
   const adjustPosition = (dx, dy) => {
     setControlledPosition(prevPosition => ({
       x: prevPosition.x + dx,
@@ -38,11 +36,12 @@ const DragnDropItem = ({
   return (
     <div>
       <Draggable
+      bounds={"body"}
         position={controlledPosition}
         onStop={handleStop}
         onDrag={handleDrag}
       >
-        <div className='dragndrop-answers'>
+        <div className='dragndrop-answers' onClick={()=>  setControlledPosition({ x: 200, y: 100 })}>
           {answer.text}
           {/* <div>({controlledPosition.x})X - ({controlledPosition.y}) Y</div> */}
         </div>

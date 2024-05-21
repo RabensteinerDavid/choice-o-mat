@@ -18,6 +18,8 @@ const ImageUploader = ({
   const [defaultPhoto, setDefaultPhoto] = useState(null)
   const { id } = useParams()
 
+  console.log(aspectratio)
+
   useEffect(() => {
     setDefaultPhoto(defaultPhotoProp)
   }, [defaultPhotoProp])
