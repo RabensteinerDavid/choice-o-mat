@@ -55,14 +55,15 @@ const QuestionUpdateFunction = () => {
 
   const checkQuestionType = async () => {
     const response = await getQuestionTypes()
+    let foundAspectration = false
     response.data.types.forEach(type => {
       Object.entries(type.formats).forEach(([key, value]) => {
         if (questionType === key) {
           const [v1, v2] = value.split('/').map(Number)
           const aspectRatio = v1 / v2
           setAspectRatio(aspectRatio)
-        }
-        else{
+          foundAspectration = true
+        } else if (!foundAspectration) {
           setAspectRatio([])
         }
       })
