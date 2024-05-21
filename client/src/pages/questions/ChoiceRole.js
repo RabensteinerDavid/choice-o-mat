@@ -4,6 +4,7 @@ import FotBar from '../../components/FotBar'
 import '../../style/questions/choicerole.css'
 import HeadingQuestion from '../../components/HeadingQuestion'
 import { Player } from '@lottiefiles/react-lottie-player'
+import SelectionImage from '../../components/questions_images/SelectionImage'
 
 const ChoiceRole = ({ question, pageNumber, maxPage }) => {
   const { heading, subheading, answers } = question
@@ -21,7 +22,7 @@ const ChoiceRole = ({ question, pageNumber, maxPage }) => {
                   <p>{answer.text}</p>
                   <p>Points DA: {answer.points.da}</p>
                   <p>Points MTD: {answer.points.mtd}</p>
-                  {answer.photo && (
+                  {answer.photo && answer.photo.includes("json") && (
                     <Player
                       src={`http://localhost:3001/lottie/${answer.photo}`}
                       className='player'
@@ -29,6 +30,9 @@ const ChoiceRole = ({ question, pageNumber, maxPage }) => {
                       autoplay
                       style={{ height: '300px', width: '300px' }}
                     />
+                  )}
+                  {answer.photo && !answer.photo.includes("json") && (
+                      <SelectionImage photo={answer.photo} />
                   )}
                 </div>
               ))}
