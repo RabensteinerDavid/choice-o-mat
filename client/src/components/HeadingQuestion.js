@@ -5,8 +5,8 @@ const HeadingQuestion = ({ heading, subheading }) => {
 
   return (
     <div className='heading-question'>
-      <h1>{heading}</h1>
-      <h2>{subheading}</h2>
+      <h1 className="question-header">{heading}</h1>
+      <h2 className="question-subheader">{subheading}</h2>
     </div>
   )
 }

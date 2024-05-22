@@ -1,3 +1,13 @@
 .heading-question h1{
     color: var(--main-green);
 }
+
+.question-header {
+    font-size: 4vh;
+    margin-bottom: 4px;
+}
+
+.question-subheader {
+    font-size: 2vh;
+    margin: 0px;
+}
