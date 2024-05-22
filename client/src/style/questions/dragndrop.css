@@ -42,22 +42,22 @@
 
 .answer-wrapper > div:nth-child(1) {
   top: 10%;
-  left: 10%;
+  left: 0%;
 }
 
 .answer-wrapper > div:nth-child(2) {
   top: 30%;
-  left: 4%;
+  left: -14%;
 }
 
 .answer-wrapper > div:nth-child(3) {
   top: 50%;
-  left: 2%;
+  left: -16%;
 }
 
 .answer-wrapper > div:nth-child(4) {
   top: 70%;
-  left: 8%;
+  left: -10%;
 }
 
 .answer-wrapper > div:nth-child(5) {
@@ -67,17 +67,17 @@
 
 .answer-wrapper > div:nth-child(6) {
   top: 30%;
-  left: 82%;
+  left: 86%;
 }
 
 .answer-wrapper > div:nth-child(7) {
   top: 50%;
-  left: 84%;
+  left: 90%;
 }
 
 .answer-wrapper > div:nth-child(8) {
   top: 70%;
-  left: 76%;
+  left: 86%;
 }
 
 @media (max-width: 1024px) {
