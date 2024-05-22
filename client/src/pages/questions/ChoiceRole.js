@@ -1,13 +1,18 @@
-import React from 'react'
-import NavBar from '../../components/NavBar'
-import FotBar from '../../components/FotBar'
-import '../../style/questions/choicerole.css'
-import HeadingQuestion from '../../components/HeadingQuestion'
-import { Player } from '@lottiefiles/react-lottie-player'
-import SelectionImage from '../../components/questions_images/SelectionImage'
+import React, { useState } from 'react';
+import NavBar from '../../components/NavBar';
+import FotBar from '../../components/FotBar';
+import '../../style/questions/choicerole.css';
+import HeadingQuestion from '../../components/HeadingQuestion';
+import { Player } from '@lottiefiles/react-lottie-player';
+import SelectionImage from '../../components/questions_images/SelectionImage';
 
 const ChoiceRole = ({ question, pageNumber, maxPage }) => {
-  const { heading, subheading, answers } = question
+  const { heading, subheading, answers } = question;
+  const [clicked, setClicked] = useState(false);
+
+  const handleClick = () => {
+    setClicked(!clicked);
+  };
 
   return (
     <div className='question-list'>
@@ -16,7 +21,7 @@ const ChoiceRole = ({ question, pageNumber, maxPage }) => {
         {question ? (
           <React.Fragment>
             <HeadingQuestion heading={heading} subheading={subheading} />
-            <div>
+          {/*   <div>
               {answers.map(answer => (
                 <div key={answer._id}>
                   <p>{answer.text}</p>
@@ -36,7 +41,56 @@ const ChoiceRole = ({ question, pageNumber, maxPage }) => {
                   )}
                 </div>
               ))}
+            </div> */}
+            <div className='Linke Spalte'>
+              <button 
+                className={`button ${clicked ? 'clicked' : ''}`} 
+                onClick={handleClick}
+              >
+              Videoschnitt
+              </button><br/><br/>
+
+              <button 
+                className={`button ${clicked ? 'clicked' : ''}`} 
+                onClick={handleClick}
+              >
+                Drehbuch Autor*in
+              </button><br/><br/>
+
+              <button 
+                className={`button ${clicked ? 'clicked' : ''}`} 
+                onClick={handleClick}
+              >
+                Projekt Manager*in
+              </button>
+          </div>
+
+          <br/><br/>
+          
+
+          <div className='Rechte Spalte'>
+              <button 
+                className={`button ${clicked ? 'clicked' : ''}`} 
+                onClick={handleClick}
+              >
+                Level Planner*in
+              </button>
+
+              <button 
+                className={`button ${clicked ? 'clicked' : ''}`} 
+                onClick={handleClick}
+              >
+                Audio Techniker*in
+              </button>
+
+              <button 
+                className={`button ${clicked ? 'clicked' : ''}`} 
+                onClick={handleClick}
+              >
+                Spezial Effekte
+              </button>
             </div>
+
           </React.Fragment>
         ) : (
           <p>No questions found at question </p>
@@ -47,7 +101,7 @@ const ChoiceRole = ({ question, pageNumber, maxPage }) => {
         nextQuestion={pageNumber === maxPage ? maxPage : pageNumber + 1}
       />
     </div>
-  )
+  );
 }
 
-export default ChoiceRole
+export default ChoiceRole;
