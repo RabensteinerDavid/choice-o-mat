@@ -1,8 +1,13 @@
 :root {
   --main-green: #5e8035;
-  --main-grey: #EDEDED;
+  --main-grey: #ededed;
   --width-rapper: 80%;
   --hero-section-width: 5%;
+}
+
+html {
+  line-height: 1.15;
+  font-family: 'Poppins';
 }
 
 .app {
@@ -30,6 +35,8 @@
   display: none;
 }
 
-body {
-  font-family: 'Poppins';
-}
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+

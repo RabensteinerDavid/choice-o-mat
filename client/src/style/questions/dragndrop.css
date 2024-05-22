@@ -1,22 +1,163 @@
 .dragndrop-answers {
-  width: 200px;
   padding: 20px 10px 20px 10px;
   background-color: var(--main-grey);
   border-radius: 80px;
   white-space: nowrap;
-  box-shadow: 5px 5px 8px 0px rgba(106, 106, 106, 0.75);
+  width: 251px;
+  box-shadow: 5px 5px 8px 0px rgba(61, 61, 61, 0.169);
+  padding: 25px 18px 25px 18px;
+  border-radius: 80px;
 }
 
 .middle-circle {
-    position: fixed;
-    left: 50%;
-    transform: translate(-50%, 0);
-    background-color: var(--main-green);
-    border-radius: 50%;
-    width: clamp(800px, 50%, 200px);
-    align-self: flex-start;
-    height: clamp(10px, 60%, 600px);
-    background-size: contain;
-    background-position: center;
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+  background-color: var(--main-green);
+  border-radius: 50%;
+  width: clamp(20%, 50%, 60%);
+  height: clamp(20%, 50%, 60%);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.answer-wrapper {
+  position: relative;
+  width: 90%;
+  height: 40rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.answer-wrapper > div {
+  position: absolute;
+  z-index: 2;
+}
+
+.answer-wrapper > div:nth-child(1) {
+  top: 10%;
+  left: 10%;
+}
+
+.answer-wrapper > div:nth-child(2) {
+  top: 30%;
+  left: 4%;
+}
+
+.answer-wrapper > div:nth-child(3) {
+  top: 50%;
+  left: 2%;
+}
+
+.answer-wrapper > div:nth-child(4) {
+  top: 70%;
+  left: 8%;
+}
+
+.answer-wrapper > div:nth-child(5) {
+  top: 10%;
+  left: 76%;
+}
+
+.answer-wrapper > div:nth-child(6) {
+  top: 30%;
+  left: 82%;
+}
+
+.answer-wrapper > div:nth-child(7) {
+  top: 50%;
+  left: 84%;
+}
+
+.answer-wrapper > div:nth-child(8) {
+  top: 70%;
+  left: 76%;
+}
+
+@media (max-width: 1024px) {
+  .answer-wrapper {
+    margin-top: 60%;
+    width: 70%;
+    height: auto;
   }
-  
+
+  .answer-wrapper > div {
+    position: static;
+    transform: none;
+    margin: 10px;
+  }
+}
+
+@media (max-width: 688px) {
+  .answer-wrapper {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 400px) {
+  .answer-wrapper {
+    height: auto;
+  }
+
+  .answer-wrapper > div {
+    position: static;
+    transform: none;
+    margin: 10px;
+  }
+}
+
+.inner-circle {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.inner-circle .item {
+  color: white;
+  border: 2px dashed white;
+  background-color: #ffffff2e;
+  position: absolute;
+  width: 250px;
+  padding: 20px 10px 20px 10px;
+  border-radius: 80px;
+  white-space: nowrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 5px 5px 8px 0px rgba(61, 61, 61, 0.169);
+}
+
+.inner-circle .item:nth-child(1) {
+  top: 15%;
+  left: 20%;
+}
+
+.inner-circle .item:nth-child(2) {
+  top: 35%;
+  left: 50%;
+}
+
+.inner-circle .item:nth-child(3) {
+  top: 50%;
+  left: 10%;
+}
+
+.inner-circle .item:nth-child(4) {
+  top: 70%;
+  left: 40%;
+}
+
+.inner-circle > div:nth-child(1) {
+  margin-left: 5%;
+}
+
+.inner-circle-row {
+  width: auto;
+}
