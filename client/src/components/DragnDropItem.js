@@ -17,6 +17,7 @@ const DragnDropItem = ({
     x: defaultX,
     y: defaultY
   })
+  const nodeRef = React.useRef(null);
 
   useEffect(() => {
     const item = document.getElementById(`${answer._id}`)
@@ -68,8 +69,16 @@ const DragnDropItem = ({
 
   return (
     <div>
-      <Draggable position={controlledPosition} onStop={handleStop}>
-        <div className='dragndrop-answers' id={answer._id}>
+      <Draggable
+      nodeRef={nodeRef}
+        position={controlledPosition}
+        onStop={handleStop}
+      >
+        <div 
+        ref={nodeRef}
+          className='dragndrop-answers'
+          id={answer._id}
+        >
           {answer.text}
         </div>
       </Draggable>

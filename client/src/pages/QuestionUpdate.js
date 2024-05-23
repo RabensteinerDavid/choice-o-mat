@@ -8,6 +8,7 @@ function QuestionUpdate () {
   const [questions, setQuestions] = useState([])
   const [order, setOrder] = useState(questions)
   const [info, showInfo] = useState(false)
+  const nodeRef = React.useRef(null)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -82,6 +83,7 @@ function QuestionUpdate () {
                     .sort((a, b) => a.page - b.page)
                     .map((question, index) => (
                       <Draggable
+                        nodeRef={nodeRef}
                         key={question._id}
                         draggableId={question._id}
                         index={index}

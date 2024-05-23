@@ -24,7 +24,7 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
     setDefaultTargetAnswer(newCoordinates)
   }, [width, height, finalAnswers])
 
-  function addAnswer(targetIndex, answer) {
+  function addAnswer (targetIndex, answer) {
     setFinalAnswers(prev => ({
       ...prev,
       [targetIndex]: answer
@@ -45,7 +45,7 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
 
   return (
     <div className='question-list'>
-      {    console.log(finalAnswers)}
+      {console.log(finalAnswers)}
       <NavBar />
       <div className='main'>
         {question ? (
@@ -55,7 +55,9 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
               <div className='inner-circle'>
                 <div className='inner-circle-row'>
                   {[0, 1, 2, 3].map(index => (
-                    <div className='item' key={index}>Drop here </div>
+                    <div className='item' key={index}>
+                      Drop here{' '}
+                    </div>
                   ))}
                 </div>
               </div>
