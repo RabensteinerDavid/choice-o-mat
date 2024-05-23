@@ -63,7 +63,7 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
                   targetPosition={defaultTargetAnswer}
                   addAnswer={addAnswer}
                   removeAnswer={removeAnswer}
-                  freeAnswers={freeAnswersCount}
+                  freeAnswersCount={freeAnswersCount}
                 />
               ))}
             </div>

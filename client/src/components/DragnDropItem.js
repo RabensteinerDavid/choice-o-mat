@@ -9,7 +9,7 @@ const DragnDropItem = ({
   targetPosition,
   addAnswer,
   removeAnswer,
-  freeAnswers
+  freeAnswersCount
 }) => {
   const { height, width, coordinates } = useWindowDimensions()
   const [answerCoordinates, setAnswerCoodinates] = useState({})
@@ -37,11 +37,25 @@ const DragnDropItem = ({
     for (const key in targetPosition) {
       const rect = targetPosition[key]
 
+      const answerRect = {
+        left: answerCoordinates.left + data.x,
+        right: answerCoordinates.left + data.x + answerCoordinates.width,
+        top: answerCoordinates.top + data.y,
+        bottom: answerCoordinates.top + data.y + answerCoordinates.height
+      }
+
+      const targetRect = {
+        left: rect.left,
+        right: rect.left + rect.width,
+        top: rect.top,
+        bottom: rect.top + rect.height
+      }
+
       if (
-        answerCoordinates.left + data.x >= rect.left &&
-        answerCoordinates.left + data.x <= rect.left + rect.width &&
-        answerCoordinates.top + data.y >= rect.top &&
-        answerCoordinates.top + data.y <= rect.top + rect.height
+        answerRect.left < targetRect.right &&
+        answerRect.right > targetRect.left &&
+        answerRect.top < targetRect.bottom &&
+        answerRect.bottom > targetRect.top
       ) {
         addAnswer(answer._id)
         setControlledPosition({
@@ -61,7 +75,7 @@ const DragnDropItem = ({
   }
 
   const handleDoubleClick = () => {
-    const freeTargetIndex = freeAnswers
+    const freeTargetIndex = freeAnswersCount
     const target = targetPosition[freeTargetIndex]
     if (target) {
       setControlledPosition({
