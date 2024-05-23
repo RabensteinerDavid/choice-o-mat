@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import Draggable from 'react-draggable'
 import NavBar from '../../components/NavBar'
 import FotBar from '../../components/FotBar'
 import HeadingQuestion from '../../components/HeadingQuestion'
 import '../../style/questions/dragndrop.css'
 import DragnDropItem from '../../components/DragnDropItem'
 import useWindowDimensions from '../../components/useWindowSize'
-import dragndropBg from '../../images/dragndrop-bg.png'
 
 const DragnDrop = ({ question, pageNumber, maxPage }) => {
   const { heading, subheading, answers } = question
   const { height, width } = useWindowDimensions()
   const [defaultTargetAnswer, setDefaultTargetAnswer] = useState({})
-  const [finalAnswers, setFinalAnswers] = useState([])
-  const freeAnswersCount = finalAnswers.length
+  const [finalAnswers, setFinalAnswers] = useState({})
 
   useEffect(() => {
     const items = document.querySelectorAll('.inner-circle .item')
@@ -24,22 +21,31 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
       newCoordinates[index] = rect
     })
 
-    console.log(finalAnswers)
-
     setDefaultTargetAnswer(newCoordinates)
   }, [width, height, finalAnswers])
 
-  function addAnswer (answer) {
-    setFinalAnswers([...finalAnswers, answer])
+  function addAnswer(targetIndex, answer) {
+    setFinalAnswers(prev => ({
+      ...prev,
+      [targetIndex]: answer
+    }))
   }
 
-  const removeAnswer = id => {
-    const newAnswers = finalAnswers.filter(finalAnswer => finalAnswer !== id)
-    setFinalAnswers(newAnswers)
+  const removeAnswer = answerId => {
+    setFinalAnswers(prev => {
+      const newAnswers = { ...prev }
+      for (const key in newAnswers) {
+        if (newAnswers[key] === answerId) {
+          delete newAnswers[key]
+        }
+      }
+      return newAnswers
+    })
   }
 
   return (
     <div className='question-list'>
+      {    console.log(finalAnswers)}
       <NavBar />
       <div className='main'>
         {question ? (
@@ -48,10 +54,9 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
             <div className='middle-circle'>
               <div className='inner-circle'>
                 <div className='inner-circle-row'>
-                  <div className='item'>Drop here </div>
-                  <div className='item'>Drop here </div>
-                  <div className='item'>Drop here </div>
-                  <div className='item'>Drop here </div>
+                  {[0, 1, 2, 3].map(index => (
+                    <div className='item' key={index}>Drop here </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -63,7 +68,7 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
                   targetPosition={defaultTargetAnswer}
                   addAnswer={addAnswer}
                   removeAnswer={removeAnswer}
-                  freeAnswersCount={freeAnswersCount}
+                  finalAnswers={finalAnswers}
                 />
               ))}
             </div>

@@ -9,23 +9,14 @@ const DragnDropItem = ({
   targetPosition,
   addAnswer,
   removeAnswer,
-  freeAnswersCount
+  finalAnswers
 }) => {
-  const { height, width, coordinates } = useWindowDimensions()
+  const { height, width } = useWindowDimensions()
   const [answerCoordinates, setAnswerCoodinates] = useState({})
   const [controlledPosition, setControlledPosition] = useState({
     x: defaultX,
     y: defaultY
   })
-
-  let withinTarget = false
-
-  const adjustPosition = (dx, dy) => {
-    setControlledPosition(prevPosition => ({
-      x: prevPosition.x + dx,
-      y: prevPosition.y + dy
-    }))
-  }
 
   useEffect(() => {
     const item = document.getElementById(`${answer._id}`)
@@ -34,6 +25,7 @@ const DragnDropItem = ({
   }, [width, height])
 
   const handleStop = (e, data) => {
+    let withinTarget = false
     for (const key in targetPosition) {
       const rect = targetPosition[key]
 
@@ -55,9 +47,10 @@ const DragnDropItem = ({
         answerRect.left < targetRect.right &&
         answerRect.right > targetRect.left &&
         answerRect.top < targetRect.bottom &&
-        answerRect.bottom > targetRect.top
+        answerRect.bottom > targetRect.top &&
+        !finalAnswers[key]
       ) {
-        addAnswer(answer._id)
+        addAnswer(key, answer._id)
         setControlledPosition({
           x: rect.left - answerCoordinates.left + defaultX,
           y: rect.top - answerCoordinates.top + defaultY
@@ -68,51 +61,15 @@ const DragnDropItem = ({
     }
 
     if (!withinTarget) {
-      withinTarget = false
       removeAnswer(answer._id)
       setControlledPosition({ x: defaultX, y: defaultY })
     }
   }
 
-  const handleDoubleClick = () => {
-    const freeTargetIndex = freeAnswersCount
-    const target = targetPosition[freeTargetIndex]
-    if (target) {
-      setControlledPosition({
-        x: target.left - answerCoordinates.left,
-        y: target.top - answerCoordinates.top
-      })
-    }
-  }
-
-  //todo: remove answer from target after draganddrop
-  const handleClick = () => {
-    console.log('here')
-    if (withinTarget) {
-      setControlledPosition({
-        x: defaultX,
-        y: defaultY
-      })
-      removeAnswer(answer._id)
-    }
-  }
-
-  const handleDrag = (e, ui) => {
-    adjustPosition(ui.deltaX, ui.deltaY)
-  }
-
   return (
     <div>
-      <Draggable
-        position={controlledPosition}
-        onStop={handleStop}
-        onDrag={handleDrag}
-      >
-        <div
-          className='dragndrop-answers'
-          // onDoubleClick={handleDoubleClick}
-          id={answer._id}
-        >
+      <Draggable position={controlledPosition} onStop={handleStop}>
+        <div className='dragndrop-answers' id={answer._id}>
           {answer.text}
         </div>
       </Draggable>
