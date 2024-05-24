@@ -13,11 +13,12 @@ const DragnDropItem = ({
 }) => {
   const { height, width } = useWindowDimensions()
   const [answerCoordinates, setAnswerCoodinates] = useState({})
+  const [isUsed, setIsUse] = useState(false)
   const [controlledPosition, setControlledPosition] = useState({
     x: defaultX,
     y: defaultY
   })
-  const nodeRef = React.useRef(null);
+  const nodeRef = React.useRef(null)
 
   useEffect(() => {
     const item = document.getElementById(`${answer._id}`)
@@ -51,6 +52,10 @@ const DragnDropItem = ({
         answerRect.bottom > targetRect.top &&
         !finalAnswers[key]
       ) {
+        if (isUsed) {
+          removeAnswer(answer._id)
+        }
+        setIsUse(true)
         addAnswer(key, answer._id)
         setControlledPosition({
           x: rect.left - answerCoordinates.left + defaultX,
@@ -70,15 +75,11 @@ const DragnDropItem = ({
   return (
     <div>
       <Draggable
-      nodeRef={nodeRef}
+        nodeRef={nodeRef}
         position={controlledPosition}
         onStop={handleStop}
       >
-        <div 
-        ref={nodeRef}
-          className='dragndrop-answers'
-          id={answer._id}
-        >
+        <div ref={nodeRef} className='dragndrop-answers' id={answer._id}>
           {answer.text}
         </div>
       </Draggable>
