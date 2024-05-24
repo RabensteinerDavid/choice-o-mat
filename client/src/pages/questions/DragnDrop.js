@@ -53,6 +53,19 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
             <HeadingQuestion heading={heading} subheading={subheading} />
             <div className='middle-circle'>
               <div className='inner-circle'>
+                <div className='answer-wrapper'>
+                  {width > 1405 &&
+                    answers.map(answer => (
+                      <DragnDropItem
+                        key={answer._id}
+                        answer={answer}
+                        targetPosition={defaultTargetAnswer}
+                        addAnswer={addAnswer}
+                        removeAnswer={removeAnswer}
+                        finalAnswers={finalAnswers}
+                      />
+                    ))}
+                </div>
                 <div className='inner-circle-row'>
                   {[0, 1, 2, 3].map(index => (
                     <div className='item' key={index}>
@@ -62,18 +75,21 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
                 </div>
               </div>
             </div>
-            <div className='answer-wrapper'>
-              {answers.map(answer => (
-                <DragnDropItem
-                  key={answer._id}
-                  answer={answer}
-                  targetPosition={defaultTargetAnswer}
-                  addAnswer={addAnswer}
-                  removeAnswer={removeAnswer}
-                  finalAnswers={finalAnswers}
-                />
-              ))}
-            </div>
+
+            {width < 1405 && (
+              <div className='answer-wrapper-bottom'>
+                {answers.map(answer => (
+                  <DragnDropItem
+                    key={answer._id}
+                    answer={answer}
+                    targetPosition={defaultTargetAnswer}
+                    addAnswer={addAnswer}
+                    removeAnswer={removeAnswer}
+                    finalAnswers={finalAnswers}
+                  />
+                ))}
+              </div>
+            )}
           </React.Fragment>
         ) : (
           <p>No questions found at question</p>

@@ -1,3 +1,10 @@
+.main.dragndrop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .dragndrop-answers {
   padding: 20px 10px 20px 10px;
   background-color: var(--main-grey);
@@ -10,10 +17,7 @@
 }
 
 .middle-circle {
-  position: absolute;
-  left: 50%;
-  top: 52.5%;
-  transform: translate(-50%, -50%);
+  margin-top: 4vh;
   background-color: var(--main-green);
   border-radius: 50%;
   width: 50vw;
@@ -24,17 +28,6 @@
   text-align: center;
 }
 
-.answer-wrapper {
-  position: relative;
-  width: 90%;
-  height: 40rem;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
 .answer-wrapper > div {
   position: absolute;
   z-index: 2;
@@ -42,42 +35,42 @@
 
 .answer-wrapper > div:nth-child(1) {
   top: 6vh;
-  left: -8vw;
+  left: -20vw;
 }
 
 .answer-wrapper > div:nth-child(2) {
   top: 20vh;
-  left: -12vw;
+  left: -24vw;
 }
 
 .answer-wrapper > div:nth-child(3) {
   top: 34vh;
-  left: -12vw;
+  left: -24vw;
 }
 
 .answer-wrapper > div:nth-child(4) {
   top: 48vh;
-  left: -8vw;
+  left: -20vw;
 }
 
 .answer-wrapper > div:nth-child(5) {
   top: 6vh;
-  left: 62.5vw;
+  left: 50.5vw;
 }
 
 .answer-wrapper > div:nth-child(6) {
   top: 20vh;
-  left: 66.5vw;
+  left: 54.5vw;
 }
 
 .answer-wrapper > div:nth-child(7) {
   top: 34vh;
-  left: 66.5vw;
+  left: 54.5vw;
 }
 
 .answer-wrapper > div:nth-child(8) {
   top: 48vh;
-  left: 62.5vw;
+  left: 50.5vw;
 }
 
 .inner-circle {
@@ -121,19 +114,34 @@
   left: 20vw;
 }
 
-.inner-circle > div:nth-child(1) {
-  margin-left: 5%;
-}
-
-.inner-circle-row {
+/* .inner-circle-row {
   width: auto;
+} */
+
+.answer-wrapper-bottom {
+  z-index: 5;
+  display: flex;
+  margin-top: 5vh;
+  margin-bottom: 10vh;
+  width: 100%;
+  height: auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 1405px) {
   .answer-wrapper {
-    margin-top: 65vh;
-    width: 100%;
+    display: flex;
+    transform: translate(-15%, 0);
+    margin-bottom: 10px;
+    margin-top: 55vh;
+    width: 80vw;
     height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 
   .answer-wrapper > div {
@@ -296,8 +304,8 @@
 @media (max-width: 360px) {
   .middle-circle {
     margin-top: 1vh;
-    width: clamp(100px, 250px, 600px);
-    height: clamp(100px, 250px, 600px);
+    width: clamp(100px, 300px, 600px);
+    height: clamp(100px, 300px, 600px);
   }
 
   .inner-circle .item {
@@ -311,21 +319,21 @@
 
   .inner-circle .item:nth-child(1) {
     top: 10% !important;
-    left: 22.5% !important;
+    left: 15% !important;
   }
 
   .inner-circle .item:nth-child(2) {
     top: 30% !important;
-    left: 22.5% !important;
+    left: 15% !important;
   }
 
   .inner-circle .item:nth-child(3) {
     top: 50% !important;
-    left: 22.5% !important;
+    left: 15% !important;
   }
 
   .inner-circle .item:nth-child(4) {
     top: 70% !important;
-    left: 22.5% !important;
+    left: 15% !important;
   }
 }
