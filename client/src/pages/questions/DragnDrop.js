@@ -47,7 +47,7 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
     <div className='question-list'>
       {console.log(finalAnswers)}
       <NavBar />
-      <div className='main'>
+      <div className='main dragndrop'>
         {question ? (
           <React.Fragment>
             <HeadingQuestion heading={heading} subheading={subheading} />
