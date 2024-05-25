@@ -29,7 +29,6 @@ const VerticalSlider = ({ question, pageNumber, maxPage }) => {
             <HeadingQuestion heading={heading} subheading={subheading} />
             {horizontal ? (
               <div className='vertical-slider-wrapper'>
-                {/* <div className='background-line' /> */}
                 <div className='vertical-slider-agenda'>
                   <div className='vertical-slider-agenda-item'>
                     <h2 className='arrow-container'>Sehr gut</h2>
@@ -50,7 +49,7 @@ const VerticalSlider = ({ question, pageNumber, maxPage }) => {
               </div>
             ) : (
               <div className='vertical-slider-wrapper-horizontal'>
-                {/* <div className='background-line-horizontal' /> */}
+    
                 <div className='vertical-slider-agenda-horizontal'>
                   <div className='vertical-slider-agenda-item-horizontal'>
                     <h2 className='arrow-container-horizontal'>
