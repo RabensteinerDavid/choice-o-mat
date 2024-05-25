@@ -112,7 +112,7 @@
   width: 250%;
 }
 
-.vertical-slider-item:nth-child(4) .background-line {
+.vertical-slider-item:last-child .background-line {
   left: -50%;
   width: 200%;
 }
@@ -206,7 +206,7 @@
   left: 50%;
 }
 
-.vertical-slider-item-horizontal:nth-child(5) .background-line-horizontal {
+.vertical-slider-item-horizontal:last-child .background-line-horizontal {
   height: 200%;
   top: -50%;
   left: 50%;
