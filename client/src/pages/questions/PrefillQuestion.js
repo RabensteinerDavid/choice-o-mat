@@ -32,8 +32,8 @@ export const prefilledQuestions = [
       "answers": [
         { "text": "Technisches Verständnis", "points": { "da": 2, "mtd": 2 } },
         { "text": "Ideen Entwicklung", "points": { "da": 2, "mtd": 2 } },
-        { "text": "Künstlerischefähigkeiten", "points": { "da": 2, "mtd": 2 } },
-        { "text": "Lösungsorienttiertes Denken", "points": { "da": 2, "mtd": 2 } }
+        { "text": "Künstlerische Fähigkeiten", "points": { "da": 2, "mtd": 2 } },
+        { "text": "Praktisches Denken", "points": { "da": 2, "mtd": 2 } }
       ]
     },
     {
@@ -83,7 +83,7 @@ export const prefilledQuestions = [
     {
       "heading": "Schätze deine Stärken ein!",
       "subheading": "Verschiebe die Regler so, dass sie auf dich zutreffen",
-      "type": "VerticalSlider",
+      "type": "HorizontalSlider",
       "page": 6,
       "answers": [
         { "text": "Organisatorisches Talent", "points": { "da": 2, "mtd": 2 } },

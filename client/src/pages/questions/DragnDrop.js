@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import Draggable from 'react-draggable'
 import NavBar from '../../components/NavBar'
 import FotBar from '../../components/FotBar'
 import HeadingQuestion from '../../components/HeadingQuestion'
 import '../../style/questions/dragndrop.css'
 import DragnDropItem from '../../components/DragnDropItem'
 import useWindowDimensions from '../../components/useWindowSize'
-import dragndropBg from '../../images/dragndrop-bg.png'
+import { saveAnswersLocalStorage } from '../../components/LoadQuestion'
 
 const DragnDrop = ({ question, pageNumber, maxPage }) => {
   const { heading, subheading, answers } = question
   const { height, width } = useWindowDimensions()
   const [defaultTargetAnswer, setDefaultTargetAnswer] = useState({})
-  const [finalAnswers, setFinalAnswers] = useState([])
-  const freeAnswersCount = finalAnswers.length
+  const [finalAnswers, setFinalAnswers] = useState({})
 
   useEffect(() => {
     const items = document.querySelectorAll('.inner-circle .item')
@@ -24,49 +22,78 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
       newCoordinates[index] = rect
     })
 
-    console.log(finalAnswers)
-
     setDefaultTargetAnswer(newCoordinates)
   }, [width, height, finalAnswers])
 
-  function addAnswer (answer) {
-    setFinalAnswers([...finalAnswers, answer])
+  function addAnswer (targetIndex, answer) {
+    setFinalAnswers(prev => ({
+      ...prev,
+      [targetIndex]: answer
+    }))
   }
 
-  const removeAnswer = id => {
-    const newAnswers = finalAnswers.filter(finalAnswer => finalAnswer !== id)
-    setFinalAnswers(newAnswers)
+  const removeAnswer = answerId => {
+    setFinalAnswers(prev => {
+      const newAnswers = { ...prev }
+      for (const key in newAnswers) {
+        if (newAnswers[key] === answerId) {
+          delete newAnswers[key]
+        }
+      }
+      return newAnswers
+    })
+  }
+
+  const saveAnswers = () => {
+    saveAnswersLocalStorage(question._id, JSON.stringify(finalAnswers))
   }
 
   return (
     <div className='question-list'>
       <NavBar />
-      <div className='main'>
+      <div className='main dragndrop'>
         {question ? (
           <React.Fragment>
             <HeadingQuestion heading={heading} subheading={subheading} />
             <div className='middle-circle'>
               <div className='inner-circle'>
+                <div className='answer-wrapper'>
+                  {width > 1405 &&
+                    answers.map(answer => (
+                      <DragnDropItem
+                        key={answer._id}
+                        answer={answer}
+                        targetPosition={defaultTargetAnswer}
+                        addAnswer={addAnswer}
+                        removeAnswer={removeAnswer}
+                        finalAnswers={finalAnswers}
+                      />
+                    ))}
+                </div>
                 <div className='inner-circle-row'>
-                  <div className='item'>Drop here </div>
-                  <div className='item'>Drop here </div>
-                  <div className='item'>Drop here </div>
-                  <div className='item'>Drop here </div>
+                  {[0, 1, 2, 3].map(index => (
+                    <div className='item' key={index}>
+                      Drop here{' '}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
-            <div className='answer-wrapper'>
-              {answers.map(answer => (
-                <DragnDropItem
-                  key={answer._id}
-                  answer={answer}
-                  targetPosition={defaultTargetAnswer}
-                  addAnswer={addAnswer}
-                  removeAnswer={removeAnswer}
-                  freeAnswers={freeAnswersCount}
-                />
-              ))}
-            </div>
+
+            {width < 1405 && (
+              <div className='answer-wrapper-bottom'>
+                {answers.map(answer => (
+                  <DragnDropItem
+                    key={answer._id}
+                    answer={answer}
+                    targetPosition={defaultTargetAnswer}
+                    addAnswer={addAnswer}
+                    removeAnswer={removeAnswer}
+                    finalAnswers={finalAnswers}
+                  />
+                ))}
+              </div>
+            )}
           </React.Fragment>
         ) : (
           <p>No questions found at question</p>
@@ -75,6 +102,7 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
       <FotBar
         prevQuestion={pageNumber === 1 ? 1 : pageNumber - 1}
         nextQuestion={pageNumber === maxPage ? maxPage : pageNumber + 1}
+        saveAnswers={saveAnswers}
       />
     </div>
   )

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import '../../style/startside.css'
 import '@fontsource/poppins'
+import '@fontsource/poppins/700.css'
 import fhLogo from '../../images/fh_ooe_logo.png'
 import '../../style/homepage.css'
 
@@ -29,7 +30,7 @@ function Startside () {
         <h1 className='hero-heading'>MTD oder DA?</h1>
         <p className='hero-p'>
           Wir helfen dir bei deiner Entscheidung und bringen dich auf deinen
-          richtigen Karrierepfad{' '}
+          richtigen Karrierepfad
         </p>
         <StartButton />
       </div>

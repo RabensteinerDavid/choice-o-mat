@@ -1,28 +1,45 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory, useNavigate } from 'react-router-dom'
 import '../style/links.css'
 import { getMaxPageValue } from './LoadQuestion'
 
-const Arrows = ({ prevQuestion, nextQuestion }) => (
-  <React.Fragment>
-    <div className='bottom-header'>
-      {isValidQuestionId(prevQuestion) && (
-        <Link to={`/questions/${prevQuestion}`} className='nav-link'>
-          {'<'}
-        </Link>
-      )}
-      {isValidQuestionId(nextQuestion) && (
-        <Link to={`/questions/${nextQuestion}`} className='nav-link'>
-          {'>'}
-        </Link>
-      )}
-    </div>
-  </React.Fragment>
-)
+const Arrows = ({ prevQuestion, nextQuestion, saveAnswers }) => {
+  const navigation = useNavigate()
 
-const isValidQuestionId = async questionId => {
-  const maxPageValue = await getMaxPageValue()
-  return questionId > 0 && questionId < maxPageValue
+  const handleNavigation = questionId => {
+    saveAnswers()
+    setTimeout(() => {
+      navigation(`/questions/${questionId}`)
+    }, 0)
+  }
+
+  const isValidQuestionId = async questionId => {
+    const maxPageValue = await getMaxPageValue()
+    return questionId > 0 && questionId < maxPageValue
+  }
+
+  return (
+    <React.Fragment>
+      <div className='bottom-header'>
+        {isValidQuestionId(prevQuestion) && (
+          <span
+            className='nav-link'
+            onClick={() => handleNavigation(prevQuestion)}
+          >
+            {'<'}
+          </span>
+        )}
+        {isValidQuestionId(nextQuestion) && (
+          <span
+            className='nav-link'
+            onClick={() => handleNavigation(nextQuestion)}
+          >
+            {'>'}
+          </span>
+        )}
+      </div>
+    </React.Fragment>
+  )
 }
 
 export default Arrows
