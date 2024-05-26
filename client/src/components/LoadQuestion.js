@@ -87,6 +87,6 @@ export const saveAnswersLocalStorage = (id, finalAnswers) => {
 }
 
 export const loadAnswersFromLocalStorage = (id, index) => {
-  const storedAnswers = JSON.parse(localStorage.getItem(id))
-  return storedAnswers[index] ? storedAnswers[index] : {}
-}
+  const storedAnswers = JSON.parse(localStorage.getItem(id)) || [];
+  return storedAnswers[index] || 0;
+};
