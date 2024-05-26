@@ -4,14 +4,24 @@ import FotBar from '../../components/FotBar';
 import '../../style/questions/choicerole.css';
 import HeadingQuestion from '../../components/HeadingQuestion';
 import { Player } from '@lottiefiles/react-lottie-player';
-import SelectionImage from '../../components/questions_images/SelectionImage';
+
+const icons = {
+  videoschnitt: '/icons/videoschnitt.png',
+  drehbuchautor: '/icons/drehbuchautor.png',
+  projektmanager: '/icons/projektmanager.png',
+  levelplanner: '/icons/levelplanner.png',
+  audiotechniker: '/icons/audiotechniker.png',
+  spezialeffekte: '/icons/spezialeffekte.png',
+};
 
 const ChoiceRole = ({ question, pageNumber, maxPage }) => {
   const { heading, subheading, answers } = question;
-  const [clicked, setClicked] = useState(false);
+  const [selectedRole, setSelectedRole] = useState(null);
+  const [selectedJson, setSelectedJson] = useState('');
 
-  const handleClick = () => {
-    setClicked(!clicked);
+  const handleClick = (role, jsonFile) => {
+    setSelectedRole(role);
+    setSelectedJson(jsonFile);
   };
 
   return (
@@ -21,76 +31,78 @@ const ChoiceRole = ({ question, pageNumber, maxPage }) => {
         {question ? (
           <React.Fragment>
             <HeadingQuestion heading={heading} subheading={subheading} />
-          {/*   <div>
-              {answers.map(answer => (
-                <div key={answer._id}>
-                  <p>{answer.text}</p>
-                  <p>Points DA: {answer.points.da}</p>
-                  <p>Points MTD: {answer.points.mtd}</p>
-                  {answer.photo && answer.photo.includes("json") && (
-                    <Player
-                      src={`http://localhost:3001/lottie/${answer.photo}`}
-                      className='player'
-                      loop
-                      autoplay
-                      style={{ height: '300px', width: '300px' }}
-                    />
-                  )}
-                  {answer.photo && !answer.photo.includes("json") && (
-                      <SelectionImage photo={answer.photo} />
-                  )}
-                </div>
-              ))}
-            </div> */}
-            <div className='Linke Spalte'>
-              <button 
-                className={`button ${clicked ? 'clicked' : ''}`} 
-                onClick={handleClick}
-              >
-              Videoschnitt
-              </button><br/><br/>
+            <br/><br/><br/><br/>
+            <div className='content'>
+              <div className='left-column'>
+                <button
+                  className={`button ${selectedRole === 'videoschnitt' ? 'clicked' : ''}`}
+                  onClick={() => handleClick('videoschnitt', 'videoschnitt.json')}
+                >
+                  <img src={icons.videoschnitt} alt='Icon' className='button-icon' />
+                  Videoschnitt
+                </button><br/><br/>
 
-              <button 
-                className={`button ${clicked ? 'clicked' : ''}`} 
-                onClick={handleClick}
-              >
-                Drehbuch Autor*in
-              </button><br/><br/>
+                <button
+                  className={`button ${selectedRole === 'drehbuchautor' ? 'clicked' : ''}`}
+                  onClick={() => handleClick('drehbuchautor', 'drehbuchautor.json')}
+                >
+                  <img src={icons.drehbuchautor} alt='Icon' className='button-icon' />
+                  Drehbuch Autor/in
+                </button><br/><br/>
 
-              <button 
-                className={`button ${clicked ? 'clicked' : ''}`} 
-                onClick={handleClick}
-              >
-                Projekt Manager*in
-              </button>
-          </div>
+                <button
+                  className={`button ${selectedRole === 'projektmanager' ? 'clicked' : ''}`}
+                  onClick={() => handleClick('projektmanager', 'projektmanager.json')}
+                >
+                  <img src={icons.projektmanager} alt='Icon' className='button-icon' />
+                  Projekt Manager/in
+                </button>
+              </div>
 
-          <br/><br/>
-          
+              <div className='middle-column'>
+                {selectedJson ? (
+                  <Player
+                    src={`http://localhost:3001/lottie/${selectedJson}`}
+                    className='player'
+                    loop
+                    autoplay
+                    style={{ height: '300px', width: '300px' }}
+                  />
+                ) : (
+                  <img
+                    src='/PlaceholderImageQ10.png'
+                    alt='Platzhalterbild'
+                    style={{ height: '500px', width: '500px' }}
+                  />
+                )}
+              </div>
 
-          <div className='Rechte Spalte'>
-              <button 
-                className={`button ${clicked ? 'clicked' : ''}`} 
-                onClick={handleClick}
-              >
-                Level Planner*in
-              </button>
+              <div className='right-column'>
+                <button
+                  className={`button ${selectedRole === 'levelplanner' ? 'clicked' : ''}`}
+                  onClick={() => handleClick('levelplanner', 'levelplanner.json')}
+                >
+                  <img src={icons.levelplanner} alt='Icon' className='button-icon' />
+                  Level Planner/in
+                </button><br/><br/>
 
-              <button 
-                className={`button ${clicked ? 'clicked' : ''}`} 
-                onClick={handleClick}
-              >
-                Audio Techniker*in
-              </button>
+                <button
+                  className={`button ${selectedRole === 'audiotechniker' ? 'clicked' : ''}`}
+                  onClick={() => handleClick('audiotechniker', 'audiotechniker.json')}
+                >
+                  <img src={icons.audiotechniker} alt='Icon' className='button-icon' />
+                  Audio Techniker/in
+                </button><br/><br/>
 
-              <button 
-                className={`button ${clicked ? 'clicked' : ''}`} 
-                onClick={handleClick}
-              >
-                Spezial Effekte
-              </button>
+                <button
+                  className={`button ${selectedRole === 'spezialeffekte' ? 'clicked' : ''}`}
+                  onClick={() => handleClick('spezialeffekte', 'spezialeffekte.json')}
+                >
+                  <img src={icons.spezialeffekte} alt='Icon' className='button-icon' />
+                  Spezial Effekte
+                </button>
+              </div>
             </div>
-
           </React.Fragment>
         ) : (
           <p>No questions found at question </p>
