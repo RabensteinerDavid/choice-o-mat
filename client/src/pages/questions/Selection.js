@@ -38,8 +38,8 @@ const Selection = ({ question, pageNumber, maxPage }) => {
                   >
                     {answer.text}
                     {focusedButtons.includes(answer._id) && (
-                    <div class="circle">
-                      <div class="checkMark"></div>
+                    <div className="circle">
+                      <div className="checkMark"></div>
                     </div>         //selected-icon für check mark im grünen Kreis, wenn ein Button gedrückt ist
                   )}
                   </button>

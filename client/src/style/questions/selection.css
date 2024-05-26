@@ -21,6 +21,11 @@
   position: relative;
   width: 100%;
   height: 70px;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  min-width: 150px;
+
 }
 
 .answer-element:hover {
@@ -52,4 +57,24 @@
   width: 6px;
   border-bottom: 2px solid #fff;
   border-right: 2px solid #fff;
+}
+
+
+
+/* @media (max-width: 1024px) {
+  .answer-grid {
+    grid-template-columns: repeat(3, 1fr); /* Auf Tablets: 3 Spalten 
+  }
+} */
+
+@media (max-width: 768px) {
+  .answer-grid {
+    grid-template-columns: repeat(2, 1fr); /* Auf kleinen Tablets: 2 Spalten */
+  }
+}
+
+@media (max-width: 480px) {
+  .answer-grid {
+    grid-template-columns: repeat(1, 1fr); /* Auf Handys: 1 Spalte */
+  }
 }
