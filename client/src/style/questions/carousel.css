@@ -1,0 +1,74 @@
+.swiper {
+    margin: 2rem; /*nach oben hin abstand*/
+    width: 100%;    
+    height: 29rem;   
+}
+  
+.swiper-slide {
+    text-align: center ;
+    font-size: 18px;
+    background: #F3F3F3;
+    border-radius: 1rem;
+    flex-direction: column; /* Elemente werden vertikal ausgerichtet */
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+/*rechts & links der weiter swipe Button*/
+.swiper-button-next:after, .swiper-button-prev:after {
+    color: green;
+}
+
+
+/*wenn ein Swiper-Element angeklickt wird*/
+.swiper-slide.focused{
+    background: #5e8035 !important;
+}
+
+/* text farbe wenn angelickt */
+.swiper-slide.focused p {
+    color: white; 
+}
+
+
+
+.swiper-slide img, .player {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.player-wrapper{
+    background-color: pink;
+    width: 10vw;
+    height: 20vh;
+    border-radius: 1rem;
+    margin-top: -3rem; /*-13%;*/
+    overflow: hidden; /* Verhindert das Überlaufen des Inhalts */
+    position: relative;
+    display:flex;
+    justify-content: center !important; 
+    align-items: center;
+}
+
+.content-wrapper{
+    display:flex;
+    justify-content: center !important; 
+    align-items: center;
+    flex-direction: column;
+}
+
+
