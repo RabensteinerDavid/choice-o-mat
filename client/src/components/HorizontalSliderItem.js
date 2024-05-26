@@ -2,18 +2,23 @@ import React, { useEffect, useState } from 'react'
 import Draggable from 'react-draggable'
 import useWindowDimensions from './useWindowSize'
 
-const HorizontalSliderItem = ({ answer, defaultX = 0, defaultY = 0 }) => {
+const HorizontalSliderItem = ({ answer, defaultX, addAnswer, index }) => {
   const { height, width } = useWindowDimensions()
   const [widthSlider, setWidthSlider] = useState(0)
   const [widthAnswer, setWidthAnswer] = useState(0)
   const [controlledPosition, setControlledPosition] = useState({
-    x: defaultX,
-    y: defaultY
+    x: 0,
+    y: 0
   })
   const nodeRef = React.useRef(null)
 
   const handleDrag = (e, data) => {
-    setControlledPosition({ x: data.x, y: data.y })
+    const newX = data.x
+    const sliderWidth = widthSlider - widthAnswer
+    const middleX = sliderWidth / 2
+    const newPercentage = ((newX + middleX) / sliderWidth) * 100
+    setControlledPosition({ x: newX, y: 0 })
+    addAnswer(index, Math.max(0, Math.min(100, newPercentage)))
   }
 
   useEffect(() => {
@@ -24,6 +29,7 @@ const HorizontalSliderItem = ({ answer, defaultX = 0, defaultY = 0 }) => {
       const answerRect = answer.getBoundingClientRect()
       setWidthSlider(sliderRect.width)
       setWidthAnswer(answerRect.width)
+      addAnswer(index, 50)
     }
   }, [width, height])
 
@@ -34,7 +40,6 @@ const HorizontalSliderItem = ({ answer, defaultX = 0, defaultY = 0 }) => {
         nodeRef={nodeRef}
         position={controlledPosition}
         onDrag={handleDrag}
-        axis='y'
         bounds={{
           top: 0,
           left: -widthSlider / 2 + widthAnswer / 2,

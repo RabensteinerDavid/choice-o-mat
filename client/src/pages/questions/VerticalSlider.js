@@ -6,11 +6,16 @@ import HeadingQuestion from '../../components/HeadingQuestion'
 import VerticalSliderItem from '../../components/VerticalSliderItem'
 import HorizontalSliderItem from '../../components/HorizontalSliderItem'
 import useWindowDimensions from '../../components/useWindowSize'
+import {
+  loadAnswersFromLocalStorage,
+  saveAnswersLocalStorage
+} from '../../components/LoadQuestion'
 
 const VerticalSlider = ({ question, pageNumber, maxPage }) => {
   const { heading, subheading, answers } = question
   const { height, width } = useWindowDimensions()
   const [horizontal, setHorizontal] = useState(true)
+  const [finalAnswers, setFinalAnswers] = useState({})
 
   useEffect(() => {
     if (width < height) {
@@ -19,6 +24,17 @@ const VerticalSlider = ({ question, pageNumber, maxPage }) => {
       setHorizontal(true)
     }
   }, [width, height])
+
+  function addAnswer (targetIndex, answer) {
+    setFinalAnswers(prev => ({
+      ...prev,
+      [targetIndex]: answer
+    }))
+  }
+
+  const saveAnswers = () => {
+    saveAnswersLocalStorage(question._id, JSON.stringify(finalAnswers))
+  }
 
   return (
     <div className='question-list'>
@@ -40,16 +56,24 @@ const VerticalSlider = ({ question, pageNumber, maxPage }) => {
                   </div>
                 </div>
                 <div className='vertical-slider-item-wrapper'>
-                  {answers.map(answer => (
+                  {answers.map((answer, index) => (
                     <div key={answer._id} className='vertical-slider-item'>
-                      <VerticalSliderItem key={answer._id} answer={answer} />
+                      <VerticalSliderItem
+                        key={answer._id}
+                        answer={answer}
+                        addAnswer={addAnswer}
+                        index={index}
+                        defaultY={loadAnswersFromLocalStorage(
+                          question._id,
+                          index
+                        )}
+                      />
                     </div>
                   ))}
                 </div>
               </div>
             ) : (
               <div className='vertical-slider-wrapper-horizontal'>
-    
                 <div className='vertical-slider-agenda-horizontal'>
                   <div className='vertical-slider-agenda-item-horizontal'>
                     <h2 className='arrow-container-horizontal'>
@@ -62,12 +86,21 @@ const VerticalSlider = ({ question, pageNumber, maxPage }) => {
                     </h2>
                   </div>
                 </div>
-                {answers.map(answer => (
+                {answers.map((answer, index) => (
                   <div
                     key={answer._id}
                     className='vertical-slider-item-horizontal'
                   >
-                    <HorizontalSliderItem key={answer._id} answer={answer} />
+                    <HorizontalSliderItem
+                      key={answer._id}
+                      answer={answer}
+                      addAnswer={addAnswer}
+                      index={index}
+                      defaultX={loadAnswersFromLocalStorage(
+                        question._id,
+                        index
+                      )}
+                    />
                   </div>
                 ))}
               </div>
@@ -80,6 +113,7 @@ const VerticalSlider = ({ question, pageNumber, maxPage }) => {
       <FotBar
         prevQuestion={pageNumber === 1 ? 1 : pageNumber - 1}
         nextQuestion={pageNumber === maxPage ? maxPage : pageNumber + 1}
+        saveAnswers={saveAnswers}
       />
     </div>
   )

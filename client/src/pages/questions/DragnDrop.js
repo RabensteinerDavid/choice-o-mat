@@ -5,6 +5,7 @@ import HeadingQuestion from '../../components/HeadingQuestion'
 import '../../style/questions/dragndrop.css'
 import DragnDropItem from '../../components/DragnDropItem'
 import useWindowDimensions from '../../components/useWindowSize'
+import { saveAnswersLocalStorage } from '../../components/LoadQuestion'
 
 const DragnDrop = ({ question, pageNumber, maxPage }) => {
   const { heading, subheading, answers } = question
@@ -43,9 +44,12 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
     })
   }
 
+  const saveAnswers = () => {
+    saveAnswersLocalStorage(question._id, JSON.stringify(finalAnswers))
+  }
+
   return (
     <div className='question-list'>
-      {console.log(finalAnswers)}
       <NavBar />
       <div className='main dragndrop'>
         {question ? (
@@ -98,6 +102,7 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
       <FotBar
         prevQuestion={pageNumber === 1 ? 1 : pageNumber - 1}
         nextQuestion={pageNumber === maxPage ? maxPage : pageNumber + 1}
+        saveAnswers={saveAnswers}
       />
     </div>
   )
