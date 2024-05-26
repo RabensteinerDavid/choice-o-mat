@@ -3,15 +3,12 @@ import NavBar from "../../components/NavBar";
 import FotBar from "../../components/FotBar";
 import "../../style/questions/carousel.css";
 import HeadingQuestion from "../../components/HeadingQuestion";
-import CarouselImage from "../../components/questions_images/CarouselImage";
 import { Player } from "@lottiefiles/react-lottie-player";
 import SelectionImage from "../../components/questions_images/SelectionImage";
-
-//swiper imports
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation} from "swiper/modules";
+import { Navigation } from 'swiper';
 
 const Carousel = ({ question, pageNumber, maxPage }) => {
   const { heading, subheading, answers } = question;
