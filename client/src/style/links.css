@@ -1,53 +1,119 @@
-.top-header{
-    display: flex;
-    justify-content: space-between !important;
+.top-header {
+  display: flex;
+  justify-content: space-between !important;
 }
 
-.nav-link{
- margin: 35px; 
+.nav-link {
+  margin: 35px;
 }
 
-.bottom-header{
-    display: flex;
-    justify-content: space-between !important;
-    height: auto;
-    background: white;
+.bottom-header {
+  display: flex;
+  justify-content: space-between !important;
+  height: auto;
+  background: white;
 }
 
 .navigation-position {
-    flex: 1 0 auto; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .navigatio-item-bridge {
-    padding: 0;
-    margin: 0;
-    width: 2%; 
-    height: 5px;
-    background-color: var(--main-grey);
-  }
-  
-  .navigatio-item {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: var(--main-grey);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
+  flex: 1 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .navigatio-item-bridge.visited {
-    background-color: var(--main-green);
+.navigatio-item-bridge {
+  padding: 0;
+  margin: 0;
+  width: 2%;
+  height: 5px;
+  background-color: var(--main-grey);
+}
 
+.navigatio-item {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--main-grey);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.navigatio-item-bridge.visited {
+  background-color: var(--main-green);
+}
+
+.navigatio-item.visited {
+  border: 2px solid var(--main-green);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  .navigatio-item.visited {
-    border: 2px solid var(--main-green);
-  } 
-  
-  
-  
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s forwards;
+}
+
+.fade-out {
+  animation: fadeOut 0.5s forwards;
+}
+
+.fox-nav {
+  position: absolute;
+  z-index: 2;
+}
+
+.eyes-container {
+  position: absolute;
+  width: 40px;
+  height: 20px;
+  margin-left: -3px;
+  margin-top: -70px;
+  z-index: 100 !important;
+}
+
+.eye {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.pupil {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background-color: black;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.left-eye {
+  top: 5px;
+  left: 8px;
+}
+
+.right-eye {
+  top: 5px;
+  right: 8px;
+}
