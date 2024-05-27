@@ -1,9 +1,19 @@
+/*ist dasselbe wie mySwiper*/
 .swiper {
     margin: 2rem auto; 
     width: 100%;  
     max-width: 1200px; 
     height: auto; 
     padding-bottom: 10px !important;
+    /*padding-left: 80px !important; braucht man, um swiper-button-next:after, .swiper-button-prev:after zu sehen außerhalb slider
+    padding-right: 80px !important;*/
+}
+
+.selection-counter{
+    text-align: right;
+    margin-right: 20px;
+    margin-left: 80vw;
+    font-size: 14px !important;
 }
   
 .swiper-slide {
@@ -31,14 +41,14 @@
 
 /*rechts & links der weiter swipe Button*/
 .swiper-button-next:after, .swiper-button-prev:after {
-    color: green;
+    color: #5e8035;
 }
 
 
-/* SIEHT MAN GERADE NOCH NICHT*/
+/* SIEHT MAN GERADE NOCH NICHT
 .swiper-button-next:after{
     padding-left: 80px !important;
-}
+}*/
 
 
 /*wenn ein Swiper-Element angeklickt wird*/
@@ -53,18 +63,18 @@
 
 
 
-.swiper-slide img {
+.swiper-slide img, .carousel-player {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: inherit;
-    position: relative; /* Füllt den gesamten Container */
+    position: relative;
 }
 
 
 
-/* .player-wrapper{
-    background-color: rgb(255, 0, 191);
+.player-wrapper{
+    background-color: rgb(239, 239, 239);
     width: calc(100%* 0.90); 
     height: calc(100%* 0.75); 
     border-radius: 1rem;
@@ -74,30 +84,9 @@
     display:flex;
     justify-content: center !important; 
     align-items: center;
-} */
+}
 
-.player-wrapper {
-    margin-top: 1rem; 
-    width: calc(100%* 0.90); 
-    height: calc(100%* 0.75); 
-    border: 1px solid #00000000;
-    border-radius: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden; /* Ensure the container hides overflow */
-    position: relative; /* Ensure relative positioning */
-  }
-  
-    .player {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    transform: translate(-50%, -50%);
-    object-fit: fill; /* Change to cover, fill, etc. as needed */
-  } 
+
 
 .content-wrapper{
     display:flex;
@@ -113,18 +102,41 @@
     .swiper-slide {
         font-size: 16px;
     }
+
+    .selection-counter {
+        font-size: 13px !important;
+    }
+
+    .swiper-button-next:after, .swiper-button-prev:after {
+        transform: scale(0.9);
+    }
 }
 
 @media (max-width: 992px) {
     .swiper-slide {
         font-size: 14px;
     }
-    
+
+    .selection-counter {
+        font-size: 12px !important;
+    }
+
+    .swiper-button-next:after, .swiper-button-prev:after {
+        transform: scale(0.8);
+    }
 }
 
 @media (max-width: 768px) {
     .swiper-slide {
         font-size: 12px;
+    }
+
+    .selection-counter {
+        font-size: 11px !important;
+    }
+
+    .swiper-button-next:after, .swiper-button-prev:after {
+        transform: scale(0.7);
     }
 }
 
@@ -132,4 +144,12 @@
     .swiper-slide {
         font-size: 10px;
     }
+
+    .selection-counter {
+        font-size: 10px !important;
+    }
+
+    .swiper-button-next:after, .swiper-button-prev:after {
+        transform: scale(0.6);
+        }
 }
