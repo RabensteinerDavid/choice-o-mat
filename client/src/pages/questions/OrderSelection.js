@@ -10,21 +10,23 @@ const OrderSelection = ({ question, pageNumber, maxPage }) => {
   const [pressed, setPressed] = useState([])
 
   const handleOrder = (index, id) => {
-    const newPressed = [...pressed]
+    let newPressed = [...pressed]
+
     if (newPressed.includes(id)) {
-      newPressed.splice(newPressed.indexOf(id), 1)
+      newPressed = newPressed.filter(pressedId => pressedId !== id)
     } else {
       newPressed.push(id)
     }
     setPressed(newPressed)
 
-    const newOrder = [...order]
-    const selectedItem = newOrder.splice(index, 1)[0]
-    if (!newPressed.includes(id)) {
-      newOrder.push(selectedItem)
-    } else {
-      newOrder.unshift(selectedItem)
-    }
+    const remainingItems = order.filter(item => !newPressed.includes(item._id))
+
+    const newOrder = [
+      ...newPressed.map(pressedId =>
+        order.find(item => item._id === pressedId)
+      ),
+      ...remainingItems
+    ]
     setOrder(newOrder)
   }
 
@@ -41,6 +43,7 @@ const OrderSelection = ({ question, pageNumber, maxPage }) => {
                   onClick={() => {
                     handleOrder(index, answer._id)
                   }}
+                  id={answer._id}
                   key={answer._id}
                   className={`order-selection-item ${
                     pressed.includes(answer._id) ? `pressed_${index}` : ''
