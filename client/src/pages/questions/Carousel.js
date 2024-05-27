@@ -20,12 +20,11 @@ const Carousel = ({ question, pageNumber, maxPage }) => {
   const { height, width } = useWindowDimensions()
 
   const toggleFocus = (id) => {
-    setFocusedButtons(
-      (prevState) =>
-        prevState.includes(id)
-          ? prevState.filter((buttonId) => buttonId !== id) 
-          : [...prevState, id] 
-    );
+    if (focusedButtons.includes(id)) {
+      setFocusedButtons((prevState) => prevState.filter((buttonId) => buttonId !== id));
+    } else if (focusedButtons.length < 2) {
+      setFocusedButtons((prevState) => [...prevState, id]);
+    }
   };
 
   const getSlidesPerView = () => {
@@ -49,7 +48,10 @@ const Carousel = ({ question, pageNumber, maxPage }) => {
         {question ? (
           <React.Fragment>
             <HeadingQuestion heading={heading} subheading={subheading} />
-            <>
+            <> 
+            <div className="selection-counter">
+                {focusedButtons.length}/2
+              </div>
               <Swiper 
                 watchSlidesProgress={true}
                 slidesPerView={getSlidesPerView()}
@@ -76,7 +78,7 @@ const Carousel = ({ question, pageNumber, maxPage }) => {
                       {answer.photo && answer.photo.includes("json") ? (
                         <Player
                           src={`http://localhost:3001/lottie/${answer.photo}`}
-                          className="player"
+                          className="carousel-player"
                           loop
                           autoplay
                         />
@@ -88,8 +90,7 @@ const Carousel = ({ question, pageNumber, maxPage }) => {
                   </SwiperSlide>
                 ))}
               </Swiper>
-              <div>{width}</div>
-              <div>{height}</div>
+
             </>
           </React.Fragment>
         ) : (
