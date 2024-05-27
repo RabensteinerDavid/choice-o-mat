@@ -1,10 +1,22 @@
-import React from 'react'
-import { Link, useHistory, useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useHistory, useNavigate, useParams } from 'react-router-dom'
 import '../style/links.css'
 import { getMaxPageValue } from './LoadQuestion'
+import useWindowDimensions from './useWindowSize'
 
 const Arrows = ({ prevQuestion, nextQuestion, saveAnswers }) => {
   const navigation = useNavigate()
+  const [maxPageSide, setMaxPageSide] = useState(0)
+  const { id: page_id } = useParams()
+
+  useEffect(() => {
+    const fetchMaxPageSide = async () => {
+      const maxPageValue = await getMaxPageValue()
+      setMaxPageSide(maxPageValue)
+    }
+
+    fetchMaxPageSide()
+  }, [])
 
   const handleNavigation = questionId => {
     saveAnswers()
@@ -13,32 +25,49 @@ const Arrows = ({ prevQuestion, nextQuestion, saveAnswers }) => {
     }, 0)
   }
 
-  const isValidQuestionId = async questionId => {
-    const maxPageValue = await getMaxPageValue()
-    return questionId > 0 && questionId < maxPageValue
+  const isValidQuestionId = questionId => {
+    return questionId > 0 && questionId < maxPageSide
   }
 
   return (
-    <React.Fragment>
-      <div className='bottom-header'>
-        {isValidQuestionId(prevQuestion) && (
-          <span
-            className='nav-link'
-            onClick={() => handleNavigation(prevQuestion)}
-          >
-            {'<'}
-          </span>
-        )}
-        {isValidQuestionId(nextQuestion) && (
-          <span
-            className='nav-link'
-            onClick={() => handleNavigation(nextQuestion)}
-          >
-            {'>'}
-          </span>
-        )}
+    <div className='bottom-header'>
+      {isValidQuestionId(prevQuestion) && (
+        <span
+          className='nav-link'
+          onClick={() => handleNavigation(prevQuestion)}
+        >
+          {'<'}
+        </span>
+      )}
+
+      <div className='navigation-position'>
+        <div className='navigatio-item visited'>1</div>
+        {maxPageSide &&
+          Array.from({ length: maxPageSide - 1 }).map((_, index) => (
+            <React.Fragment key={index}>
+              <div
+                className={`navigatio-item-bridge${
+                  index < page_id ? ' visited' : ''
+                }`}
+              ></div>
+
+              <div
+                className={`navigatio-item${index < page_id ? ' visited' : ''}`}
+              >
+                {index + 2}
+              </div>
+            </React.Fragment>
+          ))}
       </div>
-    </React.Fragment>
+      {isValidQuestionId(nextQuestion) && (
+        <span
+          className='nav-link'
+          onClick={() => handleNavigation(nextQuestion)}
+        >
+          {'>'}
+        </span>
+      )}
+    </div>
   )
 }
 

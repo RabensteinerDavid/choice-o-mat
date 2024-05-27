@@ -10,4 +10,44 @@
 .bottom-header{
     display: flex;
     justify-content: space-between !important;
+    height: auto;
+    background: white;
 }
+
+.navigation-position {
+    flex: 1 0 auto; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .navigatio-item-bridge {
+    padding: 0;
+    margin: 0;
+    width: 2%; 
+    height: 5px;
+    background-color: var(--main-grey);
+  }
+  
+  .navigatio-item {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--main-grey);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .navigatio-item-bridge.visited {
+    background-color: var(--main-green);
+
+  }
+  
+  .navigatio-item.visited {
+    border: 2px solid var(--main-green);
+  } 
+  
+  
+  
