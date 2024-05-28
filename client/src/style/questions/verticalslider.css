@@ -200,14 +200,19 @@
   z-index: -1;
 }
 
-.vertical-slider-item-horizontal:nth-child(2) .background-line-horizontal {
+/* .vertical-slider-item-horizontal:nth-child(2) .background-line-horizontal {
   height: 200%;
   top: -50%;
   left: 50%;
-}
+} */
 
-.vertical-slider-item-horizontal:last-child .background-line-horizontal {
+/* .vertical-slider-item-horizontal:last-child .background-line-horizontal {
   height: 200%;
+  top: -50%;
+  left: 50%;
+} */
+.vertical-slider-item-horizontal:last-child .background-line-horizontal {
+  height: 0%;
   top: -50%;
   left: 50%;
 }
