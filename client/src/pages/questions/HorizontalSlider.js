@@ -12,10 +12,15 @@ const HorizontalSlider = ({ question, pageNumber, maxPage }) => {
   const { heading, subheading, answers } = question
 
   const handleSliderChange = (index, event) => {
-    const newValues = [...sliderValues]
-    newValues[index] = event.target.value
-    setSliderValues(newValues)
-  }
+    const newValues = [...sliderValues];
+    newValues[index] = event.target.value;
+    setSliderValues(newValues);
+  
+    const sliders = document.querySelectorAll('.slider');
+    sliders.forEach((slider, i) => {
+      slider.style.setProperty('--slider-width', `${sliderValues[i]}%`);
+    });
+  };
 
   return (
     <div className='question-list'>
@@ -35,11 +40,14 @@ const HorizontalSlider = ({ question, pageNumber, maxPage }) => {
                       max="100"
                       value={sliderValues[index]}
                       onChange={(e) => handleSliderChange(index, e)}
-                      class="slider"
+                      className="slider"
+                      
                     />
                     <div className='horitontal-slider-value-textwrapper'>
                       <p className='horitontal-slider-value-text'>nicht gut</p>
+                      
                       <p className= 'horitontal-slider-value-text'>sehr gut</p>
+                      
                     </div>
                   </div>
                 </div>
@@ -59,3 +67,4 @@ const HorizontalSlider = ({ question, pageNumber, maxPage }) => {
 }
 
 export default HorizontalSlider
+//<p className= 'horitontal-slider-value-text'>{sliderValues[index]}%</p>
