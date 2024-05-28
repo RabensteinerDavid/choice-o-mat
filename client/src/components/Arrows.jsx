@@ -90,7 +90,7 @@ const Arrows = ({ prevQuestion, nextQuestion, saveAnswers }) => {
                 <div>
                   <Eyes />
                   <Player
-                    src={`http://localhost:3001/lottie/test.json`}
+                    src="/lottie/navbar-fox.json"
                     className='fox-nav'
                     loop
                     autoplay
