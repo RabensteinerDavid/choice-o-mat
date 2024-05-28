@@ -45,7 +45,7 @@
   -o-hyphens: auto;
   hyphens: auto;
   padding: 5px;
-  font-size: 2vh;
+  font-size: 1rem;
 }
 
 .arrow-container-horizontal {
@@ -58,7 +58,7 @@
   width: 10vw;
   height: 60vh;
   justify-content: space-between;
-  font-size: 1.5vh;
+  font-size: 1rem !important;
 }
 .left-arrow,
 .right-arrow,
@@ -118,9 +118,6 @@
 }
 
 @media (max-width: 1500px) {
-  .vertical-slider-answers {
-    font-size: 1.5vh !important;
-  }
 
   .vertical-slider-agenda {
     width: 20vw !important;
@@ -229,7 +226,7 @@
     height: 18vw;
   }
   .text-container-horizontal {
-    font-size: 3vw !important;
+    font-size: 2.5vw !important;
   }
 
   .vertical-slider-answers.horizontal {
