@@ -8,7 +8,6 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 3rem;
-  /* white-space: nowrap; */
 }
 
 .answer-element {
@@ -61,20 +60,64 @@
 
 
 
-/* @media (max-width: 1024px) {
+@media (max-width: 1024px) {
   .answer-grid {
-    grid-template-columns: repeat(3, 1fr); /* Auf Tablets: 3 Spalten 
+    margin-top: 2.5rem; 
   }
-} */
+  .answer-element {
+    font-size: 0.9rem; 
+    height: 70px; 
+  }
+  .circle {
+    height: 20px;
+    width: 20px;
+  }
+  .checkMark {
+    height: 10px;
+    width: 5px;
+  }
+}
 
-@media (max-width: 768px) {
+@media (max-width: 790px) {
   .answer-grid {
-    grid-template-columns: repeat(2, 1fr); /* Auf kleinen Tablets: 2 Spalten */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 1.5rem; 
+    margin-top: 2rem; 
+  }
+  .answer-element {
+    font-size: 0.85rem; 
+    height: 50px; 
+  }
+  .circle {
+    height: 18px;
+    width: 18px;
+  }
+  .checkMark {
+    height: 7px;
+    width: 2.5px;
+    border-bottom: 1.5px solid #fff;
+    border-right: 1.5px solid #fff;
   }
 }
 
 @media (max-width: 480px) {
   .answer-grid {
-    grid-template-columns: repeat(1, 1fr); /* Auf Handys: 1 Spalte */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 1rem; 
+    margin-top: 1.5rem; 
+  }
+  .answer-element {
+    font-size: 0.75rem; 
+    height: 55px; 
+  }
+  .circle {
+    height: 17px;
+    width: 17px;
+  }
+  .checkMark {
+    height: 7px;
+    width: 2.5px;
+    border-bottom: 1.3px solid #fff;
+    border-right: 1.3px solid #fff;
   }
 }

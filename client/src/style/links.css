@@ -117,3 +117,14 @@
   top: 5px;
   right: 8px;
 }
+
+@media (max-width: 576px) {
+  .nav-link {
+    margin: 24px 24px 20px 24px;
+  }
+}
+@media (max-width: 768px) {
+  .nav-link {
+    margin: 35px 35px 20px 35px;
+  }
+}
