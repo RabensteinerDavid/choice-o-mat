@@ -1,14 +1,31 @@
-.heading-question h1{
-    color: var(--main-green);
+.heading-question h1 {
+  color: var(--main-green);
 }
 
 .question-header {
-    font-size: 4vh;
-    margin-bottom: 4px;
+  font-size: 4vh;
+  margin: 0px 0px 10px;
 }
 
 .question-subheader {
-    font-size: 2vh;
-    margin: 0px;
-    margin-top: 1rem;
+  font-size: 2vh;
+  margin: 0px;
 }
+
+@media (max-width: 576px) {
+  .question-header {
+    font-size: 22px;
+  }
+  .question-subheader {
+    font-size: 16px;
+  }
+}
+@media (max-width: 768px) {
+    .question-header {
+      margin: 0px 0px 9px;
+    }
+    .question-subheader {
+      font-size: 16px;
+      margin: 0px;
+    }
+  }
