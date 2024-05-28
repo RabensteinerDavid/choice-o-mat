@@ -4,10 +4,13 @@ import FotBar from "../../components/FotBar";
 import "../../style/questions/selection.css";
 import HeadingQuestion from "../../components/HeadingQuestion";
 import SelectionImage from "../../components/questions_images/SelectionImage";
+import useWindowDimensions from '../../components/useWindowSize'
+
 
 const Selection = ({ question, pageNumber, maxPage }) => {
   const { heading, subheading, answers } = question;
 
+  const {height, width} = useWindowDimensions()
   const [focusedButtons, setFocusedButtons] = useState([]); // State für die fokussierten Buttons
 
   const toggleFocus = (id) => {
@@ -52,6 +55,8 @@ const Selection = ({ question, pageNumber, maxPage }) => {
           <p>No questions found at question </p>
         )}
       </div>
+      <div>{width}</div>
+                  <div>{height}</div>
       <FotBar
         prevQuestion={pageNumber === 1 ? 1 : pageNumber - 1}
         nextQuestion={pageNumber === maxPage ? maxPage : pageNumber + 1}
