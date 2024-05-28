@@ -77,6 +77,7 @@ const Carousel = ({ question, pageNumber, maxPage }) => {
                       <div className="player-wrapper">
                       {answer.photo && answer.photo.includes("json") ? (
                         <Player
+                          key={answer._id}
                           src={`http://localhost:3001/lottie/${answer.photo}`}
                           className="carousel-player"
                           loop
