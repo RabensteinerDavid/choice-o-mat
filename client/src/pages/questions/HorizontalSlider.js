@@ -1,12 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import NavBar from '../../components/NavBar'
 import FotBar from '../../components/FotBar'
-import '../../style/questions/verticalslider.css'
+import '../../style/questions/horizontalslider.css'
 import HeadingQuestion from '../../components/HeadingQuestion'
 
 const HorizontalSlider = ({ question, pageNumber, maxPage }) => {
-  
+  const [sliderValues, setSliderValues] = useState(
+    question.answers.map(() => 50)
+  )
+
   const { heading, subheading, answers } = question
+
+  const handleSliderChange = (index, event) => {
+    const newValues = [...sliderValues]
+    newValues[index] = event.target.value
+    setSliderValues(newValues)
+  }
 
   return (
     <div className='question-list'>
@@ -15,12 +24,24 @@ const HorizontalSlider = ({ question, pageNumber, maxPage }) => {
         {question ? (
           <React.Fragment>
             <HeadingQuestion heading={heading} subheading={subheading} />
-            <div>
-              {answers.map(answer => (
-                <div key={answer._id}>
-                  <p>{answer.text}</p>
-                  <p>Points DA: {answer.points.da}</p>
-                  <p>Points MTD: {answer.points.mtd}</p>
+            <div className='horitontal-slider-wrapper'>
+              {answers.map((answer, index) => (
+                <div key={answer._id} className='horitontal-slider-item'>
+                  <p className='horitontal-slider-answer'>{answer.text}</p>
+                  <div className='horitontal-slider-value'>
+                    <input
+                      type="range"
+                      min="1"
+                      max="100"
+                      value={sliderValues[index]}
+                      onChange={(e) => handleSliderChange(index, e)}
+                      class="slider"
+                    />
+                    <div className='horitontal-slider-value-textwrapper'>
+                      <p className='horitontal-slider-value-text'>nicht gut</p>
+                      <p className= 'horitontal-slider-value-text'>sehr gut</p>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
