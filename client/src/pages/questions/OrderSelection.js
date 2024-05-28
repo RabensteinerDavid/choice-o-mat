@@ -58,7 +58,7 @@ const OrderSelection = ({ question, pageNumber, maxPage }) => {
           <p>No questions found at question </p>
         )}
       </div>
-      <FotBar
+      <FotBar 
         prevQuestion={pageNumber === 1 ? 1 : pageNumber - 1}
         nextQuestion={pageNumber === maxPage ? maxPage : pageNumber + 1}
       />
