@@ -5,5 +5,4 @@
 /client/node_modules/*
 /server/.env
 
-/server/public/images/*
-/server/public/lottie/*
+/server/public/*
