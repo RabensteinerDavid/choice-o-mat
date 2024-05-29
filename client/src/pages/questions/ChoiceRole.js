@@ -31,31 +31,32 @@ const ChoiceRole = ({ question, pageNumber, maxPage }) => {
         {question ? (
           <React.Fragment>
             <HeadingQuestion heading={heading} subheading={subheading} />
-            <br/><br/><br/><br/>
+            <br /><br /><br /><br />
             <div className='content'>
               <div className='left-column'>
                 <button
-                  className={`button ${selectedRole === 'videoschnitt' ? 'clicked' : ''}`}
-                  onClick={() => handleClick('videoschnitt', 'videoschnitt.json')}
+                  className={`button ${selectedRole ===  answers[0].text ? 'clicked' : ''}`}
+                  onClick={() => handleClick( answers[0].text, ' answers[0].json')}
                 >
                   <img src={icons.videoschnitt} alt='Icon' className='button-icon' />
-                  Videoschnitt
-                </button><br/><br/>
+                  {answers[0].text}
+                </button><br /><br /><br /><br />
 
                 <button
-                  className={`button ${selectedRole === 'drehbuchautor' ? 'clicked' : ''}`}
-                  onClick={() => handleClick('drehbuchautor', 'drehbuchautor.json')}
+                  className={`button ${selectedRole ===  answers[1].text ? 'clicked' : ''}`}
+                  id="moreLeft"
+                  onClick={() => handleClick( answers[1].text, ' answers[1].json')}
                 >
                   <img src={icons.drehbuchautor} alt='Icon' className='button-icon' />
-                  Drehbuch Autor/in
-                </button><br/><br/>
+                  {answers[1].text}
+                </button><br /><br /><br /><br />
 
                 <button
-                  className={`button ${selectedRole === 'projektmanager' ? 'clicked' : ''}`}
-                  onClick={() => handleClick('projektmanager', 'projektmanager.json')}
+                  className={`button ${selectedRole ===  answers[2].text ? 'clicked' : ''}`}
+                  onClick={() => handleClick( answers[2].text, ' answers[2].json')}
                 >
                   <img src={icons.projektmanager} alt='Icon' className='button-icon' />
-                  Projekt Manager/in
+                  {answers[2].text}
                 </button>
               </div>
 
@@ -79,27 +80,28 @@ const ChoiceRole = ({ question, pageNumber, maxPage }) => {
 
               <div className='right-column'>
                 <button
-                  className={`button ${selectedRole === 'levelplanner' ? 'clicked' : ''}`}
-                  onClick={() => handleClick('levelplanner', 'levelplanner.json')}
+                  className={`button ${selectedRole ===  answers[3].text ? 'clicked' : ''}`}
+                  onClick={() => handleClick(answers[3].text, 'answers[3].json')}
                 >
                   <img src={icons.levelplanner} alt='Icon' className='button-icon' />
-                  Level Planner/in
-                </button><br/><br/>
+                  {answers[3].text}
+                </button><br /><br /><br /><br />
 
                 <button
-                  className={`button ${selectedRole === 'audiotechniker' ? 'clicked' : ''}`}
-                  onClick={() => handleClick('audiotechniker', 'audiotechniker.json')}
+                  className={`button ${selectedRole === answers[4].text ? 'clicked' : ''}`}
+                  id="moreRight"
+                  onClick={() => handleClick(answers[4].text, 'answers[4].json')}
                 >
                   <img src={icons.audiotechniker} alt='Icon' className='button-icon' />
-                  Audio Techniker/in
-                </button><br/><br/>
+                  {answers[4].text}
+                </button><br /><br /><br /><br />
 
                 <button
-                  className={`button ${selectedRole === 'spezialeffekte' ? 'clicked' : ''}`}
-                  onClick={() => handleClick('spezialeffekte', 'spezialeffekte.json')}
+                  className={`button ${selectedRole === answers[5].text ? 'clicked' : ''}`}
+                  onClick={() => handleClick(answers[5].text, 'answers[5].json')}
                 >
                   <img src={icons.spezialeffekte} alt='Icon' className='button-icon' />
-                  Spezial Effekte
+                  {answers[5].text}
                 </button>
               </div>
             </div>
