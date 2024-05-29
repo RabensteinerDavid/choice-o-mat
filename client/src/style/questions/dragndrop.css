@@ -261,6 +261,12 @@
 }
 
 @media (max-width: 500px) {
+  .answer-wrapper-bottom {
+    gap: 10px;
+  }
+  .answer-wrapper-bottom {
+    margin-top: 1vh;
+  }
   .middle-circle {
     margin-top: 1vh;
     width: clamp(100px, 350px, 600px);
@@ -269,31 +275,38 @@
 
   .inner-circle .item {
     width: 175px !important;
+    font-size: 0.8rem;
   }
 
   .dragndrop-answers {
     width: 175px;
-    font-size: 15px !important;
+    font-size: 0.8rem;
+    height: 0% !important;
+    padding: 15px;
   }
 
   .inner-circle .item:nth-child(1) {
     top: 10% !important;
     left: 22.5% !important;
+    padding: 15px;
   }
 
   .inner-circle .item:nth-child(2) {
     top: 30% !important;
     left: 22.5% !important;
+    padding: 15px;
   }
 
   .inner-circle .item:nth-child(3) {
     top: 50% !important;
     left: 22.5% !important;
+    padding: 15px;
   }
 
   .inner-circle .item:nth-child(4) {
     top: 70% !important;
     left: 22.5% !important;
+    padding: 15px;
   }
 }
 
