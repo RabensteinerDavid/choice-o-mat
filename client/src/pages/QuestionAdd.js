@@ -14,11 +14,6 @@ const QuestionAdd = () => {
   const [answerCount, setAnswerCount] = useState(0)
   const [answers, setAnswers] = useState([])
   const [photos, setPhoto] = useState([])
-  const [aspectratio, setAspectRatio] = useState([])
-
-  useEffect(() => {
-    checkQuestionType()
-  }, [questionType])
 
   const handleChangeInputQuestionType = type => {
     setQuestionType(type)
@@ -26,23 +21,6 @@ const QuestionAdd = () => {
 
   const handlePhotosAdd = selectedPhotos => {
     setPhoto(prevPhotos => [...prevPhotos, ...selectedPhotos])
-  }
-
-  const checkQuestionType = async () => {
-    const response = await getQuestionTypes()
-    let foundAspectration = false
-    response.data.types.forEach(type => {
-      Object.entries(type.formats).forEach(([key, value]) => {
-        if (questionType === key) {
-          const [v1, v2] = value.split('/').map(Number)
-          const aspectRatio = v1 / v2
-          setAspectRatio(aspectRatio)
-          foundAspectration = true
-        } else if (!foundAspectration) {
-          setAspectRatio([])
-        }
-      })
-    })
   }
 
   const handleChangeInputHeading = event => {
@@ -200,7 +178,6 @@ const QuestionAdd = () => {
       <ImageUploader
         answerNumber={index}
         photoAdd={handlePhotosAdd}
-        aspectratio={aspectratio}
         photoDelete={handlePhotosDelete}
         defaultPhotoProp={answer.photo != 'no photo' ? answer.photo : null}
         answerId={answer._id}

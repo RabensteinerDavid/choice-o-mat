@@ -9,7 +9,6 @@ const ImageUploader = ({
   photoDelete,
   defaultPhotoProp,
   answerNumber,
-  aspectratio,
   answerId,
   initial
 }) => {
@@ -17,8 +16,6 @@ const ImageUploader = ({
   const [error, setError] = useState(null)
   const [defaultPhoto, setDefaultPhoto] = useState(null)
   const { id } = useParams()
-
-  console.log(aspectratio)
 
   useEffect(() => {
     setDefaultPhoto(defaultPhotoProp)
@@ -59,11 +56,6 @@ const ImageUploader = ({
       } else {
         const image = new Image()
         image.onload = () => {
-          //check for aspect ratio -> optional
-          // if (image.width / image.height !== aspectratio) {
-          //   setError(`Aspect ratio of all images must be ${aspectratio}`)
-          //   return
-          // }
           setPhoto(prevPhotos => [...prevPhotos, newFile])
           setError(null)
           photoAdd([...photo, newFile])
