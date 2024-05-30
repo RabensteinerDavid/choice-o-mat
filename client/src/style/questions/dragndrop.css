@@ -67,6 +67,10 @@
     position: relative;
     margin-right: 150px;
   }
+  .middle-circle {
+    width: 45vw !important;
+    height: 30vw !important;
+  }
 }
 
 .middle-circle-wrapper {
@@ -134,7 +138,7 @@
   gap: 20px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1405px) {
   .middle-circle-wrapper {
     height: 40vh;
   }
