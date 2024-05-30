@@ -59,10 +59,11 @@ const ImageUploader = ({
       } else {
         const image = new Image()
         image.onload = () => {
-          if (image.width / image.height !== aspectratio) {
-            setError(`Aspect ratio of all images must be ${aspectratio}`)
-            return
-          }
+          //check for aspect ratio -> optional
+          // if (image.width / image.height !== aspectratio) {
+          //   setError(`Aspect ratio of all images must be ${aspectratio}`)
+          //   return
+          // }
           setPhoto(prevPhotos => [...prevPhotos, newFile])
           setError(null)
           photoAdd([...photo, newFile])
