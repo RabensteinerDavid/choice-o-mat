@@ -10,12 +10,13 @@ import ImageSelection from './questions/ImageSelection.js'
 import OrderSelection from './questions/OrderSelection.js'
 import DragnDrop from './questions/DragnDrop.js'
 import ThisOrThatPicture from './questions/ThisOrThatPicture.js'
+import HorizontalSlider from './questions/HorizontalSlider.js'
 
 import {
   getMaxPageValue,
   loadQuestionsOrderData
 } from '../components/LoadQuestion'
-import HorizontalSlider from './questions/HorizontalSlider.js'
+import FotBar from '../components/FotBar.jsx'
 
 const QuestionList = () => {
   const { id: page_id } = useParams()
@@ -130,7 +131,6 @@ const QuestionList = () => {
         return <StartSide />
     }
   }
-
   const renderList = () => {
     if (!order) return null
 
@@ -146,7 +146,18 @@ const QuestionList = () => {
     )
   }
 
-  return renderList()
+  return (
+    <div>
+      {renderList()}
+      {console.log(page_id)}
+      <FotBar
+        prevQuestion={parseInt(page_id) === 1 ? 1 : parseInt(page_id) - 1}
+        nextQuestion={
+          parseInt(page_id) === maxPage ? maxPage : parseInt(page_id) + 1
+        }
+      />
+    </div>
+  )
 }
 
 export default QuestionList

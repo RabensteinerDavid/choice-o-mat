@@ -39,3 +39,7 @@ html {
 button{
   font-family: 'Poppins';
 }
+
+.question-list .bottom-header{
+display: none;
+}
