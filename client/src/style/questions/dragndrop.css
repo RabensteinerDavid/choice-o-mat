@@ -168,6 +168,9 @@
   .answer-wrapper-bottom {
     width: 90vw;
   }
+  .middle-circle-wrapper {
+    height: 60vh;
+  }
 }
 
 @media (max-width: 1000px) {
@@ -199,6 +202,22 @@
   }
   .answer-wrapper-bottom {
     width: 80vw;
+  }
+}
+@media (max-width: 1000px) {
+  .middle-circle-wrapper {
+    height: 55vh;
+  }
+}
+@media (max-width: 900px) {
+  .middle-circle-wrapper {
+    height: 55vh;
+  }
+}
+
+@media (max-width: 800px) {
+  .middle-circle-wrapper {
+    height: 45vh;
   }
 }
 
