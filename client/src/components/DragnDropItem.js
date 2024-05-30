@@ -6,14 +6,15 @@ const DragnDropItem = ({
   answer,
   defaultX = 0,
   defaultY = 0,
-  targetPosition,
   addAnswer,
   removeAnswer,
   finalAnswers
 }) => {
   const { height, width } = useWindowDimensions()
-  const [answerCoordinates, setAnswerCoodinates] = useState({})
-  const [isUsed, setIsUse] = useState(false)
+  const [answerCoordinates, setAnswerCoordinates] = useState({})
+  const [isUsed, setIsUsed] = useState(false)
+  const [targetKey, setTargetKey] = useState(null)
+  const [targetPosition, setTargetPosition] = useState({})
   const [controlledPosition, setControlledPosition] = useState({
     x: defaultX,
     y: defaultY
@@ -21,10 +22,35 @@ const DragnDropItem = ({
   const nodeRef = React.useRef(null)
 
   useEffect(() => {
-    const item = document.getElementById(`${answer._id}`)
-    const rect = item.getBoundingClientRect()
-    setAnswerCoodinates(rect)
+    const items = document.querySelectorAll('.inner-circle-row .item')
+    const newCoordinates = {}
+
+    items.forEach((item, index) => {
+      const rect = item.getBoundingClientRect()
+      newCoordinates[index] = rect
+    })
+
+    setTargetPosition(newCoordinates)
   }, [width, height])
+
+  useEffect(() => {
+    const item = document.getElementById(`${answer._id}`)
+    if (item) {
+      const rect = item.getBoundingClientRect()
+      setAnswerCoordinates(rect)
+    }
+  }, [width, height, answer._id])
+
+  useEffect(() => {
+    if (isUsed && targetKey !== null) {
+      const rect = targetPosition[targetKey]
+      if (rect) {
+        const newX = rect.left - answerCoordinates.left + controlledPosition.x
+        const newY = rect.top - answerCoordinates.top + controlledPosition.y
+        setControlledPosition({ x: newX, y: newY })
+      }
+    }
+  }, [targetPosition, answerCoordinates])
 
   const handleStop = (e, data) => {
     let withinTarget = false
@@ -54,8 +80,10 @@ const DragnDropItem = ({
       ) {
         if (isUsed) {
           removeAnswer(answer._id)
+          setIsUsed(false)
         }
-        setIsUse(true)
+        setIsUsed(true)
+        setTargetKey(key)
         addAnswer(key, answer._id)
         setControlledPosition({
           x: rect.left - answerCoordinates.left + defaultX,
@@ -68,6 +96,8 @@ const DragnDropItem = ({
 
     if (!withinTarget) {
       removeAnswer(answer._id)
+      setIsUsed(false)
+      setTargetKey(null)
       setControlledPosition({ x: defaultX, y: defaultY })
     }
   }

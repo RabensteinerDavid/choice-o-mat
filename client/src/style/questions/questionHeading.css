@@ -5,6 +5,7 @@
 .question-header {
   font-size: 3rem;
   margin: 0px 0px 10px;
+  width: 100%;
 }
 
 .question-subheader {
@@ -14,18 +15,21 @@
 
 @media (max-width: 576px) {
   .question-header {
-    font-size: 22px;
+    width: 95vw;
+    font-size: 20px;
+    width: 100%;
   }
   .question-subheader {
-    font-size: 16px;
+    font-size: 15px;
   }
 }
 @media (max-width: 768px) {
-    .question-header {
-      margin: 0px 0px 9px;
-    }
-    .question-subheader {
-      font-size: 16px;
-      margin: 0px;
-    }
+  .question-header {
+    margin: 0px 0px 9px;
+    width: 100%;
   }
+  .question-subheader {
+    font-size: 16px;
+    margin: 0px;
+  }
+}
