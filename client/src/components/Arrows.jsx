@@ -10,7 +10,6 @@ const Arrows = ({ prevQuestion, nextQuestion, saveAnswers }) => {
   const [maxPageSide, setMaxPageSide] = useState(0)
   const { id: page_id } = useParams()
   const maxPageSideRef = useRef(0)
-  const [fadeClass, setFadeClass] = useState('fade-in')
 
   useEffect(() => {
     const fetchMaxPageSide = async () => {
@@ -23,23 +22,17 @@ const Arrows = ({ prevQuestion, nextQuestion, saveAnswers }) => {
   }, [])
 
   const handleNavigation = questionId => {
-    if (page_id != 1) {
-      setFadeClass('fade-out')
-      saveAnswers()
-      navigate(`/questions/${questionId}`)
-    }
+    saveAnswers()
+    navigate(`/questions/${questionId}`)
   }
 
   const handleNavigationButton = questionId => {
-    if (page_id != 1) {
-      setFadeClass('fade-out')
-      saveAnswers()
-      navigate(`/questions/${questionId}`)
-    }
+    saveAnswers()
+    navigate(`/questions/${questionId}`)
   }
 
   const isValidQuestionId = questionId => {
-    return questionId > 0 && questionId <= maxPageSideRef.current +1
+    return questionId > 0 && questionId <= maxPageSideRef.current + 1
   }
 
   return (
@@ -54,12 +47,12 @@ const Arrows = ({ prevQuestion, nextQuestion, saveAnswers }) => {
       )}
       <div className='anim-border'></div>
 
-      <div className={`navigation-position ${fadeClass}`}>
+      <div className={`navigation-position`}>
         {page_id == 1 && (
           <div>
             <Eyes />
             <Player
-              src={`http://localhost:3001/lottie/test.json`}
+              src='/lottie/navbar-fox.json'
               className='fox-nav'
               loop
               autoplay
@@ -90,7 +83,7 @@ const Arrows = ({ prevQuestion, nextQuestion, saveAnswers }) => {
                 <div>
                   <Eyes />
                   <Player
-                    src="/lottie/navbar-fox.json"
+                    src='/lottie/navbar-fox.json'
                     className='fox-nav'
                     loop
                     autoplay

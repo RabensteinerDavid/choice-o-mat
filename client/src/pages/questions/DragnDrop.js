@@ -9,21 +9,8 @@ import { saveAnswersLocalStorage } from '../../components/LoadQuestion'
 
 const DragnDrop = ({ question, pageNumber, maxPage }) => {
   const { heading, subheading, answers } = question
-  const { height, width } = useWindowDimensions()
-  const [defaultTargetAnswer, setDefaultTargetAnswer] = useState({})
   const [finalAnswers, setFinalAnswers] = useState({})
-
-  useEffect(() => {
-    const items = document.querySelectorAll('.inner-circle .item')
-    const newCoordinates = {}
-
-    items.forEach((item, index) => {
-      const rect = item.getBoundingClientRect()
-      newCoordinates[index] = rect
-    })
-
-    setDefaultTargetAnswer(newCoordinates)
-  }, [width, height, finalAnswers])
+  const { width } = useWindowDimensions()
 
   function addAnswer (targetIndex, answer) {
     setFinalAnswers(prev => ({
@@ -45,6 +32,7 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
   }
 
   const saveAnswers = () => {
+    console.log(finalAnswers)
     saveAnswersLocalStorage(question._id, JSON.stringify(finalAnswers))
   }
 
@@ -55,44 +43,76 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
         {question ? (
           <React.Fragment>
             <HeadingQuestion heading={heading} subheading={subheading} />
-            <div className='middle-circle'>
-              <div className='inner-circle'>
-                <div className='answer-wrapper'>
-                  {width > 1405 &&
-                    answers.map(answer => (
+            {width > 1405 ? (
+              <div className='answer-wrapper-main'>
+                <div className='answer-wrapper-main-top' >
+                  {answers
+                    .slice(0, Math.ceil(answers.length / 2))
+                    .map(answer => (
                       <DragnDropItem
                         key={answer._id}
                         answer={answer}
-                        targetPosition={defaultTargetAnswer}
                         addAnswer={addAnswer}
                         removeAnswer={removeAnswer}
                         finalAnswers={finalAnswers}
                       />
                     ))}
-                </div>
-                <div className='inner-circle-row'>
-                  {[0, 1, 2, 3].map(index => (
-                    <div className='item' key={index}>
-                      Drop here{' '}
+                </div>  
+
+                <div className='middle-circle-wrapper'>
+                  <div className='middle-circle'>
+                    <div className='inner-circle'>
+                      <div className='inner-circle-row'>
+                        {[0, 1, 2, 3].map(index => (
+                          <div className='item' key={index}>
+                            Drop here
+                          </div>
+                        ))}
+                      </div>
                     </div>
+                  </div>
+                </div>
+
+                <div className='answer-wrapper-main-bottom'>
+                  {answers.slice(Math.ceil(answers.length / 2)).map(answer => (
+                    <DragnDropItem
+                      key={answer._id}
+                      answer={answer}
+                      addAnswer={addAnswer}
+                      removeAnswer={removeAnswer}
+                      finalAnswers={finalAnswers}
+                    />
                   ))}
                 </div>
               </div>
-            </div>
+            ) : (
+              <>
+                <div className='middle-circle-wrapper'>
+                  <div className='middle-circle'>
+                    <div className='inner-circle'>
+                      <div className='inner-circle-row'>
+                        {[0, 1, 2, 3].map(index => (
+                          <div className='item' key={index}>
+                            Drop here
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-            {width < 1405 && (
-              <div className='answer-wrapper-bottom'>
-                {answers.map(answer => (
-                  <DragnDropItem
-                    key={answer._id}
-                    answer={answer}
-                    targetPosition={defaultTargetAnswer}
-                    addAnswer={addAnswer}
-                    removeAnswer={removeAnswer}
-                    finalAnswers={finalAnswers}
-                  />
-                ))}
-              </div>
+                <div className='answer-wrapper-bottom'>
+                  {answers.map(answer => (
+                    <DragnDropItem
+                      key={answer._id}
+                      answer={answer}
+                      addAnswer={addAnswer}
+                      removeAnswer={removeAnswer}
+                      finalAnswers={finalAnswers}
+                    />
+                  ))}
+                </div>
+              </>
             )}
           </React.Fragment>
         ) : (
