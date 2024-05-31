@@ -1,0 +1,77 @@
+.answer-grid-thisorthatpicture {
+    margin-top: 3rem; /* Abstand von subheading und dem Grid */
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 1fr; /* Breite der Spalten festlegen */
+    gap: 2rem;
+}
+
+.answer-element {
+    font-size: 16px;
+    border: 4px solid #f3f3f3;
+    border-radius: 0.5rem;
+    padding: 0.2rem;
+    box-shadow: 5px 5px 8px 0px rgba(61, 61, 61, 0.169);
+    background-color: #f3f3f3;
+    position: relative;
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column; /* Column direction for flex container */
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+    text-align: center; /* Center text */
+}
+
+.ThisOrThatPictureImage {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.ThisOrThatPictureImage img {
+    width: 100%; /* Image takes the full width of its container */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 300px; /* Optional: max-width for images */
+}
+
+.answer-element p {
+    margin-top: 1rem; /* Space between image and text */
+}
+
+.answer-element:hover {
+    border-color: #5e8035;
+}
+
+/* State when clicked */
+.answer-element.focused {
+    border-color: #5e8035;
+    background-color: #5e8035;
+    color: white;
+}
+
+.hidden_points {
+    display: none;
+}
+
+.oder-text {
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    font-size: 1.5rem;
+    height: 100%; /* Match the height of the answer elements */
+}
+
+@media (max-width: 480px) {
+    .answer-grid-thisorthatpicture {
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .answer-element {
+        font-size: 0.75rem;
+        height: auto; /* Adjust height for smaller screens */
+    }
+}
