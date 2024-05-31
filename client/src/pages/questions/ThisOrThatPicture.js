@@ -68,3 +68,4 @@ const ThisOrThatPicture = ({ question, pageNumber, maxPage }) => {
 };
 
 export default ThisOrThatPicture;
+
