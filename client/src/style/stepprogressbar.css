@@ -101,3 +101,14 @@
   top: 5px;
   right: 8px;
 }
+
+.navigation-position-number{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.nav-link.bottom{
+  font-size: medium;
+}
