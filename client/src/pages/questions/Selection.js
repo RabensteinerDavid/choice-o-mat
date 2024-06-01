@@ -9,7 +9,6 @@ import useWindowDimensions from '../../components/useWindowSize'
 const Selection = ({ question, pageNumber, maxPage }) => {
   const { heading, subheading, answers } = question
 
-  const { height, width } = useWindowDimensions()
   const [focusedButtons, setFocusedButtons] = useState([]) // State für die fokussierten Buttons
 
   const toggleFocus = id => {
@@ -32,7 +31,7 @@ const Selection = ({ question, pageNumber, maxPage }) => {
               {answers.map(answer => (
                 <button
                   key={answer._id}
-                  className={`answer-element ${
+                  className={`answer-element-selection ${
                     focusedButtons.includes(answer._id) ? 'focused' : ''
                   }`}
                   onClick={() => toggleFocus(answer._id)}
@@ -51,8 +50,6 @@ const Selection = ({ question, pageNumber, maxPage }) => {
           <p>No questions found at question </p>
         )}
       </div>
-      <div>{width}</div>
-      <div>{height}</div>
       <FotBar
         prevQuestion={pageNumber === 1 ? 1 : pageNumber - 1}
         nextQuestion={pageNumber === maxPage ? maxPage : pageNumber + 1}
