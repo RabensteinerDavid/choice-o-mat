@@ -37,6 +37,11 @@ const StepProgressBar = ({ prevQuestion, nextQuestion, saveAnswers }) => {
     return questionId > 0 && questionId <= maxPageSideRef.current + 1
   }
 
+  const redirect = () => {  
+    saveAnswers()
+    navigate('/result')
+  }
+
   return (
     <div className='bottom-header'>
       {isValidQuestionId(prevQuestion) && (
@@ -128,7 +133,7 @@ const StepProgressBar = ({ prevQuestion, nextQuestion, saveAnswers }) => {
         </span>
       )}
       {page_id == maxPageSide && (
-        <div className='cross-wrapper'>
+        <div className='cross-wrapper' onClick={redirect}>
           <div className='circle-progress-bar'>
             <div className='checkMark-progress-bar'></div>
           </div>
