@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import '../style/links.css'
+import '../style/stepprogressbar.css'
 import { getMaxPageValue } from './LoadQuestion'
 import { Player } from '@lottiefiles/react-lottie-player'
 import Eyes from './Eyes'
 
-const Arrows = ({ prevQuestion, nextQuestion, saveAnswers }) => {
+const StepProgressBar = ({ prevQuestion, nextQuestion, saveAnswers }) => {
   const navigate = useNavigate()
   const [maxPageSide, setMaxPageSide] = useState(0)
   const { id: page_id } = useParams()
@@ -47,7 +47,7 @@ const Arrows = ({ prevQuestion, nextQuestion, saveAnswers }) => {
       )}
       <div className='anim-border'></div>
 
-      <div className={`navigation-position`}>
+      <div className='navigation-position'>
         {page_id == 1 && (
           <div>
             <Eyes />
@@ -66,7 +66,7 @@ const Arrows = ({ prevQuestion, nextQuestion, saveAnswers }) => {
           </div>
         )}
         <div
-          className='navigatio-item visited'
+          className={`navigatio-item ${page_id == 1 ? 'current' : ''} visited`}
           onClick={() => handleNavigationButton(1)}
         >
           1
@@ -97,9 +97,9 @@ const Arrows = ({ prevQuestion, nextQuestion, saveAnswers }) => {
                 </div>
               )}
               <div
-                className={`navigatio-item${
-                  index + 1 < page_id ? ' visited' : ''
-                }`}
+                className={`navigatio-item ${
+                  page_id == index + 2 ? 'current' : ''
+                } ${index + 1 < page_id ? 'visited' : ''}`}
                 onClick={() => handleNavigationButton(index + 2)}
               >
                 {index + 2}
@@ -119,4 +119,4 @@ const Arrows = ({ prevQuestion, nextQuestion, saveAnswers }) => {
   )
 }
 
-export default Arrows
+export default StepProgressBar

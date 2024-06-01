@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Arrows from './Arrows'
+import StepProgressBar from './StepProgressBar'
 
 class FotBar extends Component {
   render () {
@@ -10,7 +10,7 @@ class FotBar extends Component {
     } = this.props
     return (
       <div>
-        <Arrows
+        <StepProgressBar
           prevQuestion={prevQuestion}
           saveAnswers={saveAnswers}
           nextQuestion={nextQuestion}
