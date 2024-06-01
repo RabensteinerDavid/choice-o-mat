@@ -71,3 +71,7 @@ tbody tr:hover {
 .update-link:hover {
   background-color: #3c5197;
 }
+
+.question-list.update{
+  height: 100%;
+}

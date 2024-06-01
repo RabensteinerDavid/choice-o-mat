@@ -102,13 +102,31 @@
   right: 8px;
 }
 
-.navigation-position-number{
+.navigation-position-number {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0;
 }
 
-.nav-link.bottom{
+.nav-link.bottom {
   font-size: medium;
+}
+
+.circle-progress-bar {
+  background: #5e8035;
+  border-radius: 50%;
+  height: 45px;
+  width: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkMark-progress-bar {
+  transform: rotate(45deg);
+  height: 12px;
+  width: 6px;
+  border-bottom: 2px solid #fff;
+  border-right: 2px solid #fff;
 }

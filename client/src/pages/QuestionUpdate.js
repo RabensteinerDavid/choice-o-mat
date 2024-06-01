@@ -61,7 +61,7 @@ function QuestionUpdate () {
   }
 
   return (
-    <div className='question-list'>
+    <div className='question-list update'>
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId='droppable'>
           {provided => (

@@ -114,16 +114,25 @@ const StepProgressBar = ({ prevQuestion, nextQuestion, saveAnswers }) => {
         </div>
       ) : (
         <div className='navigation-position'>
-         <p className='nav-link bottom'>{page_id} / {maxPageSide}</p>
+          <p className='nav-link bottom'>
+            {page_id} / {maxPageSide}
+          </p>
         </div>
       )}
-      {isValidQuestionId(nextQuestion) && (
+      {isValidQuestionId(nextQuestion) && page_id != maxPageSide && (
         <span
           className='nav-link'
           onClick={() => handleNavigation(nextQuestion)}
         >
           {'>'}
         </span>
+      )}
+      {page_id == maxPageSide && (
+        <div className='cross-wrapper'>
+          <div className='circle-progress-bar'>
+            <div className='checkMark-progress-bar'></div>
+          </div>
+        </div>
       )}
     </div>
   )
