@@ -7,11 +7,12 @@ class Links extends Component {
     return (
       <nav>
         <div className='top-header'>
-        <Link to="/" className='nav-link cross'></Link>
+          <div className='cross-wrapper'>
+            <Link to='/' className='nav-link cross'></Link>
+          </div>
           <Link /*to="/movies/list"*/ className='nav-link'>?</Link>
         </div>
       </nav>
-      
     )
   }
 }
