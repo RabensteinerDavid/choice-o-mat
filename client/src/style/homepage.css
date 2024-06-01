@@ -25,6 +25,7 @@ html {
 .question-list {
   display: flex;
   flex-direction: column;
+  height:80vh;
 }
 
 .start-button a {
