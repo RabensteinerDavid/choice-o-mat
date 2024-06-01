@@ -32,7 +32,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
 }
 
 .result-body h1 {
@@ -89,17 +89,83 @@
   align-items: center;
 
   margin: 0px 15px 0 0;
-  align-self: flex-end; 
-  margin-top: auto; 
+  align-self: flex-end;
+  margin-top: auto;
 }
 .percentage.end {
   margin: 0px 0 0 15px;
-  align-self: flex-start; 
+  align-self: flex-start;
   margin-top: auto;
 }
 
-.result-fox{
-    position: fixed;
-    left: 0;
-    bottom: 0;
+.result-fox {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+
+@media (orientation: portrait) {
+  .result-body {
+    flex-direction: column;
+  }
+
+  .da,
+  .mtd {
+    width: 100%;
+    height: auto;
+  }
+
+  .da-wrapper,
+  .mtd-wrapper {
+    margin-top: 0;
+  }
+
+  .percentage {
+    font-size: 100px !important;
+  }
+
+  .percentage.start {
+    margin: 20px 15px 0 0 !important;
+    align-self: flex-end;
+    margin-top: auto;
+  }
+  .da.smaller {
+    width: 100% !important;
+  }
+  .percentage.end {
+    margin: 20px 15px 0 0 !important;
+    align-self: flex-end;
+    margin-top: auto;
+  }
+
+  .result-body h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .result-body p {
+    font-size: 1rem;
+    font-weight: lighter;
+    margin: 0;
+  }
+
+  .percentage {
+    font-size: 4rem !important;
+  }
+
+  .result-fox {
+    display: none;
+  }
+
+  .mtd,.da{
+    padding-top: 50px;
+  }
+
+  .more-information {
+    width: auto;
+
+    font-size: 16px;
+    padding: 10px 60px 10px 10px;
+  }
 }

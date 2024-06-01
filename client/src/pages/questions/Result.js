@@ -15,10 +15,17 @@ function Result () {
 
   return (
     <div className='result-body'>
+      <nav>
+        <div className='top-header'>
+          {/* <div className='cross-wrapper'>
+            <Link to='/' className='nav-link cross'></Link>
+          </div> */}
+        </div>
+      </nav>
       <div className='mtd bigger'>
         <div className='mtd-wrapper'>
           <h1>MTD</h1>
-          <p>
+          <p className='result-text'>
             Lorem ipsum dolor sit amet consectetur. Massa leo blandit tincidunt
             aenean sit egestas. Est rhoncus sed habitasse sit. Imperdiet
             porttitor tempor imperdiet sit quam tempus ornare. Fermentum nibh a
@@ -31,7 +38,7 @@ function Result () {
       <div className='da smaller'>
         <div className='da-wrapper'>
           <h1>DA</h1>
-          <p>
+          <p className='result-text'>
             Lorem ipsum dolor sit amet consectetur. Massa leo blandit tincidunt
             aenean sit egestas. Est rhoncus sed habitasse sit. Imperdiet
             porttitor tempor imperdiet sit quam tempus ornare. Fermentum nibh a
