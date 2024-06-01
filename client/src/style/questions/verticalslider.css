@@ -1,11 +1,3 @@
-.verticalslider {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 15vh;
-}
-
 .vertical-slider-wrapper {
   display: flex;
   flex-direction: row;
@@ -118,7 +110,6 @@
 }
 
 @media (max-width: 1500px) {
-
   .vertical-slider-agenda {
     width: 20vw !important;
     height: 60vh !important;
@@ -220,19 +211,19 @@
   }
 
   .vertical-slider-wrapper-horizontal {
-    gap: 40px !important;
+    gap: 20px !important;
   }
-  .vertical-slider-item-horizontal {
-    height: 18vw;
-  }
+  /* .vertical-slider-item-horizontal {
+     height: 18vw; 
+  } */
   .text-container-horizontal {
     font-size: 2.5vw !important;
   }
 
-  .vertical-slider-answers.horizontal {
-    width: 20vw !important;
-    height: 20vw !important;
-  }
+  /* .vertical-slider-answers.horizontal {
+     width: 20vw !important;
+    height: 20vw !important; 
+  } */
 
   .vertical-slider-item-horizontal {
     width: 100% !important;
@@ -247,7 +238,7 @@
 
 @media (max-width: 550px) {
   .vertical-slider-wrapper-horizontal {
-    gap: 20px;
+    gap: 25px !important;
   }
   .text-container {
     font-size: 2vw;
