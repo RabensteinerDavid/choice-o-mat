@@ -16,11 +16,11 @@ function Result () {
   return (
     <div className='result-body'>
       <nav>
-        <div className='top-header'>
+        {/* <div className='top-header'>
           {/* <div className='cross-wrapper'>
             <Link to='/' className='nav-link cross'></Link>
-          </div> */}
-        </div>
+          </div> 
+        </div> */}
       </nav>
       <div className='mtd bigger'>
         <div className='mtd-wrapper'>

@@ -3,18 +3,23 @@
   justify-content: space-between;
   flex-direction: row;
   height: 100vh;
-  scroll-behavior: none;
-  overflow-y: hidden;
+  overflow: hidden;
+}
+
+.da,
+.mtd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 100%;
+  color: white;
+  padding-bottom: 50px;
 }
 
 .da {
-  display: flex;
-  flex-direction: column;
   background-color: #ed6a2a;
-  color: white;
-  align-items: center;
-  width: 50%;
-  justify-content: center;
 }
 
 .da.smaller {
@@ -26,13 +31,7 @@
 }
 
 .mtd {
-  width: 50%;
-  color: white;
   background-color: var(--main-green);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .result-body h1 {
@@ -87,7 +86,6 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
   margin: 0px 15px 0 0;
   align-self: flex-end;
   margin-top: auto;
@@ -107,12 +105,14 @@
 @media (orientation: portrait) {
   .result-body {
     flex-direction: column;
+    overflow: visible;
   }
 
   .da,
   .mtd {
     width: 100%;
     height: auto;
+    height: 100%;
   }
 
   .da-wrapper,
@@ -158,14 +158,80 @@
     display: none;
   }
 
-  .mtd,.da{
+  .mtd,
+  .da {
     padding-top: 50px;
+    padding-bottom: 15px;
   }
 
   .more-information {
     width: auto;
-
     font-size: 16px;
     padding: 10px 60px 10px 10px;
+  }
+}
+
+@media (min-width: 600px) and (orientation: portrait) {
+  .percentage {
+    font-size: 100px !important;
+  }
+  .result-body p {
+    font-size: 1.5rem;
+  }
+  .more-information {
+    font-size: 1rem;
+    padding: 10px 60px 10px 10px;
+  }
+  .result-body h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin: 0;
+  }
+}
+
+@media (max-width: 1500px) and (orientation: landscape) {
+  .percentage {
+    font-size: 100px !important;
+  }
+  .result-body p {
+    font-size: 1.5rem;
+  }
+  .more-information {
+    font-size: 1rem;
+    padding: 10px 60px 10px 10px;
+  }
+  .result-body h1 {
+    font-size: 4.5rem;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .da.smaller {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 1000px) and (orientation: landscape) {
+  .percentage {
+    font-size: 50px !important;
+  }
+  .result-body p {
+    font-size: 1rem;
+  }
+  .more-information {
+    font-size: 0.8rem;
+    padding: 10px 60px 10px 10px;
+  }
+  .result-body h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .da.smaller {
+    width: 100% !important;
+  }
+  .result-fox {
+    display: none;
   }
 }
