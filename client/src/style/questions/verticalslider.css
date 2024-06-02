@@ -262,3 +262,19 @@
     height: 45px;
   }
 }
+
+@media (min-width: 530px) and (max-width: 930px) and (orientation: portrait) {
+  .vertical-slider-item-horizontal {
+    height: 10vw;
+  }
+  .vertical-slider-answers.horizontal {
+    width: 12vw !important;
+    height: 12vw !important;
+  }
+  .vertical-slider-wrapper-horizontal {
+    gap: 45px !important;
+  }
+  .text-container-horizontal {
+    font-size: 1rem !important;
+}
+}
