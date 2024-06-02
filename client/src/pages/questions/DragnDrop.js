@@ -10,7 +10,7 @@ import { saveAnswersLocalStorage } from '../../components/LoadQuestion'
 const DragnDrop = ({ question, pageNumber, maxPage }) => {
   const { heading, subheading, answers } = question
   const [finalAnswers, setFinalAnswers] = useState({})
-  const { width } = useWindowDimensions()
+  const { height, width } = useWindowDimensions()
 
   function addAnswer (targetIndex, answer) {
     setFinalAnswers(prev => ({
@@ -43,7 +43,7 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
         {question ? (
           <React.Fragment>
             <HeadingQuestion heading={heading} subheading={subheading} />
-            {width > 1405 ? (
+            {width > height ? (
               <div className='answer-wrapper-main'>
                 <div className='answer-wrapper-main-top' >
                   {answers
