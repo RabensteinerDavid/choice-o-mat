@@ -5,7 +5,7 @@ import { Player } from '@lottiefiles/react-lottie-player'
 function Result () {
   function MoreInformation () {
     return (
-      <div className='mre-information'>
+      <div className='more-information-wrapper'>
         <Link to='/questions/1' className='more-information'>
           Jetzt mehr erfahren
         </Link>
@@ -15,13 +15,11 @@ function Result () {
 
   return (
     <div className='result-body'>
-      <nav>
-        {/* <div className='top-header'>
-          {/* <div className='cross-wrapper'>
-            <Link to='/' className='nav-link cross'></Link>
-          </div> 
-        </div> */}
-      </nav>
+
+        <div className='result-nav-wrapper'>
+          <Link to='/' className='nav-link cross-result'></Link>
+        </div>
+
       <div className='mtd bigger'>
         <div className='mtd-wrapper'>
           <h1>MTD</h1>
