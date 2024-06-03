@@ -1,22 +1,27 @@
-
-
 .main {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+.main.choicerole {
+  width: 100% !important;
+}
+
 .content {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 80px;
+  width: 100%;
 }
 
-.left-column, .right-column {
+.left-column,
+.right-column {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 60px;
 }
 
 .middle-column {
@@ -25,12 +30,28 @@
   align-items: center;
 }
 
+.left-column > button:nth-child(1) {
+  margin-left: 50px;
+}
+
+.left-column > button:last-child {
+  margin-left: 50px;
+}
+
+.right-column > button:nth-child(1) {
+  margin-right: 50px;
+}
+
+.right-column > button:last-child {
+  margin-right: 50px;
+}
+
 .button {
   position: relative;
   font-family: Poppins, sans-serif;
   border-radius: 600px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  border-color: #5E8035;
+  border-color: #5e8035;
   border-style: solid;
   border-width: 1px;
   justify-content: center;
@@ -54,15 +75,14 @@
 }
 
 .clicked {
-  background-color: #5E8035;
+  background-color: #5e8035;
   color: white;
 }
 
-#moreRight{
+#moreRight {
   left: 30px;
 }
 
-
-#moreLeft{
-  right: 30px;
+#moreLeft {
+  right:30px;
 }
