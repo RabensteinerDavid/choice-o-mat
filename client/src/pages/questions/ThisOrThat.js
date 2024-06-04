@@ -59,5 +59,4 @@ const ThisOrThat = ({ question, pageNumber, maxPage }) => {
     </div>
   );
 }
-
 export default ThisOrThat;

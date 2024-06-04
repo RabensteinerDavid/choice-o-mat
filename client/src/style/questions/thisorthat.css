@@ -73,7 +73,6 @@
     border-bottom-right-radius: 30px;
   }
 
-
  
   
   .answer-button3.selected.answer-button3.left {
@@ -103,7 +102,7 @@
       font-size: 20px; /* Reduziere die Schriftgröße für kleinere Bildschirme */
     }
     .answer-button3 {
-      font-size: 20px; /* Reduziere die Schriftgröße für kleinere Bildschirme */
+      font-size: 20px; 
     }
     .answer-text3{
         font-size: 20px;
@@ -133,5 +132,3 @@
         font-size: 16px;
     }
   }
-  
-  

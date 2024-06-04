@@ -6,7 +6,7 @@ import HeadingQuestion from '../../components/HeadingQuestion';
 
 const ImageSelection = ({ question, pageNumber, maxPage }) => {
   const { heading, subheading, answers } = question;
-  const [focusedButtons, setFocusedButtons] = useState([]); // State für die fokussierten Buttons
+  const [focusedButtons, setFocusedButtons] = useState([]); 
 
   const toggleFocus = id => {
     setFocusedButtons(
