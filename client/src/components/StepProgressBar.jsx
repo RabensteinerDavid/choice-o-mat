@@ -24,6 +24,9 @@ const StepProgressBar = ({ prevQuestion, nextQuestion, saveAnswers }) => {
   }, [])
 
   const handleNavigation = questionId => {
+    navigate(`/questions/${questionId}`)
+  }
+  const handleNavigationSaveQuestion = questionId => {
     saveAnswers()
     navigate(`/questions/${questionId}`)
   }
@@ -127,7 +130,7 @@ const StepProgressBar = ({ prevQuestion, nextQuestion, saveAnswers }) => {
       {isValidQuestionId(nextQuestion) && page_id != maxPageSide && (
         <span
           className='nav-link'
-          onClick={() => handleNavigation(nextQuestion)}
+          onClick={() => handleNavigationSaveQuestion(nextQuestion)}
         >
           {'>'}
         </span>

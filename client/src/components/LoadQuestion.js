@@ -77,16 +77,46 @@ export const getMaxPageValue = async () => {
 }
 
 export const saveAnswersLocalStorage = (id, finalAnswers) => {
+  // console.log(finalAnswers)
+  if(finalAnswers){
+  let storedAnswers = localStorage.getItem("result");
+  
+  if (storedAnswers) {
+    if (typeof storedAnswers === "string") {
+      try {
+        storedAnswers = JSON.parse(storedAnswers);
+      } catch (error) {
+        console.error("Error parsing stored value:", error);
+      }
+    }
+  } else {
+    storedAnswers = { da: 0, mtd: 0 };
+  }
+
+  if (storedAnswers.da !== null && storedAnswers.mtd !== null) {
+    console.log("storedvalue", storedAnswers.da);
+    console.log("storedvalue", storedAnswers.mtd);
+    storedAnswers.da += finalAnswers.da;
+    storedAnswers.mtd += finalAnswers.mtd;
+  } else {
+    storedAnswers = finalAnswers;
+  }
+
   console.log(
     'Question with id: ' +
-      id +
-      ' has saved with the following content to the local storage: ' +
-      finalAnswers
-  )
-  localStorage.setItem(id, finalAnswers)
-}
+    id +
+    ' has saved with the following content to the local storage: ' +
+    JSON.stringify(finalAnswers)
+  );
 
-export const loadAnswersFromLocalStorage = (id, index) => {
-  const storedAnswers = JSON.parse(localStorage.getItem(id)) || [];
-  return storedAnswers[index] || 0;
+  // storedAnswers = { da: 0, mtd: 0 }
+  localStorage.setItem("result", JSON.stringify(storedAnswers));}
+  else{
+    alert("Please answer all the questions")
+  }
 };
+
+export const findPointsToAnswer = (answers, answerID) => {
+  const points = answers.find(a => a._id === answerID).points
+  return points
+}

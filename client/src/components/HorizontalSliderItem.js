@@ -18,18 +18,18 @@ const HorizontalSliderItem = ({ answer, defaultX, addAnswer, index }) => {
     const middleX = sliderWidth / 2
     const newPercentage = ((newX + middleX) / sliderWidth) * 100
     setControlledPosition({ x: newX, y: 0 })
-    addAnswer(index, Math.max(0, Math.min(100, newPercentage)))
+    addAnswer(answer._id, Math.max(0, Math.min(100, newPercentage)))
   }
 
   useEffect(() => {
     const slider = document.querySelector('.vertical-slider-item-horizontal')
-    const answer = document.querySelector('.vertical-slider-answers')
+    const answerItem = document.querySelector('.vertical-slider-answers')
     if (slider && answer) {
       const sliderRect = slider.getBoundingClientRect()
-      const answerRect = answer.getBoundingClientRect()
+      const answerRect = answerItem.getBoundingClientRect()
       setWidthSlider(sliderRect.width)
       setWidthAnswer(answerRect.width)
-      addAnswer(index, 50)
+      addAnswer(answer._id, 50)
     }
   }, [width, height])
 

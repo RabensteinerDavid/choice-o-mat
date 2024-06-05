@@ -14,7 +14,8 @@ import HorizontalSlider from './questions/HorizontalSlider.js'
 
 import {
   getMaxPageValue,
-  loadQuestionsOrderData
+  loadQuestionsOrderData,
+  saveAnswersLocalStorage
 } from '../components/LoadQuestion'
 import FotBar from '../components/FotBar.jsx'
 
@@ -22,6 +23,7 @@ const QuestionList = () => {
   const { id: page_id } = useParams()
   const [maxPage, setMaxPage] = useState(null)
   const [order, setOrder] = useState(null)
+  const [finalAnswers, setFinalAnswers] = useState({}) 
 
   useEffect(() => {
     const fetchMaxPage = async () => {
@@ -62,6 +64,8 @@ const QuestionList = () => {
             question={question}
             pageNumber={index + 1}
             maxPage={maxPage}
+            finalAnswers={finalAnswers} 
+            setFinalAnswers={setFinalAnswers}
           />
         )
       case 'Carousel':
@@ -98,6 +102,8 @@ const QuestionList = () => {
             question={question}
             pageNumber={index + 1}
             maxPage={maxPage}
+            finalAnswer={finalAnswers}
+            setFinalAnswers={setFinalAnswers}
           />
         )
       case 'ChoiceRole':
@@ -146,15 +152,19 @@ const QuestionList = () => {
     )
   }
 
+  const saveAnswers = () => {
+    saveAnswersLocalStorage(page_id, finalAnswers)
+  }
+
   return (
     <div>
       {renderList()}
-      {console.log(page_id)}
       <FotBar
         prevQuestion={parseInt(page_id) === 1 ? 1 : parseInt(page_id) - 1}
         nextQuestion={
           parseInt(page_id) === maxPage ? maxPage : parseInt(page_id) + 1
         }
+        saveAnswers={saveAnswers}
       />
     </div>
   )

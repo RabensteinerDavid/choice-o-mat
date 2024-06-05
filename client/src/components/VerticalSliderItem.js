@@ -19,17 +19,17 @@ const VerticalSliderItem = ({ answer, defaultY, addAnswer, index }) => {
     const middleY = sliderHeight / 2
     const newPercentage = 100 - ((newY + middleY) / sliderHeight) * 100
     setControlledPosition({ x: 0, y: newY })
-    addAnswer(index, Math.max(0, Math.min(100, newPercentage)))
+    addAnswer(answer._id, Math.max(0, Math.min(100, newPercentage)))
   }
   useEffect(() => {
     const slider = document.querySelector('.vertical-slider-item')
-    const answer = document.querySelector('.vertical-slider-answers')
+    const answerItem = document.querySelector('.vertical-slider-answers')
     if (slider && answer) {
       const sliderRect = slider.getBoundingClientRect()
-      const answerRect = answer.getBoundingClientRect()
+      const answerRect = answerItem.getBoundingClientRect()
       setHeightSlider(sliderRect.height)
       setHeightAnswer(answerRect.height)
-      addAnswer(index, 50)
+      addAnswer(answer._id, 50)
     }
   }, [width, height])
 

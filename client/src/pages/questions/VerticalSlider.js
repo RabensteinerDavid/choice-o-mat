@@ -6,16 +6,13 @@ import HeadingQuestion from '../../components/HeadingQuestion'
 import VerticalSliderItem from '../../components/VerticalSliderItem'
 import HorizontalSliderItem from '../../components/HorizontalSliderItem'
 import useWindowDimensions from '../../components/useWindowSize'
-import {
-  loadAnswersFromLocalStorage,
-  saveAnswersLocalStorage
-} from '../../components/LoadQuestion'
+import { findPointsToAnswer } from '../../components/LoadQuestion'
 
-const VerticalSlider = ({ question, pageNumber, maxPage }) => {
+const VerticalSlider = ({ question, pageNumber, maxPage, setFinalAnswers }) => {
   const { heading, subheading, answers } = question
   const { height, width } = useWindowDimensions()
   const [horizontal, setHorizontal] = useState(true)
-  const [finalAnswers, setFinalAnswers] = useState({})
+  const [finalAnswers, setFinalAnswersResult] = useState({})
 
   useEffect(() => {
     if (width < height) {
@@ -25,16 +22,31 @@ const VerticalSlider = ({ question, pageNumber, maxPage }) => {
     }
   }, [width, height])
 
-  function addAnswer (targetIndex, answer) {
-    setFinalAnswers(prev => ({
+  function addAnswer (id, answer) {
+    setFinalAnswersResult(prev => ({
       ...prev,
-      [targetIndex]: answer
+      [id]: answer
     }))
   }
 
-  const saveAnswers = () => {
-    saveAnswersLocalStorage(question._id, JSON.stringify(finalAnswers))
-  }
+  useEffect(() => {
+    let finalAnswersResult = {
+      da: 0,
+      mtd: 0
+    }
+
+    for (const key in finalAnswers) {
+      finalAnswersResult['da'] +=
+        (parseInt(finalAnswers[key]) *
+          parseInt(findPointsToAnswer(answers, key).da)) /
+        answers.length
+      finalAnswersResult['mtd'] +=
+        (parseInt(finalAnswers[key]) *
+          parseInt(findPointsToAnswer(answers, key).mtd)) /
+        answers.length
+    }
+    setFinalAnswers(finalAnswersResult)
+  }, [finalAnswers])
 
   return (
     <div className='question-list'>
@@ -63,10 +75,6 @@ const VerticalSlider = ({ question, pageNumber, maxPage }) => {
                         answer={answer}
                         addAnswer={addAnswer}
                         index={index}
-                        defaultY={loadAnswersFromLocalStorage(
-                          question._id,
-                          index
-                        )}
                       />
                     </div>
                   ))}
@@ -96,10 +104,6 @@ const VerticalSlider = ({ question, pageNumber, maxPage }) => {
                       answer={answer}
                       addAnswer={addAnswer}
                       index={index}
-                      defaultX={loadAnswersFromLocalStorage(
-                        question._id,
-                        index
-                      )}
                     />
                   </div>
                 ))}
@@ -110,11 +114,6 @@ const VerticalSlider = ({ question, pageNumber, maxPage }) => {
           <p>No questions found</p>
         )}
       </div>
-      <FotBar
-        prevQuestion={pageNumber === 1 ? 1 : pageNumber - 1}
-        nextQuestion={pageNumber === maxPage ? maxPage : pageNumber + 1}
-        saveAnswers={saveAnswers}
-      />
     </div>
   )
 }

@@ -5,22 +5,22 @@ import HeadingQuestion from '../../components/HeadingQuestion'
 import '../../style/questions/dragndrop.css'
 import DragnDropItem from '../../components/DragnDropItem'
 import useWindowDimensions from '../../components/useWindowSize'
-import { saveAnswersLocalStorage } from '../../components/LoadQuestion'
+import { findPointsToAnswer } from '../../components/LoadQuestion'
 
-const DragnDrop = ({ question, pageNumber, maxPage }) => {
+const DragnDrop = ({ question, pageNumber, maxPage, setFinalAnswers }) => {
   const { heading, subheading, answers } = question
-  const [finalAnswers, setFinalAnswers] = useState({})
+  const [finalAnswers, setFinalAnswersResult] = useState({})
   const { height, width } = useWindowDimensions()
 
   function addAnswer (targetIndex, answer) {
-    setFinalAnswers(prev => ({
+    setFinalAnswersResult(prev => ({
       ...prev,
       [targetIndex]: answer
     }))
   }
 
   const removeAnswer = answerId => {
-    setFinalAnswers(prev => {
+    setFinalAnswersResult(prev => {
       const newAnswers = { ...prev }
       for (const key in newAnswers) {
         if (newAnswers[key] === answerId) {
@@ -31,10 +31,22 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
     })
   }
 
-  const saveAnswers = () => {
-    console.log(finalAnswers)
-    saveAnswersLocalStorage(question._id, JSON.stringify(finalAnswers))
-  }
+  useEffect(() => {
+    let finalAnswersResult = {
+      da: 0,
+      mtd: 0
+    }
+    for (const key in finalAnswers) {
+      const value = finalAnswers[key]
+      finalAnswersResult['da'] += parseInt(
+        findPointsToAnswer(answers, value).da
+      ) / answers.length
+      finalAnswersResult['mtd'] += parseInt(
+        findPointsToAnswer(answers, value).mtd
+      )/ answers.length
+    }
+    setFinalAnswers(finalAnswersResult)
+  }, [finalAnswers])
 
   return (
     <div className='question-list'>
@@ -45,7 +57,7 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
             <HeadingQuestion heading={heading} subheading={subheading} />
             {width > height ? (
               <div className='answer-wrapper-main'>
-                <div className='answer-wrapper-main-top' >
+                <div className='answer-wrapper-main-top'>
                   {answers
                     .slice(0, Math.ceil(answers.length / 2))
                     .map(answer => (
@@ -57,7 +69,7 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
                         finalAnswers={finalAnswers}
                       />
                     ))}
-                </div>  
+                </div>
 
                 <div className='middle-circle-wrapper'>
                   <div className='middle-circle'>
@@ -119,11 +131,6 @@ const DragnDrop = ({ question, pageNumber, maxPage }) => {
           <p>No questions found at question</p>
         )}
       </div>
-      <FotBar
-        prevQuestion={pageNumber === 1 ? 1 : pageNumber - 1}
-        nextQuestion={pageNumber === maxPage ? maxPage : pageNumber + 1}
-        saveAnswers={saveAnswers}
-      />
     </div>
   )
 }
