@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import NavBar from '../../components/NavBar'
-import FotBar from '../../components/FotBar'
-import '../../style/questions/choicerole.css'
-import HeadingQuestion from '../../components/HeadingQuestion'
-import { Player } from '@lottiefiles/react-lottie-player'
+import React, { useState } from 'react';
+import NavBar from '../../components/NavBar';
+import FotBar from '../../components/FotBar';
+import '../../style/questions/choicerole.css';
+import HeadingQuestion from '../../components/HeadingQuestion';
+import { Player } from '@lottiefiles/react-lottie-player';
 
 const icons = {
   0: '/icons/videoschnitt.png',
@@ -11,22 +11,22 @@ const icons = {
   2: '/icons/projektmanager.png',
   3: '/icons/levelplanner.png',
   4: '/icons/audiotechniker.png',
-  5: '/icons/spezialeffekte.png'
-}
+  5: '/icons/spezialeffekte.png',
+};
 
 const ChoiceRole = ({ question, pageNumber, maxPage }) => {
-  const { heading, subheading, answers } = question
-  const [selectedRole, setSelectedRole] = useState(null)
-  const [selectedJson, setSelectedJson] = useState('')
+  const { heading, subheading, answers } = question;
+  const [selectedRole, setSelectedRole] = useState(null);
+  const [selectedJson, setSelectedJson] = useState('');
 
   const handleClick = (role, jsonFile) => {
-    setSelectedRole(role)
-    setSelectedJson(jsonFile)
-  }
+    setSelectedRole(role);
+    setSelectedJson(jsonFile);
+  };
 
-  const half = Math.ceil(answers.length / 2)
-  const firstHalf = answers.slice(0, half)
-  const secondHalf = answers.slice(half)
+  const half = Math.ceil(answers.length / 2);
+  const firstHalf = answers.slice(0, half);
+  const secondHalf = answers.slice(half);
 
   return (
     <div className='question-list'>
@@ -35,7 +35,7 @@ const ChoiceRole = ({ question, pageNumber, maxPage }) => {
         {question ? (
           <React.Fragment>
             <HeadingQuestion heading={heading} subheading={subheading} />
-            <br/><br/><br/><br/><br/>
+            <br/><br/>
             <div className='content'>
               <div className='left-column'>
                 {firstHalf.map((ans, index) => (
@@ -57,19 +57,18 @@ const ChoiceRole = ({ question, pageNumber, maxPage }) => {
               </div>
               <div className='middle-column'>
                 {selectedJson ? (
-                <Player
-                  src={`http://localhost:3001/lottie/${selectedJson}`}
-                  className='player'
-                  loop
-                  autoplay
-                  style={{ height: '400px', width: '400px' }}
-                />
-               
+                  <Player
+                    src={`http://localhost:3001/lottie/${selectedJson}`}
+                    className='player'
+                    loop
+                    autoplay
+                    //style={{ height: '400px', width: '400px' }}
+                  />
                 ) : (
                   <img
                     src='/PlaceholderImageQ10.png'
                     alt='Platzhalterbild'
-                    style={{ height: '400px', width: '400px' }}
+                    //style={{ height: '400px', width: '400px' }}
                   />
                 )}
               </div>
@@ -83,7 +82,7 @@ const ChoiceRole = ({ question, pageNumber, maxPage }) => {
                     onClick={() => handleClick(ans.text, ans.photo)}
                   >
                     <img
-                      src={icons[index]}
+                      src={icons[half + index]}
                       alt='Icon'
                       className='button-icon'
                     />
@@ -102,7 +101,7 @@ const ChoiceRole = ({ question, pageNumber, maxPage }) => {
         nextQuestion={pageNumber === maxPage ? maxPage : pageNumber + 1}
       />
     </div>
-  )
-}
+  );
+};
 
-export default ChoiceRole
+export default ChoiceRole;
