@@ -26,6 +26,14 @@
   width: 60% !important;
 }
 
+.mtd.smaller {
+  width: 60% !important;
+}
+
+.da.bigger {
+  width: 100% !important;
+}
+
 .mtd.bigger {
   width: 100% !important;
 }
@@ -241,8 +249,15 @@
   }
 }
 
-.result-nav-wrapper {
+.result-body.mtd-first .result-nav-wrapper {
   background: var(--main-green);
+}
+
+.result-body.da-first .result-nav-wrapper {
+  background-color: #ed6a2a;
+}
+
+.result-nav-wrapper {
   padding: 1vw;
 }
 

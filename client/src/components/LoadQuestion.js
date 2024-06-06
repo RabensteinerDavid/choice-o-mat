@@ -116,6 +116,7 @@ export const saveAnswersLocalStorage = (id, finalAnswers) => {
 
 export const getResultLocalStorage = async () => {
   let storedAnswers = localStorage.getItem('result')
+  let resultEachPercent = { da: 0, mtd: 0 }
   let result = { da: 0, mtd: 0 }
 
   try {
@@ -123,9 +124,17 @@ export const getResultLocalStorage = async () => {
     if (!isNaN(pageCount) && pageCount !== 0) {
       if (storedAnswers) {
         storedAnswers = JSON.parse(storedAnswers)
+        resultEachPercent = {
+          da: parseFloat(((storedAnswers.da / pageCount) * 100).toFixed(2)),
+          mtd: parseFloat(((storedAnswers.mtd / pageCount) * 100).toFixed(2))
+        }
+
+        let mtdPercent = resultEachPercent.mtd
+        let daPercent = resultEachPercent.da
+
         result = {
-          da: parseFloat((storedAnswers.da / pageCount).toFixed(2)),
-          mtd: parseFloat((storedAnswers.mtd / pageCount).toFixed(2))
+          da: (daPercent / (mtdPercent + daPercent)) * 100,
+          mtd: (mtdPercent / (mtdPercent + daPercent)) * 100
         }
       }
     } else {

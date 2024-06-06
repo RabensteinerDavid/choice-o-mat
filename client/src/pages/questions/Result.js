@@ -31,52 +31,100 @@ function Result () {
     )
   }
 
+  const isMtdLarger = result && result.mtd >= result.da
+
   return (
-    <div className='result-body'>
+    <div className={`result-body ${isMtdLarger ? 'mtd-first' : 'da-first'}`}>
       <div className='result-nav-wrapper'>
         <Link to='/' className='nav-link cross-result'></Link>
       </div>
 
       {result && (
         <>
-          <div className='mtd bigger'>
-            <div className='mtd-wrapper'>
-              <h1>MTD</h1>
-              <p className='result-text'>
-                Lorem ipsum dolor sit amet consectetur. Massa leo blandit
-                tincidunt aenean sit egestas. Est rhoncus sed habitasse sit.
-                Imperdiet porttitor tempor imperdiet sit quam tempus ornare.
-                Fermentum nibh a quisque ullamcorper amet.
-              </p>
-              <MoreInformation />
-            </div>
-            <a className='percentage start' id='mtd-tooltip'>
-              {result.mtd}%
-            </a>
+          {result.mtd >= result.da ? (
+            <>
+              <div className='mtd bigger'>
+                <div className='mtd-wrapper'>
+                  <h1>MTD</h1>
+                  <p className='result-text'>
+                    Lorem ipsum dolor sit amet consectetur. Massa leo blandit
+                    tincidunt aenean sit egestas. Est rhoncus sed habitasse sit.
+                    Imperdiet porttitor tempor imperdiet sit quam tempus ornare.
+                    Fermentum nibh a quisque ullamcorper amet.
+                  </p>
+                  <MoreInformation />
+                </div>
+                <a className='percentage start' id='mtd-tooltip'>
+                  {result.mtd}%
+                </a>
 
-            <Tooltip className='tooltip' anchorSelect='#mtd-tooltip'>
-              Du stimmst zu {result.mtd}% mit DA überein
-            </Tooltip>
-          </div>
-          <div className='da smaller'>
-            <div className='da-wrapper'>
-              <h1>DA</h1>
-              <p className='result-text'>
-                Lorem ipsum dolor sit amet consectetur. Massa leo blandit
-                tincidunt aenean sit egestas. Est rhoncus sed habitasse sit.
-                Imperdiet porttitor tempor imperdiet sit quam tempus ornare.
-                Fermentum nibh a quisque ullamcorper amet.
-              </p>
-              <MoreInformation />
-            </div>
-            <a className='percentage end' id='da-tooltip'>
-              {result.da}%
-            </a>
+                <Tooltip className='tooltip' anchorSelect='#mtd-tooltip'>
+                  Du stimmst zu {result.mtd}% mit DA überein
+                </Tooltip>
+              </div>
+              <div className='da smaller'>
+                <div className='da-wrapper'>
+                  <h1>DA</h1>
+                  <p className='result-text'>
+                    Lorem ipsum dolor sit amet consectetur. Massa leo blandit
+                    tincidunt aenean sit egestas. Est rhoncus sed habitasse sit.
+                    Imperdiet porttitor tempor imperdiet sit quam tempus ornare.
+                    Fermentum nibh a quisque ullamcorper amet.
+                  </p>
+                  <MoreInformation />
+                </div>
+                <a className='percentage end' id='da-tooltip'>
+                  {result.da}%
+                </a>
 
-            <Tooltip className='tooltip' anchorSelect='#da-tooltip'>
-              Du stimmst zu {result.da}% mit DA überein{' '}
-            </Tooltip>
-          </div>
+                <Tooltip className='tooltip' anchorSelect='#da-tooltip'>
+                  Du stimmst zu {result.da}% mit DA überein{' '}
+                </Tooltip>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className='da bigger'>
+                <div className='da-wrapper'>
+                  <h1>DA</h1>
+                  <p className='result-text'>
+                    Lorem ipsum dolor sit amet consectetur. Massa leo blandit
+                    tincidunt aenean sit egestas. Est rhoncus sed habitasse sit.
+                    Imperdiet porttitor tempor imperdiet sit quam tempus ornare.
+                    Fermentum nibh a quisque ullamcorper amet.
+                  </p>
+                  <MoreInformation />
+                </div>
+                <a className='percentage start' id='da-tooltip'>
+                  {result.da}%
+                </a>
+
+                <Tooltip className='tooltip' anchorSelect='#da-tooltip'>
+                  Du stimmst zu {result.da}% mit MTD überein
+                </Tooltip>
+              </div>
+              <div className='mtd smaller'>
+                <div className='mtd-wrapper'>
+                  <h1>MTD</h1>
+                  <p className='result-text'>
+                    Lorem ipsum dolor sit amet consectetur. Massa leo blandit
+                    tincidunt aenean sit egestas. Est rhoncus sed habitasse sit.
+                    Imperdiet porttitor tempor imperdiet sit quam tempus ornare.
+                    Fermentum nibh a quisque ullamcorper amet.
+                  </p>
+                  <MoreInformation />
+                </div>
+                <a className='percentage end' id='mtd-tooltip'>
+                  {result.mtd}%
+                </a>
+
+                <Tooltip className='tooltip' anchorSelect='#mtd-tooltip'>
+                  Du stimmst zu {result.mtd}% mit MTD überein
+                </Tooltip>
+              </div>
+            </>
+          )}
+
           <Player
             src='/lottie/result-fox.json'
             className='result-fox'
