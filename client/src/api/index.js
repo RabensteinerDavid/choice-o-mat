@@ -14,6 +14,7 @@ export const getMaxPage = () => api.get(`/question/maxPage`)
 export const patchQuestion = (id, payload) => api.patch(`/question-update/${id}`, payload)
 export const deleteAnswerPhoto = (quesitionId, answerId) => api.patch(`/delete-answer-photo/${quesitionId}/${answerId}`)
 
+export const insertQuestionTypes = payload => api.post(`/question-types`, payload)
 export const getQuestionTypes = () => api.get(`/question-types`)
 
 const apis = {
@@ -25,7 +26,8 @@ const apis = {
   getQuestionById,
   patchQuestion,
   deleteAllQuestions,
-  getQuestionTypes
+  getQuestionTypes,
+  insertQuestionTypes
 }
 
 export default apis

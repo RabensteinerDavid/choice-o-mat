@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { deleteAllQuestions, getQuestionTypes, insertQuestion } from '../api'
+import { deleteAllQuestions, getQuestionTypes, insertQuestion, insertQuestionTypes } from '../api'
 import '../style/questionadd.css'
 import InputField from '../components/InputField'
 import { prefilledQuestions } from './questions/PrefillQuestion'
+import { prefilledQuestionTypes } from './questions/PrefillQuestionType'
 import { getMaxPageValue } from '../components/LoadQuestion'
 import ImageUploader from '../components/questions_images/ImageUploader'
 import DropDownField from '../components/DropDown'
@@ -131,6 +132,16 @@ const QuestionAdd = () => {
     }
   }
 
+  const prefillQuestionType = async () => {
+    try {
+      await insertQuestionTypes(prefilledQuestionTypes.questionTypes);
+      alert('Question types inserted successfully');
+    } catch (error) {
+      console.error('Error inserting question types:', error);
+      alert('Failed to insert question types. Please check console for details.');
+    }
+  };
+
   const deleteQuestions = async () => {
     try {
       await deleteAllQuestions()
@@ -217,6 +228,9 @@ const QuestionAdd = () => {
         </button>
         <button className='prefill-button' onClick={prefillQuestion}>
           Add Prefilled Questions
+        </button>
+        <button className='prefill-button' onClick={prefillQuestionType}>
+          Add Prefilled Questions Types
         </button>
         <button className='delete-button' onClick={deleteQuestions}>
           Delete All Questions
