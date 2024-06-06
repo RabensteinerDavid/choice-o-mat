@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Player } from '@lottiefiles/react-lottie-player'
 import { getResultLocalStorage } from '../../components/LoadQuestion'
 import '../../style/questions/result.css'
+import { Tooltip } from 'react-tooltip'
 
 function Result () {
   const [result, setResult] = useState(null)
@@ -49,7 +50,13 @@ function Result () {
               </p>
               <MoreInformation />
             </div>
-            <p className='percentage start'>{result.mtd}%</p>
+            <a className='percentage start' id='mtd-tooltip'>
+              {result.mtd}%
+            </a>
+
+            <Tooltip className='tooltip' anchorSelect='#mtd-tooltip'>
+              Du stimmst zu {result.mtd}% mit DA überein
+            </Tooltip>
           </div>
           <div className='da smaller'>
             <div className='da-wrapper'>
@@ -62,7 +69,13 @@ function Result () {
               </p>
               <MoreInformation />
             </div>
-            <p className='percentage end'>{result.da}%</p>
+            <a className='percentage end' id='da-tooltip'>
+              {result.da}%
+            </a>
+
+            <Tooltip className='tooltip' anchorSelect='#da-tooltip'>
+              Du stimmst zu {result.da}% mit DA überein{' '}
+            </Tooltip>
           </div>
           <Player
             src='/lottie/result-fox.json'
