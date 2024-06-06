@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../../components/NavBar';
 import FotBar from '../../components/FotBar';
 import '../../style/questions/imageselection.css';
 import HeadingQuestion from '../../components/HeadingQuestion';
+import { findPointsToAnswer } from '../../components/LoadQuestion';
 
-const ImageSelection = ({ question, pageNumber, maxPage }) => {
+const ImageSelection = ({ question, setFinalAnswers }) => {
   const { heading, subheading, answers } = question;
   const [focusedButtons, setFocusedButtons] = useState([]); 
 
@@ -16,6 +17,24 @@ const ImageSelection = ({ question, pageNumber, maxPage }) => {
           : [...prevState, id] // Füge den Fokus hinzu, wenn der Button nicht fokussiert ist
     );
   };
+
+  useEffect(() => {
+    let finalAnswersResult = {
+      da: 0,
+      mtd: 0
+    }
+    console.log(focusedButtons)
+    for (const key in focusedButtons) {
+      const value = focusedButtons[key]
+      finalAnswersResult['da'] += parseInt(
+        findPointsToAnswer(answers, value).da
+      ) / answers.length
+      finalAnswersResult['mtd'] += parseInt(
+        findPointsToAnswer(answers, value).mtd
+      )/ answers.length
+    }
+    setFinalAnswers(finalAnswersResult)
+  }, [focusedButtons])
 
   return (
     <div className='question-list'>
@@ -49,10 +68,6 @@ const ImageSelection = ({ question, pageNumber, maxPage }) => {
           <p>No questions found at question </p>
         )}
       </div>
-      <FotBar
-        prevQuestion={pageNumber === 1 ? 1 : pageNumber - 1}
-        nextQuestion={pageNumber === maxPage ? maxPage : pageNumber + 1}
-      />
     </div>
   );
 };

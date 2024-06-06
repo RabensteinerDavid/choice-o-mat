@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../../components/NavBar';
 import FotBar from '../../components/FotBar';
 import '../../style/questions/thisorthatpicture.css';
 import HeadingQuestion from '../../components/HeadingQuestion';
 import ThisOrThatPictureImage from '../../components/questions_images/ThisOrThatPictureImage';
 import useWindowDimensions from '../../components/useWindowSize';
+import { findPointsToAnswer } from '../../components/LoadQuestion';
 
-const ThisOrThatPicture = ({ question, pageNumber, maxPage }) => {
+const ThisOrThatPicture = ({ question, setFinalAnswers}) => {
     const { height, width } = useWindowDimensions();
     const [focusedButtons, setFocusedButtons] = useState([]); // State für den fokussierten Button
 
@@ -24,6 +25,24 @@ const ThisOrThatPicture = ({ question, pageNumber, maxPage }) => {
         // Füge die geklickte Antwort hinzu
         setFocusedButtons(prevState => [...prevState.filter(buttonId => Math.floor(answers.findIndex(answer => answer._id === buttonId) / 2) !== clickedRowIndex), id]);
     };
+
+    useEffect(() => {
+        let finalAnswersResult = {
+          da: 0,
+          mtd: 0
+        }
+        console.log(focusedButtons)
+        for (const key in focusedButtons) {
+          const value = focusedButtons[key]
+          finalAnswersResult['da'] += parseInt(
+            findPointsToAnswer(answers, value).da
+          ) / 3
+          finalAnswersResult['mtd'] += parseInt(
+            findPointsToAnswer(answers, value).mtd
+          )/ 3
+        }
+        setFinalAnswers(finalAnswersResult)
+      }, [focusedButtons])
 
     return (
         <div className='question-list'>
@@ -59,10 +78,6 @@ const ThisOrThatPicture = ({ question, pageNumber, maxPage }) => {
                     <p>No questions found at question</p>
                 )}
             </div>
-            <FotBar
-                prevQuestion={pageNumber === 1 ? 1 : pageNumber - 1}
-                nextQuestion={pageNumber === maxPage ? maxPage : pageNumber + 1}
-            />
         </div>
     );
 };

@@ -23,7 +23,7 @@ const QuestionList = () => {
   const { id: page_id } = useParams()
   const [maxPage, setMaxPage] = useState(null)
   const [order, setOrder] = useState(null)
-  const [finalAnswers, setFinalAnswers] = useState({}) 
+  const [finalAnswers, setFinalAnswers] = useState({})
 
   useEffect(() => {
     const fetchMaxPage = async () => {
@@ -46,6 +46,7 @@ const QuestionList = () => {
             version={0}
             pageNumber={index + 1}
             maxPage={maxPage}
+            setFinalAnswers={setFinalAnswers}
           />
         )
       case 'Selection':
@@ -55,6 +56,7 @@ const QuestionList = () => {
             question={question}
             pageNumber={index + 1}
             maxPage={maxPage}
+            setFinalAnswers={setFinalAnswers}
           />
         )
       case 'VerticalSlider':
@@ -64,7 +66,7 @@ const QuestionList = () => {
             question={question}
             pageNumber={index + 1}
             maxPage={maxPage}
-            finalAnswers={finalAnswers} 
+            finalAnswers={finalAnswers}
             setFinalAnswers={setFinalAnswers}
           />
         )
@@ -75,6 +77,7 @@ const QuestionList = () => {
             question={question}
             pageNumber={index + 1}
             maxPage={maxPage}
+            setFinalAnswers={setFinalAnswers}
           />
         )
       case 'ImageSelection':
@@ -84,6 +87,7 @@ const QuestionList = () => {
             question={question}
             pageNumber={index + 1}
             maxPage={maxPage}
+            setFinalAnswers={setFinalAnswers}
           />
         )
       case 'OrderSelection':
@@ -93,6 +97,7 @@ const QuestionList = () => {
             question={question}
             pageNumber={index + 1}
             maxPage={maxPage}
+            setFinalAnswers={setFinalAnswers}
           />
         )
       case 'DragnDrop':
@@ -113,6 +118,7 @@ const QuestionList = () => {
             question={question}
             pageNumber={index + 1}
             maxPage={maxPage}
+            setFinalAnswers={setFinalAnswers}
           />
         )
       case 'ThisOrThatPicture':
@@ -122,6 +128,7 @@ const QuestionList = () => {
             question={question}
             pageNumber={index + 1}
             maxPage={maxPage}
+            setFinalAnswers={setFinalAnswers}
           />
         )
       case 'HorizontalSlider':
@@ -131,6 +138,7 @@ const QuestionList = () => {
             question={question}
             pageNumber={index + 1}
             maxPage={maxPage}
+            setFinalAnswers={setFinalAnswers}
           />
         )
       default:

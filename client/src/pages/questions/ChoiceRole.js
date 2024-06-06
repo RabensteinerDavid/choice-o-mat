@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../../components/NavBar';
 import FotBar from '../../components/FotBar';
 import '../../style/questions/choicerole.css';
 import HeadingQuestion from '../../components/HeadingQuestion';
 import { Player } from '@lottiefiles/react-lottie-player';
+import { findPointsToAnswer } from '../../components/LoadQuestion';
 
 const icons = {
   0: '/icons/videoschnitt.png',
@@ -14,19 +15,39 @@ const icons = {
   5: '/icons/spezialeffekte.png',
 };
 
-const ChoiceRole = ({ question, pageNumber, maxPage }) => {
+const ChoiceRole = ({ question,setFinalAnswers }) => {
   const { heading, subheading, answers } = question;
   const [selectedRole, setSelectedRole] = useState(null);
   const [selectedJson, setSelectedJson] = useState('');
+  const [finalAnswer, setFinalAnswersResult] = useState(null);
 
-  const handleClick = (role, jsonFile) => {
+  const handleClick = (role, jsonFile, id) => {
     setSelectedRole(role);
     setSelectedJson(jsonFile);
+    setFinalAnswersResult(id)
   };
 
   const half = Math.ceil(answers.length / 2);
   const firstHalf = answers.slice(0, half);
   const secondHalf = answers.slice(half);
+
+
+  useEffect(() => {
+    let finalAnswersResult = {
+      da: 0,
+      mtd: 0
+    }
+    console.log(finalAnswer)
+    if (finalAnswer) {
+      finalAnswersResult['da'] += parseInt(
+        findPointsToAnswer(answers, finalAnswer).da
+      ) / 1
+      finalAnswersResult['mtd'] += parseInt(
+        findPointsToAnswer(answers, finalAnswer).mtd
+      )/ 1
+    }
+    setFinalAnswers(finalAnswersResult)
+  }, [finalAnswer])
 
   return (
     <div className='question-list'>
@@ -44,7 +65,7 @@ const ChoiceRole = ({ question, pageNumber, maxPage }) => {
                     className={`button ${
                       selectedRole === ans.text ? 'clicked' : ''
                     }`}
-                    onClick={() => handleClick(ans.text, ans.photo)}
+                    onClick={() => handleClick(ans.text, ans.photo,ans._id)}
                   >
                     <img
                       src={icons[index]}
@@ -79,7 +100,7 @@ const ChoiceRole = ({ question, pageNumber, maxPage }) => {
                     className={`button ${
                       selectedRole === ans.text ? 'clicked' : ''
                     }`}
-                    onClick={() => handleClick(ans.text, ans.photo)}
+                    onClick={() => handleClick(ans.text, ans.photo,ans._id)}
                   >
                     <img
                       src={icons[half + index]}
@@ -96,10 +117,6 @@ const ChoiceRole = ({ question, pageNumber, maxPage }) => {
           <p>No questions found at question </p>
         )}
       </div>
-      <FotBar
-        prevQuestion={pageNumber === 1 ? 1 : pageNumber - 1}
-        nextQuestion={pageNumber === maxPage ? maxPage : pageNumber + 1}
-      />
     </div>
   );
 };

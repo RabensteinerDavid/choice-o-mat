@@ -7,7 +7,7 @@ import DragnDropItem from '../../components/DragnDropItem'
 import useWindowDimensions from '../../components/useWindowSize'
 import { findPointsToAnswer } from '../../components/LoadQuestion'
 
-const DragnDrop = ({ question, pageNumber, maxPage, setFinalAnswers }) => {
+const DragnDrop = ({ question, setFinalAnswers }) => {
   const { heading, subheading, answers } = question
   const [finalAnswers, setFinalAnswersResult] = useState({})
   const { height, width } = useWindowDimensions()
@@ -40,10 +40,10 @@ const DragnDrop = ({ question, pageNumber, maxPage, setFinalAnswers }) => {
       const value = finalAnswers[key]
       finalAnswersResult['da'] += parseInt(
         findPointsToAnswer(answers, value).da
-      ) / answers.length
+      ) / 4
       finalAnswersResult['mtd'] += parseInt(
         findPointsToAnswer(answers, value).mtd
-      )/ answers.length
+      )/ 4
     }
     setFinalAnswers(finalAnswersResult)
   }, [finalAnswers])

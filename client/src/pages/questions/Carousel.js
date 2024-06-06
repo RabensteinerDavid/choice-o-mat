@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import NavBar from "../../components/NavBar";
 import FotBar from "../../components/FotBar";
 import "../../style/questions/carousel.css";
@@ -11,8 +11,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from 'swiper';
 import useWindowDimensions from "../../components/useWindowSize";
+import { findPointsToAnswer } from "../../components/LoadQuestion";
 
-const Carousel = ({ question, pageNumber, maxPage }) => {
+const Carousel = ({ question,setFinalAnswers }) => {
   const { heading, subheading, answers } = question;
 
   const [focusedButtons, setFocusedButtons] = useState([]); 
@@ -40,6 +41,23 @@ const Carousel = ({ question, pageNumber, maxPage }) => {
     if (window.innerWidth <= 1200) return 38;
     return 50;
   };
+
+  useEffect(() => {
+    let finalAnswersResult = {
+      da: 0,
+      mtd: 0
+    }
+    for (const key in focusedButtons) {
+      const value = focusedButtons[key]
+      finalAnswersResult['da'] += parseInt(
+        findPointsToAnswer(answers, value).da
+      ) / 2
+      finalAnswersResult['mtd'] += parseInt(
+        findPointsToAnswer(answers, value).mtd
+      )/ 2
+    }
+    setFinalAnswers(finalAnswersResult)
+  }, [focusedButtons])
 
   return (
     <div className="question-list">
@@ -98,10 +116,6 @@ const Carousel = ({ question, pageNumber, maxPage }) => {
           <p>No questions found at question </p>
         )}
       </div>
-      <FotBar
-        prevQuestion={pageNumber === 1 ? 1 : pageNumber - 1}
-        nextQuestion={pageNumber === maxPage ? maxPage : pageNumber + 1}
-      />
     </div>
   );
 };

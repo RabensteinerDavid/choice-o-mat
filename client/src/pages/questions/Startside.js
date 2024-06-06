@@ -6,11 +6,12 @@ import '@fontsource/poppins/700.css'
 import '@fontsource/poppins/200.css'
 import fhLogo from '../../images/fh_ooe_logo.png'
 import '../../style/homepage.css'
+import { resetResult } from '../../components/LoadQuestion'
 
 function StartButton () {
   return (
     <div className='app-item centered-button'>
-      <Link to='/questions/1' className='start-button'>
+      <Link to='/questions/1' className='start-button' onClick={resetResult}>
         Jetzt Starten
       </Link>
       <br></br>

@@ -37,11 +37,11 @@ const VerticalSlider = ({ question, pageNumber, maxPage, setFinalAnswers }) => {
 
     for (const key in finalAnswers) {
       finalAnswersResult['da'] +=
-        (parseInt(finalAnswers[key]) *
+        (parseInt(finalAnswers[key]) *0.01 *
           parseInt(findPointsToAnswer(answers, key).da)) /
         answers.length
       finalAnswersResult['mtd'] +=
-        (parseInt(finalAnswers[key]) *
+        (parseInt(finalAnswers[key]) *0.01*
           parseInt(findPointsToAnswer(answers, key).mtd)) /
         answers.length
     }
