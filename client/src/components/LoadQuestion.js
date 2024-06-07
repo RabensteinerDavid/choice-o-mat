@@ -133,8 +133,8 @@ export const getResultLocalStorage = async () => {
         let daPercent = resultEachPercent.da
 
         result = {
-          da: (daPercent / (mtdPercent + daPercent)) * 100,
-          mtd: (mtdPercent / (mtdPercent + daPercent)) * 100
+          da: ((daPercent / (mtdPercent + daPercent)) * 100).toFixed(2),
+          mtd: ((mtdPercent / (mtdPercent + daPercent)) * 100).toFixed(2)
         }
       }
     } else {

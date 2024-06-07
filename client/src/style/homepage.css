@@ -28,6 +28,18 @@ html {
   height: 90vh;
 }
 
+@media (orientation: portrait) {
+  .question-list {
+   margin-bottom: 10vh;
+  }
+}
+
+@media (max-width: 400px) and (orientation: portrait) {
+  .question-list {
+   margin-bottom: 20vh !important;
+  }
+}
+
 .start-button a {
   color: white;
   text-decoration: none;
