@@ -1,11 +1,11 @@
 import React from 'react';
 
-function InputField({ label, value, onChange, placeholder }) {
+function InputField({ label, value, onChange, placeholder, inputField= 'inputField'}) {
   return (
     <>
       <label className="label">{label}
       <input
-        className="inputField"
+        className={inputField}
         type="text"
         value={value}
         onChange={onChange}

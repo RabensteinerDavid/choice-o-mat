@@ -1,6 +1,7 @@
 const express = require('express')
 const QuestionCtrl = require('../controllers/question-ctrl')
 const QuestionCtrlTypes = require('../controllers/question-ctrl-types')
+const QuestionCtrlResult = require('../controllers/question-ctrl-result')
 const router = express.Router()
 
 const multer = require('multer')
@@ -54,5 +55,12 @@ router.delete('/question-types/:id', QuestionCtrlTypes.deleteQuestionType)
 router.post('/question-types/:id', QuestionCtrlTypes.insertQuestionType)
 router.delete('/question-types', QuestionCtrlTypes.deleteAllQuestionTypes)
 router.patch('/question-types/:id', QuestionCtrlTypes.patchQuestionTypes)
+
+router.get('/question-result', QuestionCtrlResult.getResults)
+router.post('/question-result', QuestionCtrlResult.insertResults)
+router.delete('/question-result/:id', QuestionCtrlResult.deleteResultByID)
+router.delete('/question-result', QuestionCtrlResult.deleteAllResults)
+router.put('/question-result/:id', QuestionCtrlResult.updateResultById)
+
 
 module.exports = router
