@@ -47,10 +47,22 @@ function Result () {
     fetchDataQuestionTypes()
   }, [result])
 
-  function MoreInformation () {
+  function MoreInformationDa () {
     return (
+     
       <div className='more-information-wrapper'>
-        <Link to='/questions/1' className='more-information'>
+        <Link to={process.env.REACT_APP_BASE_URI_DA} className='more-information'>
+          Jetzt mehr erfahren
+        </Link>
+      </div>
+    )
+  }
+
+  function MoreInformationMtd () {
+    return (
+     
+      <div className='more-information-wrapper'>
+        <Link to={process.env.REACT_APP_BASE_URI_MTD} className='more-information'>
           Jetzt mehr erfahren
         </Link>
       </div>
@@ -73,7 +85,7 @@ function Result () {
                 <div className='mtd-wrapper'>
                   <h1>MTD</h1>
                   <p className='result-text'>{resultTextMtd}</p>
-                  <MoreInformation />
+                  <MoreInformationMtd />
                 </div>
                 <a className='percentage start' id='mtd-tooltip'>
                   {result.mtd}%
@@ -87,7 +99,7 @@ function Result () {
                 <div className='da-wrapper'>
                   <h1>DA</h1>
                   <p className='result-text'>{resultTextDa}</p>
-                  <MoreInformation />
+                  <MoreInformationDa />
                 </div>
                 <a className='percentage end' id='da-tooltip'>
                   {result.da}%
@@ -104,7 +116,7 @@ function Result () {
                 <div className='da-wrapper'>
                   <h1>DA</h1>
                   <p className='result-text'>{resultTextDa}</p>
-                  <MoreInformation />
+                  <MoreInformationDa />
                 </div>
                 <a className='percentage start' id='da-tooltip'>
                   {result.da}%
@@ -118,7 +130,7 @@ function Result () {
                 <div className='mtd-wrapper'>
                   <h1>MTD</h1>
                   <p className='result-text'>{resultTextMtd}</p>
-                  <MoreInformation />
+                  <MoreInformationMtd />
                 </div>
                 <a className='percentage end' id='mtd-tooltip'>
                   {result.mtd}%
