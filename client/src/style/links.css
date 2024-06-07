@@ -63,3 +63,8 @@
 .cross:after {
   transform: rotate(-45deg);
 }
+
+.react-joyride__spotlight{
+  background-color: rgba(255, 255, 255, 0.5) !important;
+
+}

@@ -148,6 +148,7 @@ export const getResultLocalStorage = async () => {
 }
 
 export const resetResult = () => {
+  localStorage.setItem('isTourCompleted', 'false'); 
   localStorage.removeItem('result')
 }
 

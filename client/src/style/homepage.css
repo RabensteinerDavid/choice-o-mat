@@ -44,3 +44,7 @@ button{
 .question-list .bottom-header{
 display: none;
 }
+
+.react-joyride__overlay{
+  height: 100% !important;
+}
