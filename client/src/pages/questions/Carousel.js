@@ -96,7 +96,7 @@ const Carousel = ({ question,setFinalAnswers }) => {
                       {answer.photo && answer.photo.includes("json") ? (
                         <Player
                           key={answer._id}
-                          src={`http://localhost:3001/lottie/${answer.photo}`}
+                          src={`${process.env.REACT_APP_BASE_URI_LOTTIE}/${answer.photo}`}
                           className="carousel-player"
                           loop
                           autoplay

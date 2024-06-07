@@ -132,7 +132,7 @@ const ImageUploader = ({
             <div className='image-preview-item'>
               {defaultPhoto.endsWith('.json') ? (
                 <Player
-                  src={`http://localhost:3001/lottie/${defaultPhoto}`}
+                  src={`${process.env.REACT_APP_BASE_URI_LOTTIE}/${defaultPhoto}`}
                   className='player'
                   loop
                   autoplay
@@ -140,7 +140,7 @@ const ImageUploader = ({
                 />
               ) : (
                 <img
-                  src={`http://localhost:3001/images/${defaultPhoto}`}
+                  src={`${process.env.REACT_APP_BASE_URI_IMAGES}/${defaultPhoto}`}
                   className='image-preview'
                   alt=''
                 />

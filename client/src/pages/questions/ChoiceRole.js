@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import NavBar from '../../components/NavBar';
-import FotBar from '../../components/FotBar';
-import '../../style/questions/choicerole.css';
-import HeadingQuestion from '../../components/HeadingQuestion';
-import { Player } from '@lottiefiles/react-lottie-player';
-import { findPointsToAnswer } from '../../components/LoadQuestion';
+import React, { useEffect, useState } from 'react'
+import NavBar from '../../components/NavBar'
+import FotBar from '../../components/FotBar'
+import '../../style/questions/choicerole.css'
+import HeadingQuestion from '../../components/HeadingQuestion'
+import { Player } from '@lottiefiles/react-lottie-player'
+import { findPointsToAnswer } from '../../components/LoadQuestion'
 
 const icons = {
   0: '/icons/videoschnitt.png',
@@ -12,25 +12,24 @@ const icons = {
   2: '/icons/projektmanager.png',
   3: '/icons/levelplanner.png',
   4: '/icons/audiotechniker.png',
-  5: '/icons/spezialeffekte.png',
-};
+  5: '/icons/spezialeffekte.png'
+}
 
-const ChoiceRole = ({ question,setFinalAnswers }) => {
-  const { heading, subheading, answers } = question;
-  const [selectedRole, setSelectedRole] = useState(null);
-  const [selectedJson, setSelectedJson] = useState('');
-  const [finalAnswer, setFinalAnswersResult] = useState(null);
+const ChoiceRole = ({ question, setFinalAnswers }) => {
+  const { heading, subheading, answers } = question
+  const [selectedRole, setSelectedRole] = useState(null)
+  const [selectedJson, setSelectedJson] = useState('')
+  const [finalAnswer, setFinalAnswersResult] = useState(null)
 
   const handleClick = (role, jsonFile, id) => {
-    setSelectedRole(role);
-    setSelectedJson(jsonFile);
+    setSelectedRole(role)
+    setSelectedJson(jsonFile)
     setFinalAnswersResult(id)
-  };
+  }
 
-  const half = Math.ceil(answers.length / 2);
-  const firstHalf = answers.slice(0, half);
-  const secondHalf = answers.slice(half);
-
+  const half = Math.ceil(answers.length / 2)
+  const firstHalf = answers.slice(0, half)
+  const secondHalf = answers.slice(half)
 
   useEffect(() => {
     let finalAnswersResult = {
@@ -39,12 +38,10 @@ const ChoiceRole = ({ question,setFinalAnswers }) => {
     }
     console.log(finalAnswer)
     if (finalAnswer) {
-      finalAnswersResult['da'] += parseInt(
-        findPointsToAnswer(answers, finalAnswer).da
-      ) / 1
-      finalAnswersResult['mtd'] += parseInt(
-        findPointsToAnswer(answers, finalAnswer).mtd
-      )/ 1
+      finalAnswersResult['da'] +=
+        parseInt(findPointsToAnswer(answers, finalAnswer).da) / 1
+      finalAnswersResult['mtd'] +=
+        parseInt(findPointsToAnswer(answers, finalAnswer).mtd) / 1
     }
     setFinalAnswers(finalAnswersResult)
   }, [finalAnswer])
@@ -56,7 +53,8 @@ const ChoiceRole = ({ question,setFinalAnswers }) => {
         {question ? (
           <React.Fragment>
             <HeadingQuestion heading={heading} subheading={subheading} />
-            <br/><br/>
+            <br />
+            <br />
             <div className='content'>
               <div className='left-column'>
                 {firstHalf.map((ans, index) => (
@@ -65,7 +63,7 @@ const ChoiceRole = ({ question,setFinalAnswers }) => {
                     className={`button ${
                       selectedRole === ans.text ? 'clicked' : ''
                     }`}
-                    onClick={() => handleClick(ans.text, ans.photo,ans._id)}
+                    onClick={() => handleClick(ans.text, ans.photo, ans._id)}
                   >
                     <img
                       src={icons[index]}
@@ -79,7 +77,7 @@ const ChoiceRole = ({ question,setFinalAnswers }) => {
               <div className='middle-column'>
                 {selectedJson ? (
                   <Player
-                    src={`http://localhost:3001/lottie/${selectedJson}`}
+                    src={`${process.env.REACT_APP_BASE_URI_LOTTIE}/${selectedJson}`}
                     className='player'
                     loop
                     autoplay
@@ -100,7 +98,7 @@ const ChoiceRole = ({ question,setFinalAnswers }) => {
                     className={`button ${
                       selectedRole === ans.text ? 'clicked' : ''
                     }`}
-                    onClick={() => handleClick(ans.text, ans.photo,ans._id)}
+                    onClick={() => handleClick(ans.text, ans.photo, ans._id)}
                   >
                     <img
                       src={icons[half + index]}
@@ -118,7 +116,7 @@ const ChoiceRole = ({ question,setFinalAnswers }) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ChoiceRole;
+export default ChoiceRole

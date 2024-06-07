@@ -53,7 +53,8 @@ const ImageSelection = ({ question, setFinalAnswers }) => {
                     className={`answer-button ${focusedButtons.includes(answer._id) ? 'focused' : ''}`}
                     onClick={() => toggleFocus(answer._id)}
                   >
-                    <img src={`http://localhost:3001/images/${answer.photo}`} alt={answer.text} />
+                    <img src={`${process.env.REACT_APP_BASE_URI_IMAGES}/${answer.photo}`} alt={answer.text} />
+                  
                   </button>
                   {focusedButtons.includes(answer._id) && (
                     <div className='circle'>
