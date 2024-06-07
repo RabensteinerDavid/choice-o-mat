@@ -84,7 +84,7 @@ function QuestionUpdate () {
                     <th>Type</th>
                     <th>Heading</th>
                     <th>Sub Heading</th>
-                    <th colSpan={4}>Answers</th>
+                    <th colSpan={5}>Answers</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -112,7 +112,13 @@ function QuestionUpdate () {
                               {question.answers
                                 .map(
                                   answer =>
-                                    `${answer.text} ( DA: ${answer.points.da}, MTD: ${answer.points.mtd})`
+                                    `${answer.text} ( DA: ${
+                                      answer.points.da
+                                    }, MTD: ${answer.points.mtd}, ${
+                                      answer.explanation
+                                        ? ' Explanation: ' + answer.explanation
+                                        : ''
+                                    } )`
                                 )
                                 .join(', ')}
                             </td>

@@ -11,6 +11,7 @@ const Questions = new Schema(
       {
         text: { type: String, required: true },
         photo: { type: String, required: false },
+        explanation: { type: String, required: false },
         points: {
           da: { type: Number, default: 0 },
           mtd: { type: Number, default: 0 }

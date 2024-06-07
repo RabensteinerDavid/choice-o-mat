@@ -42,7 +42,12 @@ const QuestionAdd = () => {
       count = 0
     }
     setAnswerCount(count)
-    setAnswers(Array(count).fill({ text: '', points: { DA: '', MTD: '' } }))
+    setAnswers(
+      Array(count).fill({
+        text: '',
+        points: { DA: '', MTD: '' }
+      })
+    )
   }
 
   const handleChangeAnswer = (index, key, value) => {
@@ -77,6 +82,7 @@ const QuestionAdd = () => {
 
     const answerArray = answers.map(ans => ({
       text: ans.text,
+      explanation: ans.explanation,
       points: {
         da: ans.points.DA,
         mtd: ans.points.MTD
@@ -84,18 +90,13 @@ const QuestionAdd = () => {
     }))
 
     const maxPage = await getMaxPageValue()
-    const payload = {
-      heading: heading,
-      subheading: subHeading,
-      type: questionType,
-      page: maxPage + 1,
-      answers: answerArray
-    }
-
     const data = new FormData()
+    
     photos.forEach(photo => {
       data.append('photos', photo)
     })
+
+    console.log(answerArray)
 
     data.append('heading', heading)
     data.append('subheading', subHeading)
@@ -159,6 +160,16 @@ const QuestionAdd = () => {
           handleChangeAnswer(index, 'text', event.target.value)
         }
       />
+
+      <InputField
+        label={`Explanation ${index + 1}`}
+        value={answer.explanation}
+        placeholder={'Optional'}
+        onChange={event =>
+          handleChangeAnswer(index, 'explanation', event.target.value)
+        }
+      />
+
       <InputField
         label={`DA Points ${index + 1}`}
         value={answer.points.DA}
