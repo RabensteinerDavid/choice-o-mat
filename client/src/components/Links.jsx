@@ -2,31 +2,56 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import '../style/links.css'
 import Joyride from 'react-joyride'
+import { getQuestionById } from '../api'
 
 class Links extends Component {
-  state = {
-    steps: [
-      {
-        disableBeacon: true,
-        target: '.nav-link.questionmark',
-        content:
-          'Hier können Sie Informationen zu den einzelnen Begriffen nachlesen!',
-        spotlightPadding: 20,
-        floaterProps: {
-          disableAnimation: true
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      steps: [
+        {
+          disableBeacon: true,
+          target: '.nav-link.questionmark',
+          content:
+            'Hier können Sie Informationen zu den einzelnen Begriffen nachlesen!',
+          spotlightPadding: 20,
+          floaterProps: {
+            disableAnimation: true
+          }
         }
-      }
-    ],
-    isTourCompleted: false
+      ],
+      isTourCompleted: false,
+      questionData: null,
+      questionData: []
+    }
   }
 
   componentDidMount () {
+    this.checkTourStatus()
+  }
+
+  async checkTourStatus () {
     const isTourCompleted = localStorage.getItem('isTourCompleted') === 'true'
     this.setState({ isTourCompleted })
+    this.loadQuestionData()
+  }
+
+  async loadQuestionData() {
+    try {
+      getQuestionById(this.props.questionID)
+        .then(response => {
+          this.setState({ questionData: response.data.data.answers });
+        })
+        .catch(error => {
+          console.error('Error loading question data:', error);
+        });
+    } catch (error) {
+      console.error('Error loading question data:', error);
+    }
   }
 
   handleJoyrideCallback = data => {
-    console.log(data.type)
     if (data.type === 'tour:end') {
       localStorage.setItem('isTourCompleted', 'true')
       this.setState({ isTourCompleted: true })
@@ -35,7 +60,13 @@ class Links extends Component {
 
   render () {
     const { steps, isTourCompleted } = this.state
-
+    const explanations = this.state.questionData.map((item, index) => (
+      <div key={index}>
+        <p> {item.text}: {item.explanation}</p>
+      </div>
+    ));
+    
+    
     if (isTourCompleted) {
       return (
         <nav>
@@ -43,7 +74,8 @@ class Links extends Component {
             <div className='cross-wrapper'>
               <Link to='/' className='nav-link cross'></Link>
             </div>
-            <Link /*to="/movies/list"*/ className='nav-link questionmark'>
+            {explanations}
+            <Link  className='nav-link questionmark'>
               ?
             </Link>
           </div>
@@ -53,6 +85,7 @@ class Links extends Component {
 
     return (
       <nav>
+        {console.log(this.state.questionData)}
         <Joyride
           steps={steps}
           locale={{

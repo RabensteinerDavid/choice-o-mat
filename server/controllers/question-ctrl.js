@@ -75,7 +75,6 @@ updateQuestion = async (req, res) => {
     quest.subheading = body.subheading
     quest.page = body.page
 
-    
     if (body.answers && body.answers.length > 0) {
       body.answers.forEach((updatedAnswer, index) => {
         if (quest.answers[index]) {
@@ -222,18 +221,17 @@ deleteQuestion = async (req, res) => {
 }
 
 getQuestionById = async (req, res) => {
-  await Question.findOne({ _id: req.params.id }, (err, quest) => {
-    if (err) {
-      return res.status(400).json({ success: false, error: err })
-    }
-
+  try {
+    const quest = await Question.findOne({ _id: req.params.id })
     if (!quest) {
       return res
         .status(404)
         .json({ success: false, error: `Question not found` })
     }
     return res.status(200).json({ success: true, data: quest })
-  }).catch(err => console.log(err))
+  } catch (error) {
+    return res.status(400).json({ success: false, error: error.message })
+  }
 }
 
 getQuestion = async (req, res) => {
@@ -318,5 +316,5 @@ module.exports = {
   getQuestionById,
   deleteAllQuestions,
   patchQuestion,
-  deleteAnswerPhoto,
+  deleteAnswerPhoto
 }

@@ -14,10 +14,12 @@ const Nav = styled.nav.attrs({
 
 class NavBar extends Component {
     render() {
+        const { questionID } = this.props; // Hier erhältst du die questionID als Prop
+
         return (
             <Container>
                 <Nav>
-                    <Links />
+                    <Links questionID={questionID} /> {/* Übergeben der questionID an die Links-Komponente */}
                 </Nav>
             </Container>
         )

@@ -50,7 +50,7 @@ const DragnDrop = ({ question, setFinalAnswers }) => {
 
   return (
     <div className='question-list'>
-      <NavBar />
+      <NavBar questionID={question._id}/>
       <div className='main dragndrop'>
         {question ? (
           <React.Fragment>
