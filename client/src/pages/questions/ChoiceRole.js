@@ -48,7 +48,7 @@ const ChoiceRole = ({ question, setFinalAnswers }) => {
 
   return (
     <div className='question-list'>
-      <NavBar />
+      <NavBar questionID={question._id} />
       <div className='main choicerole'>
         {question ? (
           <React.Fragment>

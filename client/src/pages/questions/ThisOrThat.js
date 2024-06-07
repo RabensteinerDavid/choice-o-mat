@@ -28,16 +28,18 @@ const ThisOrThat = ({ question, setFinalAnswers }) => {
       let factor = value === 'ja' ? 1 : 0
       console.log(value === 'ja' ? 1 : 0)
       finalAnswersResult['da'] +=
-        (parseInt(findPointsToAnswer(answers, key).da) / answers.length) * factor
+        (parseInt(findPointsToAnswer(answers, key).da) / answers.length) *
+        factor
       finalAnswersResult['mtd'] +=
-        (parseInt(findPointsToAnswer(answers, key).mtd) / answers.length) * factor
+        (parseInt(findPointsToAnswer(answers, key).mtd) / answers.length) *
+        factor
     }
     setFinalAnswers(finalAnswersResult)
   }, [selectedAnswers])
 
   return (
     <div className='question-list'>
-      <NavBar />
+      <NavBar questionID={question._id} />
       <div className='main'>
         {question ? (
           <>

@@ -38,19 +38,17 @@ const DragnDrop = ({ question, setFinalAnswers }) => {
     }
     for (const key in finalAnswers) {
       const value = finalAnswers[key]
-      finalAnswersResult['da'] += parseInt(
-        findPointsToAnswer(answers, value).da
-      ) / 4
-      finalAnswersResult['mtd'] += parseInt(
-        findPointsToAnswer(answers, value).mtd
-      )/ 4
+      finalAnswersResult['da'] +=
+        parseInt(findPointsToAnswer(answers, value).da) / 4
+      finalAnswersResult['mtd'] +=
+        parseInt(findPointsToAnswer(answers, value).mtd) / 4
     }
     setFinalAnswers(finalAnswersResult)
   }, [finalAnswers])
 
   return (
     <div className='question-list'>
-      <NavBar questionID={question._id}/>
+      <NavBar questionID={question._id} />
       <div className='main dragndrop'>
         {question ? (
           <React.Fragment>

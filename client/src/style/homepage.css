@@ -25,7 +25,7 @@ html {
 .question-list {
   display: flex;
   flex-direction: column;
-  height:90vh;
+  height: 90vh;
 }
 
 .start-button a {
@@ -37,14 +37,35 @@ html {
   display: none;
 }
 
-button{
+button {
   font-family: 'Poppins';
 }
 
-.question-list .bottom-header{
-display: none;
+.question-list .bottom-header {
+  display: none;
 }
 
-.react-joyride__overlay{
+.react-joyride__overlay {
   height: 100% !important;
+}
+
+.modal-explanations {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.modal-explanations-button {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+}
+
+.explanation-text-modal {
+  word-wrap: break-word;
+  hyphens: auto;
 }

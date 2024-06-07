@@ -37,11 +37,13 @@ const VerticalSlider = ({ question, pageNumber, maxPage, setFinalAnswers }) => {
 
     for (const key in finalAnswers) {
       finalAnswersResult['da'] +=
-        (parseInt(finalAnswers[key]) *0.01 *
+        (parseInt(finalAnswers[key]) *
+          0.01 *
           parseInt(findPointsToAnswer(answers, key).da)) /
         answers.length
       finalAnswersResult['mtd'] +=
-        (parseInt(finalAnswers[key]) *0.01*
+        (parseInt(finalAnswers[key]) *
+          0.01 *
           parseInt(findPointsToAnswer(answers, key).mtd)) /
         answers.length
     }
@@ -50,7 +52,7 @@ const VerticalSlider = ({ question, pageNumber, maxPage, setFinalAnswers }) => {
 
   return (
     <div className='question-list'>
-      <NavBar />
+      <NavBar questionID={question._id} />
       <div className='main verticalslider'>
         {question ? (
           <>

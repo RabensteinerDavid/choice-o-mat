@@ -35,30 +35,34 @@ const OrderSelection = ({ question, setFinalAnswers }) => {
     let finalAnswersResult = {
       da: 0,
       mtd: 0
-    };
-  
+    }
+
     const totalDa = pressed.reduce((total, id) => {
-      return total + parseInt(findPointsToAnswer(answers, id).da);
-    }, 0);
-  
+      return total + parseInt(findPointsToAnswer(answers, id).da)
+    }, 0)
+
     const totalMtd = pressed.reduce((total, id) => {
-      return total + parseInt(findPointsToAnswer(answers, id).mtd);
-    }, 0);
-  
+      return total + parseInt(findPointsToAnswer(answers, id).mtd)
+    }, 0)
+
     pressed.forEach(id => {
-      const points = findPointsToAnswer(answers, id);
-      const percentDa = isNaN(parseInt(points.da) / totalDa) ? 0 : parseInt(points.da) / totalDa;
-      const percentMtd = isNaN(parseInt(points.mtd) / totalMtd) ? 0 : parseInt(points.mtd) / totalMtd;
-      finalAnswersResult['da'] += percentDa * 100;
-      finalAnswersResult['mtd'] += percentMtd * 100;
-    });
-  
-    setFinalAnswers(finalAnswersResult);
-  }, [pressed]);
+      const points = findPointsToAnswer(answers, id)
+      const percentDa = isNaN(parseInt(points.da) / totalDa)
+        ? 0
+        : parseInt(points.da) / totalDa
+      const percentMtd = isNaN(parseInt(points.mtd) / totalMtd)
+        ? 0
+        : parseInt(points.mtd) / totalMtd
+      finalAnswersResult['da'] += percentDa * 100
+      finalAnswersResult['mtd'] += percentMtd * 100
+    })
+
+    setFinalAnswers(finalAnswersResult)
+  }, [pressed])
 
   return (
     <div className='question-list'>
-      <NavBar />
+      <NavBar questionID={question._id} />
       <div className='main'>
         {question ? (
           <React.Fragment>

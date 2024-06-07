@@ -28,19 +28,17 @@ const Selection = ({ question, setFinalAnswers }) => {
     }
     for (const key in focusedButtons) {
       const value = focusedButtons[key]
-      finalAnswersResult['da'] += parseInt(
-        findPointsToAnswer(answers, value).da
-      ) / answers.length
-      finalAnswersResult['mtd'] += parseInt(
-        findPointsToAnswer(answers, value).mtd
-      )/ answers.length
+      finalAnswersResult['da'] +=
+        parseInt(findPointsToAnswer(answers, value).da) / answers.length
+      finalAnswersResult['mtd'] +=
+        parseInt(findPointsToAnswer(answers, value).mtd) / answers.length
     }
     setFinalAnswers(finalAnswersResult)
   }, [focusedButtons])
 
   return (
     <div className='question-list'>
-      <NavBar />
+      <NavBar questionID={question._id} />
       <div className='main'>
         {question ? (
           <React.Fragment>

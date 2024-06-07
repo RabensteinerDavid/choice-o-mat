@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import NavBar from '../../components/NavBar';
-import FotBar from '../../components/FotBar';
-import '../../style/questions/imageselection.css';
-import HeadingQuestion from '../../components/HeadingQuestion';
-import { findPointsToAnswer } from '../../components/LoadQuestion';
+import React, { useEffect, useState } from 'react'
+import NavBar from '../../components/NavBar'
+import FotBar from '../../components/FotBar'
+import '../../style/questions/imageselection.css'
+import HeadingQuestion from '../../components/HeadingQuestion'
+import { findPointsToAnswer } from '../../components/LoadQuestion'
 
 const ImageSelection = ({ question, setFinalAnswers }) => {
-  const { heading, subheading, answers } = question;
-  const [focusedButtons, setFocusedButtons] = useState([]); 
+  const { heading, subheading, answers } = question
+  const [focusedButtons, setFocusedButtons] = useState([])
 
   const toggleFocus = id => {
     setFocusedButtons(
@@ -15,8 +15,8 @@ const ImageSelection = ({ question, setFinalAnswers }) => {
         prevState.includes(id)
           ? prevState.filter(buttonId => buttonId !== id) // Entferne den Fokus, wenn der Button bereits fokussiert ist
           : [...prevState, id] // Füge den Fokus hinzu, wenn der Button nicht fokussiert ist
-    );
-  };
+    )
+  }
 
   useEffect(() => {
     let finalAnswersResult = {
@@ -26,19 +26,17 @@ const ImageSelection = ({ question, setFinalAnswers }) => {
     console.log(focusedButtons)
     for (const key in focusedButtons) {
       const value = focusedButtons[key]
-      finalAnswersResult['da'] += parseInt(
-        findPointsToAnswer(answers, value).da
-      ) / answers.length
-      finalAnswersResult['mtd'] += parseInt(
-        findPointsToAnswer(answers, value).mtd
-      )/ answers.length
+      finalAnswersResult['da'] +=
+        parseInt(findPointsToAnswer(answers, value).da) / answers.length
+      finalAnswersResult['mtd'] +=
+        parseInt(findPointsToAnswer(answers, value).mtd) / answers.length
     }
     setFinalAnswers(finalAnswersResult)
   }, [focusedButtons])
 
   return (
     <div className='question-list'>
-      <NavBar />
+      <NavBar questionID={question._id} />
       <div className='main'>
         {question ? (
           <React.Fragment>
@@ -46,15 +44,21 @@ const ImageSelection = ({ question, setFinalAnswers }) => {
             <div className='answer-grid'>
               {answers.map((answer, index) => (
                 <div
-                  className={`answer-element ${focusedButtons.includes(answer._id) ? 'focused' : ''}`}
+                  className={`answer-element ${
+                    focusedButtons.includes(answer._id) ? 'focused' : ''
+                  }`}
                   key={answer._id}
                 >
                   <button
-                    className={`answer-button ${focusedButtons.includes(answer._id) ? 'focused' : ''}`}
+                    className={`answer-button ${
+                      focusedButtons.includes(answer._id) ? 'focused' : ''
+                    }`}
                     onClick={() => toggleFocus(answer._id)}
                   >
-                    <img src={`${process.env.REACT_APP_BASE_URI_IMAGES}/${answer.photo}`} alt={answer.text} />
-                  
+                    <img
+                      src={`${process.env.REACT_APP_BASE_URI_IMAGES}/${answer.photo}`}
+                      alt={answer.text}
+                    />
                   </button>
                   {focusedButtons.includes(answer._id) && (
                     <div className='circle'>
@@ -70,7 +74,7 @@ const ImageSelection = ({ question, setFinalAnswers }) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ImageSelection;
+export default ImageSelection

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import '../style/links.css'
 import Joyride from 'react-joyride'
 import { getQuestionById } from '../api'
+import Modal from 'react-modal'
 
 class Links extends Component {
   constructor (props) {
@@ -22,32 +23,42 @@ class Links extends Component {
         }
       ],
       isTourCompleted: false,
-      questionData: null,
-      questionData: []
+      questionData: [],
+      modalIsOpen: false
     }
+
+    this.openModal = this.openModal.bind(this)
+    this.closeModal = this.closeModal.bind(this)
+    this.handleKeyPress = this.handleKeyPress.bind(this)
   }
 
   componentDidMount () {
+    Modal.setAppElement('#root')
     this.checkTourStatus()
+    window.addEventListener('keydown', this.handleKeyPress)
   }
 
-  async checkTourStatus () {
+  componentWillUnmount () {
+    window.removeEventListener('keydown', this.handleKeyPress)
+  }
+
+  checkTourStatus () {
     const isTourCompleted = localStorage.getItem('isTourCompleted') === 'true'
     this.setState({ isTourCompleted })
     this.loadQuestionData()
   }
 
-  async loadQuestionData() {
+  async loadQuestionData () {
     try {
       getQuestionById(this.props.questionID)
         .then(response => {
-          this.setState({ questionData: response.data.data.answers });
+          this.setState({ questionData: response.data.data.answers })
         })
         .catch(error => {
-          console.error('Error loading question data:', error);
-        });
+          console.error('Error loading question data:', error)
+        })
     } catch (error) {
-      console.error('Error loading question data:', error);
+      console.error('Error loading question data:', error)
     }
   }
 
@@ -58,15 +69,40 @@ class Links extends Component {
     }
   }
 
+  openModal () {
+    this.setState({ modalIsOpen: true })
+  }
+
+  closeModal () {
+    this.setState({ modalIsOpen: false })
+  }
+
+  handleKeyPress (event) {
+    if (event.key === 'Escape') {
+      this.closeModal()
+    }
+  }
+
   render () {
-    const { steps, isTourCompleted } = this.state
-    const explanations = this.state.questionData.map((item, index) => (
-      <div key={index}>
-        <p> {item.text}: {item.explanation}</p>
+    const { steps, isTourCompleted, questionData, modalIsOpen } = this.state
+    const hasExplanations = questionData.some(item => item.explanation)
+    const explanations = hasExplanations ? (
+      questionData.map(
+        (item, index) =>
+          item.explanation && (
+            <div key={index} className='explanation-text-modal'>
+              <p className='explanation-text-modal'>
+                {item.text}: {item.explanation}
+              </p>
+            </div>
+          )
+      )
+    ) : (
+      <div>
+        <p>No explanations</p>
       </div>
-    ));
-    
-    
+    )
+
     if (isTourCompleted) {
       return (
         <nav>
@@ -74,10 +110,29 @@ class Links extends Component {
             <div className='cross-wrapper'>
               <Link to='/' className='nav-link cross'></Link>
             </div>
-            {explanations}
-            <Link  className='nav-link questionmark'>
+
+            <Link className='nav-link questionmark' onClick={this.openModal}>
               ?
             </Link>
+            <Modal
+              isOpen={modalIsOpen}
+              onRequestClose={this.closeModal}
+              contentLabel='Example Modal'
+            >
+              <div className='modal-explanations'>
+                <div className='modal-explanations-button'>
+                  <div className='cross-wrapper-modal'>
+                    <Link
+                      onClick={this.closeModal}
+                      className='nav-link cross'
+                    ></Link>
+                  </div>
+                </div>
+
+                <h1>Erklärungen</h1>
+                {explanations}
+              </div>
+            </Modal>
           </div>
         </nav>
       )
@@ -85,7 +140,6 @@ class Links extends Component {
 
     return (
       <nav>
-        {console.log(this.state.questionData)}
         <Joyride
           steps={steps}
           locale={{

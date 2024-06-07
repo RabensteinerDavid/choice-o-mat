@@ -232,7 +232,7 @@ const QuestionUpdateFunction = () => {
   }
 
   const handleChangeInputAnswerExplanation = (event, index) => {
-    const value = event.trim()
+    const value = event
     setEditedAnswers(prevAnswers => {
       const updatedAnswers = [...prevAnswers]
       const extendedAnswers = [...question.answers]
