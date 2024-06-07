@@ -8,9 +8,7 @@ function DropDownField ({ label, defaultValue, value, onChange }) {
     const fetchQuestionTypes = async () => {
       try {
         const response = await getQuestionTypes()
-        response.data.types.forEach(type => {
-          setQuestionTypesData(type.questionTypes)
-        })
+        setQuestionTypesData(response.data.data)
       } catch (error) {
         console.error('Error fetching question types:', error)
       }
@@ -24,20 +22,28 @@ function DropDownField ({ label, defaultValue, value, onChange }) {
     }
   }, [defaultValue, onChange, value])
 
+  const handleChange = e => {
+    const selectedValue = e.target.value
+    onChange(selectedValue)
+  }
+
+  if (options.length === 0) {
+    return (
+      <div className='dropdown-field'>
+        <p>
+          No options available. <a href='/question-type'>Add QuestionTypes</a>
+        </p>
+      </div>
+    )
+  }
+
   return (
     <div className='dropdown-field'>
       <label className='label'>{label}</label>
-      <select
-        className='dropdown-select'
-        value={value}
-        onChange={e => {
-          console.log(e.target.value)
-          onChange(e.target.value)
-        }}
-      >
+      <select className='dropdown-select' value={value} onChange={handleChange}>
         {options.map((option, index) => (
-          <option key={index} value={option}>
-            {option}
+          <option key={index} value={option.questiontype}>
+            {option.questiontype}
           </option>
         ))}
       </select>

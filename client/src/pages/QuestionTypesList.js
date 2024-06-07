@@ -7,8 +7,8 @@ import {
   getQuestionTypes,
   insertQuestionType,
   insertQuestionTypes,
-  patchQuestionTypes,
-  deleteQuestionType
+  deleteQuestionTypeById,
+  updateQuestionTypeById
 } from '../api'
 import { prefilledQuestionTypes } from './questions/PrefillQuestionType'
 import NavBar from '../components/NavBar'
@@ -16,7 +16,6 @@ import InputField from '../components/InputField'
 
 function QuestionTypesList () {
   const [questionTypes, setQuestionsTypes] = useState([])
-  const [questionTypeID, setQuestionTypeID] = useState([])
   const [questionTypeInput, setQuestionInput] = useState('')
   const [editIndex, setEditIndex] = useState(null)
   const [editValue, setEditValue] = useState('')
@@ -25,10 +24,7 @@ function QuestionTypesList () {
     const fetchDataQuestionTypes = async () => {
       try {
         const response = await getQuestionTypes()
-        setQuestionTypeID(
-          response.data.types[0]._id ? response.data.types[0]._id : ''
-        )
-        setQuestionsTypes(response.data.types[0].questionTypes)
+        setQuestionsTypes(response.data.data)
       } catch (error) {
         console.error('Error fetching questions:', error)
       }
@@ -38,12 +34,10 @@ function QuestionTypesList () {
 
   const prefillQuestionType = async () => {
     try {
-      if (
-        questionTypes.length !== prefilledQuestionTypes.questionTypes.length &&
-        questionTypes.length === 0
-      ) {
-        await insertQuestionTypes(prefilledQuestionTypes.questionTypes)
-        alert('Question types inserted successfully')
+      if (questionTypes.length === 0) {
+        for (const result of prefilledQuestionTypes) {
+          await insertQuestionTypes(result)
+        }
       } else {
         alert(
           'Prefilled Question types are already inserted successfully. Delete all question types to insert again'
@@ -60,45 +54,44 @@ function QuestionTypesList () {
   const deleteQuestionsTypes = async () => {
     try {
       await deleteAllQuestionTypes()
-      alert('All Questions deleted successfully')
     } catch (error) {
       console.error('Error deleting questions:', error)
       alert('Failed to delete questions. Please check console for details.')
     }
   }
 
-  const deleteFunction = async index => {
+  const deleteFunction = async id => {
     try {
-      await deleteQuestionType(`${questionTypeID}-${index}`)
+      await deleteQuestionTypeById(id)
     } catch (error) {
       console.error('Error deleting question type:', error)
       alert('Failed to delete question type. Please check console for details.')
     }
   }
 
-  const editFunction = async index => {
+  const editFunction = async id => {
     try {
-      const updatedQuestionTypes = questionTypes.map((questionType, i) => {
-        if (i === index) {
-          return editValue
-        }
-        return questionType
-      })
-
-      if (questionTypes.includes(editValue)) {
-        alert('Question type already exists. Please enter a new question type.')
-        return
-      }
       if (editValue === '' || editValue === null) {
         alert(
           'Question type cannot be empty. Please enter a new question type.'
         )
         return
       }
+
+      for (let questionTypeitem of questionTypes) {
+        if (questionTypeitem.questiontype === editValue) {
+          alert('Question type already exists. Please enter a new question type.')
+          setQuestionInput('')
+          return
+        }
+      }
+
+      const questionType = {
+        questiontype: editValue
+      }
+      await updateQuestionTypeById(id, questionType)
       setEditIndex('')
       setEditValue('')
-      await patchQuestionTypes(questionTypeID, updatedQuestionTypes)
-      setQuestionsTypes(updatedQuestionTypes)
     } catch (error) {
       console.error('Error editing question type:', error)
       alert('Failed to edit question type. Please check console for details.')
@@ -114,19 +107,19 @@ function QuestionTypesList () {
       alert('Please enter a question type')
       return
     }
-    try {
-      const updatedQuestionTypes = [...questionTypes, questionTypeInput]
-
-      if (questionTypes.includes(questionTypeInput)) {
+    for (let questionTypeitem of questionTypes) {
+      if (questionTypeitem.questiontype === questionTypeInput) {
         alert('Question type already exists. Please enter a new question type.')
+        setQuestionInput('')
         return
       }
-      setQuestionsTypes(updatedQuestionTypes)
-      setQuestionInput('')
-      await insertQuestionType(questionTypeID, updatedQuestionTypes)
-      if (questionTypes.includes(questionTypeInput)) {
-        alert('Question type already exists. Please enter a new question type.')
+    }
+    try {
+      const questionType = {
+        questiontype: questionTypeInput
       }
+      await insertQuestionType(questionType)
+      setQuestionInput('')
     } catch (error) {
       console.error('Error adding question type:', error)
       alert('Failed to add question type. Please check console for details.')
@@ -141,10 +134,10 @@ function QuestionTypesList () {
           <h1 className='title'>Question Types</h1>
           <div className='toggle-list space'>
             <a href='/question-result' className='toggle-list'>
-              Change Questionresult
+              Questionresult
             </a>
             <a href='/question' className='toggle-list'>
-              Change Question
+              Question
             </a>
           </div>
         </div>
@@ -156,43 +149,45 @@ function QuestionTypesList () {
             </tr>
           </thead>
           <tbody>
-            {questionTypes.map((questionType, index) => (
-              <tr key={index}>
-                <td className='questiontype-list'>
-                  {editIndex === index ? (
-                    <InputField
-                      value={editValue}
-                      onChange={e => setEditValue(e.target.value)}
-                    />
-                  ) : (
-                    questionType
-                  )}
-                </td>
-                <td className='questiontype-list'>
-                  {editIndex === index ? (
-                    <Link
-                      className='update-link questiontype'
-                      onClick={() => editFunction(index)}
-                    >
-                      Save
-                    </Link>
-                  ) : (
-                    <Link
-                      className='update-link questiontype'
-                      onClick={() => setEditIndex(index)}
-                    >
-                      Edit
-                    </Link>
-                  )}
-                  <Link
-                    className='delete-button questiontype'
-                    onClick={() => deleteFunction(index)}
-                  >
-                    Delete
-                  </Link>
-                </td>
-              </tr>
-            ))}
+            {questionTypes
+              ? questionTypes.map((questionType, index) => (
+                  <tr key={questionType._id}>
+                    <td className='questiontype-list'>
+                      {editIndex === index ? (
+                        <InputField
+                          value={editValue}
+                          onChange={e => setEditValue(e.target.value)}
+                        />
+                      ) : (
+                        questionType.questiontype
+                      )}
+                    </td>
+                    <td className='questiontype-list'>
+                      {editIndex === index ? (
+                        <Link
+                          className='update-link questiontype'
+                          onClick={() => editFunction(questionType._id)}
+                        >
+                          Save
+                        </Link>
+                      ) : (
+                        <Link
+                          className='update-link questiontype'
+                          onClick={() => setEditIndex(index)}
+                        >
+                          Edit
+                        </Link>
+                      )}
+                      <Link
+                        className='delete-button questiontype'
+                        onClick={() => deleteFunction(questionType._id)}
+                      >
+                        Delete
+                      </Link>
+                    </td>
+                  </tr>
+                ))
+              : null}
           </tbody>
         </table>
         <h1 className='title'>Create Question Type</h1>

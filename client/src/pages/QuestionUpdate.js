@@ -70,10 +70,10 @@ function QuestionUpdate () {
                 <h1 className='title'>Questions</h1>
                 <div className='toggle-list space'>
                   <a href='/question-result' className='toggle-list'>
-                    Change Questionresult
+                    Questionresult
                   </a>
                   <a href='/question-type' className='toggle-list'>
-                    Change Questiontypes
+                    Questiontypes
                   </a>
                 </div>
               </div>

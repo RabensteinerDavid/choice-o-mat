@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { deleteAllQuestions, getQuestionTypes, insertQuestion, insertQuestionTypes } from '../api'
+import {
+  deleteAllQuestions,
+  getQuestionTypes,
+  insertQuestion,
+  insertQuestionTypes
+} from '../api'
 import '../style/questionadd.css'
 import InputField from '../components/InputField'
 import { prefilledQuestions } from './questions/PrefillQuestion'

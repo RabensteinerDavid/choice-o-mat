@@ -6,7 +6,7 @@ const insertResults = async (req, res) => {
   if (!body) {
     return res.status(400).json({
       success: false,
-      error: 'You must provide the right question result'
+      error: 'You must provide the right result'
     })
   }
 
@@ -49,7 +49,7 @@ const getResults = async (req, res) => {
   }
 }
 
-const deleteResultByID = async (req, res) => {
+const deleteResultById = async (req, res) => {
   try {
     const result = await QuestionResult.findOneAndDelete({ _id: req.params.id })
     if (!result) {
@@ -107,7 +107,7 @@ const updateResultById = async (req, res) => {
   } catch (error) {
     return res.status(404).json({
       error,
-      message: 'Question not updated!'
+      message: 'Result not updated!'
     })
   }
 }
@@ -115,7 +115,7 @@ const updateResultById = async (req, res) => {
 module.exports = {
   insertResults,
   getResults,
-  deleteResultByID,
+  deleteResultById,
   deleteAllResults,
   updateResultById
 }

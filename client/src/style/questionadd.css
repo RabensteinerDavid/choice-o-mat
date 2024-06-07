@@ -136,3 +136,7 @@ ul {
   border-radius: 5px;
   outline: none;
 }
+
+.dropdown-select{
+  font-family: Poppins, sans-serif;
+}

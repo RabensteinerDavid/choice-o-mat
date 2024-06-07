@@ -8,7 +8,7 @@ import InputField from '../components/InputField'
 import { prefilledResults } from './questions/PrefilledResults'
 import {
   deleteAllResults,
-  deleteResultByID,
+  deleteResultById,
   getResults,
   insertResults,
   updateResultById
@@ -27,14 +27,19 @@ function QuestionResult () {
   useEffect(() => {
     const fetchDataQuestionTypes = async () => {
       try {
-        const response = await getResults()
-        setResult(response.data.data)
+        const response = await getResults();
+        const sortedResults = response.data.data.sort((a, b) => {
+          const rangeA = parseInt(a.range.split('-')[0]);
+          const rangeB = parseInt(b.range.split('-')[0]);
+          return rangeB - rangeA;
+        });
+        setResult(sortedResults);
       } catch (error) {
-        console.error('Error fetching questions:', error)
+        console.error('Error fetching questions:', error);
       }
-    }
-    fetchDataQuestionTypes()
-  }, [result])
+    };
+    fetchDataQuestionTypes();
+  }, [result]);
 
   const addFunction = async () => {
     if (resultRangeMin.length === 0) {
@@ -138,7 +143,7 @@ function QuestionResult () {
 
   const deleteFunction = async index => {
     try {
-      await deleteResultByID(result[index]._id)
+      await deleteResultById(result[index]._id)
     } catch (error) {
       console.error('Error deleting question type:', error)
       alert('Failed to delete question type. Please check console for details.')
@@ -197,10 +202,10 @@ function QuestionResult () {
       <div className='wrapper'>
         <div className='toggle-list space'>
           <a href='/question-type' className='toggle-list'>
-            Change Questiontype
+            QuestionTypes
           </a>
           <a href='/question' className='toggle-list'>
-            Change Question
+            Questions
           </a>
         </div>
         <h1 className='title'>Questions Result</h1>

@@ -51,14 +51,14 @@ router.patch('/question-update/:id', upload.any('photo'), (req, res) => {
 
 router.get('/question-types', QuestionCtrlTypes.getQuestionTypes)
 router.post('/question-types', QuestionCtrlTypes.insertQuestionTypes)
-router.delete('/question-types/:id', QuestionCtrlTypes.deleteQuestionType)
+router.delete('/question-types/:id', QuestionCtrlTypes.deleteQuestionTypeById)
 router.post('/question-types/:id', QuestionCtrlTypes.insertQuestionType)
 router.delete('/question-types', QuestionCtrlTypes.deleteAllQuestionTypes)
-router.patch('/question-types/:id', QuestionCtrlTypes.patchQuestionTypes)
+router.put('/question-types/:id', QuestionCtrlTypes.updateQuestionTypeById)
 
 router.get('/question-result', QuestionCtrlResult.getResults)
 router.post('/question-result', QuestionCtrlResult.insertResults)
-router.delete('/question-result/:id', QuestionCtrlResult.deleteResultByID)
+router.delete('/question-result/:id', QuestionCtrlResult.deleteResultById)
 router.delete('/question-result', QuestionCtrlResult.deleteAllResults)
 router.put('/question-result/:id', QuestionCtrlResult.updateResultById)
 

@@ -3,9 +3,19 @@ const QuestionTypes = require('../models/question-model-types')
 const getQuestionTypes = async (req, res) => {
   try {
     const types = await QuestionTypes.find({})
-    return res.status(200).json({ success: true, types: types })
+      .then(data => {
+        return res.status(200).json({ success: true, data: data })
+      })
+      .catch(err => {
+        return res.status(404).json({ success: false, error: err })
+      })
+    if (!types || types.length === 0) {
+      return res
+        .status(404)
+        .json({ success: false, error: `Questiontypes not found` })
+    }
   } catch (error) {
-    return res.status(500).json({ success: false, error: error.message })
+    return res.status(400).json({ success: false, error: error.message })
   }
 }
 
@@ -15,29 +25,29 @@ const insertQuestionTypes = async (req, res) => {
   if (!body) {
     return res.status(400).json({
       success: false,
-      error: 'You must provide an array of question types'
+      error: 'You must provide an array of Questiontype'
     })
   }
 
-  const newQuestionTypes = await QuestionTypes.create({ questionTypes: body })
+  const newQuestionTypes = new QuestionTypes({
+    questiontype: body.questiontype
+  })
 
-  try {
-    const response = {
-      success: true,
-      types: [
-        {
-          _id: newQuestionTypes._id,
-          questionTypes: newQuestionTypes.questionTypes
-        }
-      ]
-    }
-    return res.status(201).json(response)
-  } catch (error) {
-    return res.status(400).json({
-      success: false,
-      error: error.message || 'Question types not created!'
+  newQuestionTypes
+    .save()
+    .then(() => {
+      return res.status(201).json({
+        success: true,
+        id: newQuestionTypes._id,
+        message: 'Questiontype created!'
+      })
     })
-  }
+    .catch(error => {
+      return res.status(400).json({
+        error,
+        message: 'Questiontype not created!'
+      })
+    })
 }
 
 const deleteAllQuestionTypes = async (req, res) => {
@@ -45,40 +55,46 @@ const deleteAllQuestionTypes = async (req, res) => {
     await QuestionTypes.deleteMany({})
     return res
       .status(200)
-      .json({ success: true, message: 'All question types deleted' })
+      .json({ success: true, message: 'All Questiontype deleted' })
   } catch (error) {
     return res.status(500).json({ success: false, error: error.message })
   }
 }
 
-const patchQuestionTypes = async (req, res) => {
+const updateQuestionTypeById = async (req, res) => {
   const body = req.body
-  console.log(body)
-  try {
-    const newQuestionTypes = await QuestionTypes.findOne({ _id: req.params.id })
 
-    if (!newQuestionTypes) {
-      return res
-        .status(404)
-        .json({ success: false, message: 'Question type not found' })
-    }
-
-    newQuestionTypes.questionTypes = body
-
-    console.log(newQuestionTypes)
-    await newQuestionTypes.save()
-  } catch (error) {
+  if (!body) {
     return res.status(400).json({
       success: false,
-      error: error.message || 'Failed to fetch question types'
+      error: 'You must provide a body to update'
+    })
+  }
+
+  try {
+    const questiontype = await QuestionTypes.findOne({ _id: req.params.id })
+    if (!questiontype) {
+      return res.status(404).json({
+        message: 'Questiontype not found!'
+      })
+    }
+    questiontype.questiontype = body.questiontype
+    await questiontype.save()
+    return res.status(200).json({
+      success: true,
+      id: questiontype._id,
+      message: 'Questiontype updated!'
+    })
+  } catch (error) {
+    return res.status(404).json({
+      error,
+      message: 'Question not updated!'
     })
   }
 }
 
 const insertQuestionType = async (req, res) => {
   const body = req.body
-
-  console.log(req.params.id)
 
   if (!body) {
     return res.status(400).json({
@@ -119,35 +135,17 @@ const insertQuestionType = async (req, res) => {
   }
 }
 
-const deleteQuestionType = async (req, res) => {
+const deleteQuestionTypeById = async (req, res) => {
   try {
-    const id = req.params.id.split('-')[0]
-    const index = req.params.id.split('-')[1]
-    console.log(id)
-    console.log(index)
-
-    const updatedQuestionTypes = await QuestionTypes.findOne({ _id: id })
-
-    if (!updatedQuestionTypes) {
-      return res
-        .status(404)
-        .json({ success: false, message: 'Question type not found' })
+    const questionType = await QuestionTypes.findOneAndDelete({
+      _id: req.params.id
+    })
+    if (!questionType) {
+      return res.status(404).json({ success: false, error: `Questiontype not found` })
     }
-
-    updatedQuestionTypes.questionTypes.splice(index, 1)
-
-    await updatedQuestionTypes.save()
-
-    return res
-      .status(200)
-      .json({ success: true, message: 'Question type deleted' })
+    return res.status(200).json({ success: true, data: questionType })
   } catch (error) {
-    return res
-      .status(400)
-      .json({
-        success: false,
-        error: error.message || 'Failed to delete question type'
-      })
+    return res.status(400).json({ success: false, error: error.message })
   }
 }
 
@@ -155,7 +153,7 @@ module.exports = {
   getQuestionTypes,
   insertQuestionTypes,
   deleteAllQuestionTypes,
-  patchQuestionTypes,
   insertQuestionType,
-  deleteQuestionType
+  deleteQuestionTypeById,
+  updateQuestionTypeById
 }

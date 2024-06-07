@@ -15,15 +15,15 @@ export const patchQuestion = (id, payload) => api.patch(`/question-update/${id}`
 export const deleteAnswerPhoto = (quesitionId, answerId) => api.patch(`/delete-answer-photo/${quesitionId}/${answerId}`)
 
 export const insertQuestionTypes = payload => api.post(`/question-types`, payload)
-export const insertQuestionType = (id, payload) => api.post(`/question-types/${id}`, payload)
-export const deleteQuestionType = (id) => api.delete(`/question-types/${id}`)
+export const insertQuestionType = (payload) => api.post(`/question-types/`, payload)
+export const deleteQuestionTypeById = (id) => api.delete(`/question-types/${id}`)
 export const deleteAllQuestionTypes = () => api.delete(`/question-types`)
-export const patchQuestionTypes = (id, payload) => api.patch(`/question-types/${id}`, payload)
+export const updateQuestionTypeById = (id, payload) => api.put(`/question-types/${id}`, payload)
 export const getQuestionTypes = () => api.get(`/question-types`)
 
 export const getResults = () => api.get(`/question-result`)
 export const insertResults = payload => api.post(`/question-result`, payload)
-export const deleteResultByID = (id) => api.delete(`/question-result/${id}`)
+export const deleteResultById = (id) => api.delete(`/question-result/${id}`)
 export const deleteAllResults = () => api.delete(`/question-result`)
 export const updateResultById = (id, payload) => api.put(`/question-result/${id}`, payload)
 
@@ -39,11 +39,11 @@ const apis = {
   getQuestionTypes,
   insertQuestionTypes,
   deleteAllQuestionTypes,
-  patchQuestionTypes,
-  deleteQuestionType,
+  updateQuestionTypeById,
+  deleteQuestionTypeById,
   insertResults,
   getResults,
-  deleteResultByID,
+  deleteResultById,
   deleteAllResults,
   updateResultById
 }
