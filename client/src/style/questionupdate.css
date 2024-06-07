@@ -75,3 +75,18 @@ tbody tr:hover {
 .question-list.update{
   height: 100%;
 }
+
+.question-heading-toggle{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle-list{
+  text-decoration: none;
+  color: var(--main-green);
+}
+
+.toggle-list:hover{
+  color: var(--main-darker-green);
+}

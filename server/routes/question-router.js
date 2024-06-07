@@ -50,5 +50,9 @@ router.patch('/question-update/:id', upload.any('photo'), (req, res) => {
 
 router.get('/question-types', QuestionCtrlTypes.getQuestionTypes)
 router.post('/question-types', QuestionCtrlTypes.insertQuestionTypes)
+router.delete('/question-types/:id', QuestionCtrlTypes.deleteQuestionType)
+router.post('/question-types/:id', QuestionCtrlTypes.insertQuestionType)
+router.delete('/question-types', QuestionCtrlTypes.deleteAllQuestionTypes)
+router.patch('/question-types/:id', QuestionCtrlTypes.patchQuestionTypes)
 
 module.exports = router

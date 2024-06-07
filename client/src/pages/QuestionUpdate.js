@@ -66,7 +66,12 @@ function QuestionUpdate () {
         <Droppable droppableId='droppable'>
           {provided => (
             <div>
-              <h1 className='title'>Questions</h1>
+              <div className='question-heading-toggle'>
+                <h1 className='title'>Questions</h1>
+                <a href='/question-type' className='toggle-list'>
+                  Change Questiontypes
+                </a>
+              </div>
               <table>
                 <thead>
                   <tr>

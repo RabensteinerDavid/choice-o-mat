@@ -1,0 +1,12 @@
+.questiontype-list {
+  padding: 25px !important;
+}
+
+.update-link.questiontype {
+  margin: 10px !important;
+  padding: 10px 20px;
+}
+
+.delete-button.questiontype {
+  text-decoration: none;
+}

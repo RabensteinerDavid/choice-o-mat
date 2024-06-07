@@ -15,6 +15,10 @@ export const patchQuestion = (id, payload) => api.patch(`/question-update/${id}`
 export const deleteAnswerPhoto = (quesitionId, answerId) => api.patch(`/delete-answer-photo/${quesitionId}/${answerId}`)
 
 export const insertQuestionTypes = payload => api.post(`/question-types`, payload)
+export const insertQuestionType = (id, payload) => api.post(`/question-types/${id}`, payload)
+export const deleteQuestionType = (id) => api.delete(`/question-types/${id}`)
+export const deleteAllQuestionTypes = () => api.delete(`/question-types`)
+export const patchQuestionTypes = (id, payload) => api.patch(`/question-types/${id}`, payload)
 export const getQuestionTypes = () => api.get(`/question-types`)
 
 const apis = {
@@ -27,7 +31,10 @@ const apis = {
   patchQuestion,
   deleteAllQuestions,
   getQuestionTypes,
-  insertQuestionTypes
+  insertQuestionTypes,
+  deleteAllQuestionTypes,
+  patchQuestionTypes,
+  deleteQuestionType
 }
 
 export default apis
