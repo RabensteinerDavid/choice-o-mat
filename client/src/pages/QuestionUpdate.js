@@ -68,9 +68,14 @@ function QuestionUpdate () {
             <div>
               <div className='question-heading-toggle'>
                 <h1 className='title'>Questions</h1>
-                <a href='/question-type' className='toggle-list'>
-                  Change Questiontypes
-                </a>
+                <div className='toggle-list space'>
+                  <a href='/question-result' className='toggle-list'>
+                    Change Questionresult
+                  </a>
+                  <a href='/question-type' className='toggle-list'>
+                    Change Questiontypes
+                  </a>
+                </div>
               </div>
               <table>
                 <thead>

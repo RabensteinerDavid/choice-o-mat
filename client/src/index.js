@@ -8,6 +8,7 @@ import QuestionTypesList from './pages/QuestionTypesList'
 import QuestionSetting from './pages/QuestionSetting'
 import QuestionUpdateFunction from './pages/QuestionUpdateFunction'
 import Result from './pages/questions/Result'
+import QuestionResult from './pages/QuestionResult'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -19,6 +20,7 @@ root.render(
       <Route path='/questions/:id' element={<QuestionList />} />
       <Route path='/question-update/:id' element={<QuestionUpdateFunction />} />
       <Route path='/question-type/' element={<QuestionTypesList />} />
+      <Route path='/question-result/' element={<QuestionResult />} />
     </Routes>
   </BrowserRouter>
 )

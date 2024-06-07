@@ -90,3 +90,9 @@ tbody tr:hover {
 .toggle-list:hover{
   color: var(--main-darker-green);
 }
+
+.toggle-list.space{
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}

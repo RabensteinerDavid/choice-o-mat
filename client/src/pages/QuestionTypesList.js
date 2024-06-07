@@ -139,9 +139,14 @@ function QuestionTypesList () {
       <div className='wrapper'>
         <div className='question-heading-toggle'>
           <h1 className='title'>Question Types</h1>
-          <a href='/question' className='toggle-list'>
-            Change Questions
-          </a>
+          <div className='toggle-list space'>
+            <a href='/question-result' className='toggle-list'>
+              Change Questionresult
+            </a>
+            <a href='/question' className='toggle-list'>
+              Change Question
+            </a>
+          </div>
         </div>
         <table>
           <thead>
