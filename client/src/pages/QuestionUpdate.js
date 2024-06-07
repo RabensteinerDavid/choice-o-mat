@@ -108,7 +108,7 @@ function QuestionUpdate () {
                             <td>{question.type}</td>
                             <td>{question.heading}</td>
                             <td>{question.subheading}</td>
-                            <td colSpan='4'>
+                            <td colSpan='5'>
                               {question.answers
                                 .map(
                                   answer =>

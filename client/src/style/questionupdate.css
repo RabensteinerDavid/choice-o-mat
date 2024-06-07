@@ -96,3 +96,14 @@ tbody tr:hover {
   justify-content: flex-end;
   gap: 20px;
 }
+
+.clear-button{
+  background-color: #804434;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  margin:  10px 0px 15px 0px;
+}

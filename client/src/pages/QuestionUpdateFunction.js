@@ -102,8 +102,16 @@ const QuestionUpdateFunction = () => {
         if (!obj.hasOwnProperty(key)) continue
 
         const value = obj[key]
-        if (typeof value === 'string' && value.trim() === '') return true
-        if (typeof value === 'object' && hasEmptyValues(value)) return true
+        if (
+          key !== 'explanation' &&
+          typeof value === 'string' &&
+          value.trim() === ''
+        ) {
+          return true
+        }
+        if (typeof value === 'object' && hasEmptyValues(value)) {
+          return true
+        }
       }
     }
 
@@ -147,6 +155,12 @@ const QuestionUpdateFunction = () => {
       )
     )
 
+    console.log(
+      'data',
+      JSON.stringify(
+        editedAnswers.length === 0 ? questionItem.answers : editedAnswers
+      )
+    )
     try {
       await patchQuestion(id, data)
       setSubHeading('')
@@ -217,6 +231,67 @@ const QuestionUpdateFunction = () => {
     })
   }
 
+  const handleChangeInputAnswerExplanation = (event, index) => {
+    const value = event.trim()
+    setEditedAnswers(prevAnswers => {
+      const updatedAnswers = [...prevAnswers]
+      const extendedAnswers = [...question.answers]
+
+      const mergedAnswers = [
+        ...updatedAnswers,
+        ...extendedAnswers.filter(
+          extendedAnswer =>
+            !updatedAnswers.some(
+              updatedAnswer =>
+                updatedAnswer._id &&
+                extendedAnswer._id &&
+                updatedAnswer._id === extendedAnswer._id
+            )
+        )
+      ]
+
+      if (!mergedAnswers[index]) {
+        mergedAnswers[index] = { ...question.answers[index] }
+      }
+
+      if (value === '') {
+        delete mergedAnswers[index].explanation
+      } else {
+        mergedAnswers[index].explanation = value
+      }
+
+      return mergedAnswers
+    })
+  }
+
+  const handleClearExplanation = index => {
+    setEditedAnswers(prevAnswers => {
+      const updatedAnswers = [...prevAnswers]
+      const extendedAnswers = [...question.answers]
+
+      const mergedAnswers = [
+        ...updatedAnswers,
+        ...extendedAnswers.filter(
+          extendedAnswer =>
+            !updatedAnswers.some(
+              updatedAnswer =>
+                updatedAnswer._id &&
+                extendedAnswer._id &&
+                updatedAnswer._id === extendedAnswer._id
+            )
+        )
+      ]
+
+      if (!mergedAnswers[index]) {
+        mergedAnswers[index] = { ...question.answers[index] }
+      }
+      mergedAnswers[index].explanation = ''
+      return mergedAnswers
+    })
+
+    console.log(newAnswers)
+  }
+
   const handleChangeInputPoints = (value, index, pointType) => {
     let parsedValue = parseInt(value.replace(/\D/g, ''), 10)
     parsedValue = Math.min(100, Math.max(0, parsedValue || 0))
@@ -285,6 +360,28 @@ const QuestionUpdateFunction = () => {
             }
             placeholder={answer.text}
           />
+          <div className='explanation-input'>
+            <InputField
+              label={`Explanation ${index + 1}`}
+              value={answer.explanation}
+              onChange={event =>
+                handleChangeInputAnswerExplanation(event.target.value, index)
+              }
+              placeholder={
+                answer.explanation === undefined || answer.explanation === ''
+                  ? 'Add New Explanation'
+                  : answer.explanation
+              }
+            />
+            {answer.explanation && (
+              <button
+                className='clear-button'
+                onClick={() => handleClearExplanation(index)}
+              >
+                Clear
+              </button>
+            )}
+          </div>
           <InputField
             label={`DA Points ${index + 1}`}
             value={editedAnswers[index]?.points?.da}

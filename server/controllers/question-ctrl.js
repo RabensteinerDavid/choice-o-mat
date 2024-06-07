@@ -75,6 +75,7 @@ updateQuestion = async (req, res) => {
     quest.subheading = body.subheading
     quest.page = body.page
 
+    
     if (body.answers && body.answers.length > 0) {
       body.answers.forEach((updatedAnswer, index) => {
         if (quest.answers[index]) {
@@ -169,6 +170,7 @@ patchQuestion = async (req, res) => {
           if (index !== -1) {
             quest.answers[index].points = updatedAnswer.points
             quest.answers[index].text = updatedAnswer.text
+            quest.answers[index].explanation = updatedAnswer.explanation
             quest.answers[index].photo = updatedAnswer.photo
           }
         }
