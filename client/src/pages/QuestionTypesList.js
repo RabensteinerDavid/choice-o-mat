@@ -157,6 +157,7 @@ function QuestionTypesList () {
                         <InputField
                           value={editValue}
                           onChange={e => setEditValue(e.target.value)}
+                          placeholder={questionType.questiontype}
                         />
                       ) : (
                         questionType.questiontype
