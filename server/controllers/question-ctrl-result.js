@@ -12,7 +12,8 @@ const insertResults = async (req, res) => {
 
   const result = new QuestionResult({
     range: body.range,
-    text: body.text
+    textMtd: body.textMtd,
+    textDa: body.textDa
   })
 
   result
@@ -96,7 +97,8 @@ const updateResultById = async (req, res) => {
     }
 
     result.range = body.range
-    result.text = body.text
+    result.textMtd = body.textMtd
+    result.textDa = body.textDa
 
     await result.save()
     return res.status(200).json({

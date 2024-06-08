@@ -18,28 +18,30 @@ function QuestionResult () {
   const [result, setResult] = useState('')
   const [resultRangeMin, setResultRangeMin] = useState('')
   const [resultRangeMax, setResultRangeMax] = useState('')
-  const [resultText, setResultText] = useState('')
+  const [resultTextMtd, setResultTextMtd] = useState('')
+  const [resultTextDa, setResultTextDa] = useState('')
   const [editIndex, setEditIndex] = useState(null)
   const [editValueRangeMin, setEditValueRangeMin] = useState('')
   const [editValueRangeMax, setEditValueRangeMax] = useState('')
-  const [editValueText, setEditValueText] = useState('')
+  const [editValueTextMtd, setEditValueTextMtd] = useState('')
+  const [editValueTextDa, setEditValueTextDa] = useState('')
 
   useEffect(() => {
     const fetchDataQuestionTypes = async () => {
       try {
-        const response = await getResults();
+        const response = await getResults()
         const sortedResults = response.data.data.sort((a, b) => {
-          const rangeA = parseInt(a.range.split('-')[0]);
-          const rangeB = parseInt(b.range.split('-')[0]);
-          return rangeB - rangeA;
-        });
-        setResult(sortedResults);
+          const rangeA = parseInt(a.range.split('-')[0])
+          const rangeB = parseInt(b.range.split('-')[0])
+          return rangeB - rangeA
+        })
+        setResult(sortedResults)
       } catch (error) {
-        console.error('Error fetching questions:', error);
+        console.error('Error fetching questions:', error)
       }
-    };
-    fetchDataQuestionTypes();
-  }, [result]);
+    }
+    fetchDataQuestionTypes()
+  }, [result])
 
   const addFunction = async () => {
     if (resultRangeMin.length === 0) {
@@ -50,8 +52,12 @@ function QuestionResult () {
       alert('Please enter a result range max')
       return
     }
-    if (!resultText) {
-      alert('Please enter a result text')
+    if (!resultTextMtd) {
+      alert('Please enter a result text in MTD')
+      return
+    }
+    if (!resultTextDa) {
+      alert('Please enter a result text in DA')
       return
     }
 
@@ -76,13 +82,15 @@ function QuestionResult () {
     try {
       const data = {
         range: resultRangeMin + '-' + resultRangeMax,
-        text: resultText
+        textMtd: resultTextMtd,
+        textDa: resultTextDa
       }
 
       await insertResults(data)
       setResultRangeMin('')
       setResultRangeMax('')
-      setResultText('')
+      setResultTextMtd('')
+      setResultTextDa('')
     } catch (error) {
       console.error('Error adding question type:', error)
       alert('Failed to add question type. Please check console for details.')
@@ -137,8 +145,11 @@ function QuestionResult () {
     }
   }
 
-  const handleChangeResultText = event => {
-    setResultText(event.target.value)
+  const handleChangeResultTextMtd = event => {
+    setResultTextMtd(event.target.value)
+  }
+  const handleChangeResultTextDa = event => {
+    setResultTextDa(event.target.value)
   }
 
   const deleteFunction = async index => {
@@ -185,11 +196,16 @@ function QuestionResult () {
           (editValueRangeMax.length === 0
             ? result[index].range.split('-')[1]
             : editValueRangeMax),
-        text: editValueText.length === 0 ? result[index].text : editValueText
+        textMtd:
+          editValueTextMtd.length === 0 ? result[index].textMtd : editValueTextMtd,
+        textDa:
+          editValueTextDa.length === 0 ? result[index].textDa : editValueTextDa
       }
 
       await updateResultById(result[index]._id, updatedResult)
       setEditIndex(null)
+      setEditValueTextMtd("")
+      setEditValueTextDa("")
     } catch (error) {
       console.error('Error editing question type:', error)
       alert('Failed to edit question type. Please check console for details.')
@@ -213,7 +229,8 @@ function QuestionResult () {
           <thead>
             <tr>
               <th>Range</th>
-              <th>Text</th>
+              <th>Text MTD</th>
+              <th>Text DA</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -256,21 +273,37 @@ function QuestionResult () {
                         res.range
                       )}
                     </td>
+                    <td>
+                      {editIndex === index ? (
+                        <textarea
+                          className='inputField-textarea'
+                          value={editValueTextMtd}
+                          placeholder={
+                            editValueTextMtd.length === 0
+                              ? result[index].textMtd
+                              : editValueTextMtd
+                          }
+                          onChange={e => setEditValueTextMtd(e.target.value)}
+                        />
+                      ) : (
+                        res.textMtd
+                      )}
+                    </td>
 
                     <td>
                       {editIndex === index ? (
                         <textarea
                           className='inputField-textarea'
-                          value={editValueText}
+                          value={editValueTextDa}
                           placeholder={
-                            editValueText.length === 0
-                              ? result[index].text
-                              : editValueText
+                            editValueTextDa.length === 0
+                              ? result[index].textDa
+                              : editValueTextDa
                           }
-                          onChange={e => setEditValueText(e.target.value)}
+                          onChange={e => setEditValueTextDa(e.target.value)}
                         />
                       ) : (
-                        res.text
+                        res.textDa
                       )}
                     </td>
                     <td>
@@ -313,11 +346,19 @@ function QuestionResult () {
           onChange={handleChangeRangeMax}
         />
         <label className='label'>
-          Result Text
+          Result Text MTD
           <textarea
             className='inputField-textarea'
-            value={resultText}
-            onChange={handleChangeResultText}
+            value={resultTextMtd}
+            onChange={handleChangeResultTextMtd}
+          />
+        </label>
+        <label className='label'>
+          Result Text DA
+          <textarea
+            className='inputField-textarea'
+            value={resultTextDa}
+            onChange={handleChangeResultTextDa}
           />
         </label>
         <div className='question-buttons'>
