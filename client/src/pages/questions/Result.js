@@ -29,17 +29,39 @@ function Result () {
       try {
         const response = await getResults()
 
+        let mtdInRange = false
+        let daInRange = false
+
         response.data.data.forEach(element => {
           const rangeMin = parseInt(element.range.split('-')[0])
           const rangeMax = parseInt(element.range.split('-')[1])
-          console.log(element.range)
-          if (rangeMin <= result.mtd && result.mtd <= rangeMax) {
-            setResultTextMtd(element.text)
+
+          if (result && result.mtd) {
+            if (rangeMin <= result.mtd && result.mtd <= rangeMax) {
+              setResultTextMtd(element.textMtd)
+              mtdInRange = true
+            }
           }
-          if (rangeMin <= result.da && result.da <= rangeMax) {
-            setResultTextDa(element.text)
+
+          if (result && result.da) {
+            if (rangeMin <= result.da && result.da <= rangeMax) {
+              setResultTextDa(element.textDa)
+              daInRange = true
+            }
           }
         })
+
+        if (!mtdInRange || !result.mtd) {
+          setResultTextMtd(
+            'There is an error with the MTD value or it is not in range'
+          )
+        }
+
+        if (!daInRange || !result.da) {
+          setResultTextDa(
+            'There is an error with the DA value or it is not in range'
+          )
+        }
       } catch (error) {
         console.error('Error fetching questions:', error)
       }
@@ -49,9 +71,11 @@ function Result () {
 
   function MoreInformationDa () {
     return (
-     
       <div className='more-information-wrapper'>
-        <Link to={process.env.REACT_APP_BASE_URI_DA} className='more-information'>
+        <Link
+          to={process.env.REACT_APP_BASE_URI_DA}
+          className='more-information'
+        >
           Jetzt mehr erfahren
         </Link>
       </div>
@@ -60,9 +84,11 @@ function Result () {
 
   function MoreInformationMtd () {
     return (
-     
       <div className='more-information-wrapper'>
-        <Link to={process.env.REACT_APP_BASE_URI_MTD} className='more-information'>
+        <Link
+          to={process.env.REACT_APP_BASE_URI_MTD}
+          className='more-information'
+        >
           Jetzt mehr erfahren
         </Link>
       </div>
@@ -88,7 +114,9 @@ function Result () {
                   <MoreInformationMtd />
                 </div>
                 <a className='percentage start' id='mtd-tooltip'>
-                  {result.mtd}%
+                  {!isNaN(result.mtd)
+                    ? `${result.mtd}%`
+                    : ''}
                 </a>
 
                 <Tooltip className='tooltip' anchorSelect='#mtd-tooltip'>
@@ -102,9 +130,10 @@ function Result () {
                   <MoreInformationDa />
                 </div>
                 <a className='percentage end' id='da-tooltip'>
-                  {result.da}%
+                  {!isNaN(result.da)
+                    ? `${result.da}%`
+                    : ''}
                 </a>
-
                 <Tooltip className='tooltip' anchorSelect='#da-tooltip'>
                   Du stimmst zu {result.da}% mit DA überein{' '}
                 </Tooltip>
@@ -119,9 +148,10 @@ function Result () {
                   <MoreInformationDa />
                 </div>
                 <a className='percentage start' id='da-tooltip'>
-                  {result.da}%
+                  {!isNaN(result.da)
+                    ? `${result.da}%`
+                    : ''}
                 </a>
-
                 <Tooltip className='tooltip' anchorSelect='#da-tooltip'>
                   Du stimmst zu {result.da}% mit MTD überein
                 </Tooltip>
@@ -133,9 +163,10 @@ function Result () {
                   <MoreInformationMtd />
                 </div>
                 <a className='percentage end' id='mtd-tooltip'>
-                  {result.mtd}%
+                  {!isNaN(result.mtd)
+                    ? `${result.mtd}%`
+                    : ''}
                 </a>
-
                 <Tooltip className='tooltip' anchorSelect='#mtd-tooltip'>
                   Du stimmst zu {result.mtd}% mit MTD überein
                 </Tooltip>
