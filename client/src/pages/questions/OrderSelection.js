@@ -15,7 +15,7 @@ const OrderSelection = ({ question, setFinalAnswers }) => {
   const answersCount = answers.length;
 
   const BASE_SIZE = isPortrait ? 45/answersCount : 50/answersCount; // Adjust base size based on orientation
-  const MIN_SIZE = isPortrait ? 28/answersCount : 30/answersCount; // Min size in vw or vh (important for CSS file)
+  const MIN_SIZE = isPortrait ? 25/answersCount : 23/answersCount; // Min size in vw or vh (important for CSS file)
   const BASE_FONT_SIZE = isPortrait ? 4/answersCount : 6/answersCount; // Adjust base font size based on orientation
   const FONT_DECREMENT = isPortrait ? 0.07/answersCount : 0.3/answersCount; // Abnahme der Schriftgröße in rem (Important: For CSS file)
 
