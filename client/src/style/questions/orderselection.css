@@ -1,261 +1,33 @@
 .order-selection-wrapper {
   display: flex;
+  flex-wrap: wrap;
   padding-top: 1vh;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 20px;
   height: 54vh;
-
-
-  
-  /*border: 3px solid var(--main-green); /* DEBUG */
-  
 }
-
 
 .order-selection-item {
   display: flex;
   justify-content: center;
   align-items: center;
   background: var(--main-dark-green);
-  width: 15vw;
-  height: 15vw;
   border-radius: 50%;
   color: white;
-  transition: all 1s ease-out;
-
-  font-size: 1.5rem;
-
+  transition: all 0.5s ease-out;
+  font-size: 1.5rem; /* Standard-Schriftgröße */
 }
 
-
-.order-selection-item.pressed_0 {
-  width: 25vw !important;
-  height: 25vw !important;
+.order-selection-item.pressed {
   background: var(--main-green);
-  transition: all 1s ease;
-  font-size: 2.5rem;
 }
 
-.order-selection-item.pressed_1 {
-  width: 20vw !important;
-  height: 20vw !important;
-  background: var(--main-green);
-  transition: all 1s ease;
-  font-size: 2rem;
-}
-
-.order-selection-item.pressed_2 {
-  width: 15vw !important;
-  height: 15vw !important;
-  background: var(--main-green);
-  transition: all 1s ease;
-  font-size: 1.5rem;
-}
-
-.order-selection-item.pressed_3 {
-  width: 10vw !important;
-  height: 10vw !important;
-  background: var(--main-green);
-  transition: all 1s ease;
-  font-size: 1rem;
-}
-
-.order-selection-item.pressed_4 {
-  width: 7vw !important;
-  height: 7vw !important;
-  background: var(--main-green);
-  transition: all 1s ease;
-  font-size: 0.7rem;
-}
-
-.order-selection-item.fade_not_out {
-  transition: all 0s ease;
-}
-
-
-
-@media (orientation: portrait) {
-  .order-selection-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--main-dark-green);
-    border-radius: 50%;
-    color: white;
-    transition: all 1s ease-out;
-    font-size: 1rem;
-    width: 14vw;
-    height: 14vw;
-  }
-
+/* Hier wird die Ausrichtung auf vertikal geändert, wenn das Seitenverhältnis des Bildschirms ein Portraitverhältnis ist */
+@media (max-aspect-ratio: 1/1) {
   .order-selection-wrapper {
     flex-direction: column;
-    gap: 0.5vh;
-    height: 100%;
-    
-  }
-
-  .order-selection-item.pressed_0 {
-    width: 25vw !important;
-    height: 25vw !important;
-    border-radius: 50%;
-    font-size: 1.7rem;
-  }
-
-  .order-selection-item.pressed_1 {
-    width: 20vw !important;
-    height: 20vw !important;
-    border-radius: 50%;
-    font-size: 1.5rem;
-  }
-
-  .order-selection-item.pressed_2 {
-    width: 18vw !important;
-    height: 18vw !important;
-    border-radius: 50%;
-    font-size: 1.3rem;
-  }
-
-  .order-selection-item.pressed_3 {
-    width: 15vw !important;
-    height: 15vw !important;
-    border-radius: 50%;
-    font-size: 1.1rem;
-  }
-
-  .order-selection-item.pressed_4 {
-    width: 12vw !important;
-    height: 12vw !important;
-    border-radius: 50%;
-    font-size: 1rem;
+    gap: 10px;
+    padding-top: 0;
   }
 }
-@media (max-aspect-ratio: 530/824) {
-  .order-selection-wrapper {
-    flex-direction: column;
-    gap: 0.5vh;
-    height: 100%;
-
-    
-    /*border-color: yellow; /* DEBUG */
-  }
-
-  .order-selection-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--main-dark-green);
-    border-radius: 50%;
-    color: white;
-    transition: all 1s ease-out;
-
-    height: 18vw !important;
-    width: 18vw !important;
-
-    font-size: 0.65rem;
-  }
-
-  .order-selection-item.pressed_0 {
-    width: 22vw !important;
-    height: 22vw !important;
-    border-radius: 50%;
-    font-size: 0.8rem;
-  }
-
-  .order-selection-item.pressed_1 {
-    width: 20vw !important;
-    height: 20vw !important;
-    border-radius: 50%;
-
-    font-size: 0.72rem;
-
-  }
-
-  .order-selection-item.pressed_2 {
-    width: 17vw !important;
-    height: 17vw !important;
-    border-radius: 50%;
-    font-size: 0.56rem;
-  }
-
-  .order-selection-item.pressed_3 {
-    width: 14.5vw !important;
-    height: 14.5vw !important;
-    border-radius: 50%;
-    font-size: 0.48rem;
-  }
-
-  .order-selection-item.pressed_4 {
-    width: 12vw !important;
-    height: 12vw !important;
-    border-radius: 50%;
-    font-size: 0.4rem;
-  }
-
-}
-
-@media (max-aspect-ratio: 410/824) {
-  .order-selection-wrapper {
-    flex-direction: column;
-    gap: 0.5vh;
-    height: 100%;
-
-    
-    /*border-color: red; /* DEBUG */
-  }
-
-  .order-selection-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--main-dark-green);
-    border-radius: 50%;
-    color: white;
-    transition: all 1s ease-out;
-
-    height: 23vw !important;
-    width: 23vw !important;
-
-    font-size: 0.9rem;
-  }
-
-  .order-selection-item.pressed_0 {
-    width: 31vw !important;
-    height: 31vw !important;
-    border-radius: 50%;
-    font-size: 1.2rem;
-  }
-
-  .order-selection-item.pressed_1 {
-    width: 25vw !important;
-    height: 25vw !important;
-    border-radius: 50%;
-
-    font-size: 1rem;
-
-  }
-
-  .order-selection-item.pressed_2 {
-    width: 23vw !important;
-    height: 23vw !important;
-    border-radius: 50%;
-    font-size: 0.9rem;
-  }
-
-  .order-selection-item.pressed_3 {
-    width: 18vw !important;
-    height: 18vw !important;
-    border-radius: 50%;
-    font-size: 0.68rem;
-  }
-
-  .order-selection-item.pressed_4 {
-    width: 15vw !important;
-    height: 15vw !important;
-    border-radius: 50%;
-    font-size: 0.6rem;
-  }
-
-}
-
