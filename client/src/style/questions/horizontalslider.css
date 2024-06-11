@@ -3,9 +3,8 @@
     display: flex;
     flex-direction: column;
     justify-content:space-around;
-    padding: 8vh;
+    padding: 0vh;
 
-    height: 50vh ;
     width: 80%;
     
 
@@ -22,6 +21,8 @@
 
     transition: all 1s ease-out;
     font-size: 1rem;
+
+    padding-top: 3vh;
 
     /*border: 3px solid rgb(54, 9, 255); /* DEBUG */
 }
@@ -102,6 +103,9 @@
   }
   
   @media (max-width: 700px){
+    .horitontal-slider-value-text{
+        font-size: 1rem;
+    }
     .horitontal-slider-item{
         display: flex;
         justify-content:center;
@@ -110,6 +114,8 @@
         width: 100%;
         height: 10vh;
         gap: 0.5vh;
+
+        padding-top: 3vh;
     
         transition: all 1s ease-out;
         font-size: 1rem;
@@ -125,6 +131,7 @@
         width: 100%;
         height: 100%;
         margin: 0;
+        
         
         
         flex-direction: column;

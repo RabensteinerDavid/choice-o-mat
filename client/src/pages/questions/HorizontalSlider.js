@@ -16,18 +16,12 @@ const HorizontalSlider = ({ question, setFinalAnswers }) => {
   const [sliderValues, setSliderValues] = useState(initialSliderValues)
 
   const handleSliderChange = (event, id) => {
-    const newValues = { ...sliderValues }
-    newValues[id] = parseInt(event.target.value)
-    setSliderValues(newValues)
-
-    const sliders = document.querySelectorAll('.slider')
-    let index = 0
-    for (const key in sliderValues) {
-      const value = sliderValues[key]
-      sliders[index].style.setProperty('--slider-width', `${value}%`)
-      index++
-    }
+    setSliderValues(prevValues => ({ ...prevValues, [id]: parseInt(event.target.value) }));
+    event.target.style.setProperty('--slider-width', `${event.target.value}%`);
   }
+  
+
+  
 
   useEffect(() => {
     let finalAnswersResult = {
@@ -68,6 +62,7 @@ const HorizontalSlider = ({ question, setFinalAnswers }) => {
                     />
                     <div className='horitontal-slider-value-textwrapper'>
                       <p className='horitontal-slider-value-text'>nicht gut</p>
+                      
 
                       <p className='horitontal-slider-value-text'>sehr gut</p>
                     </div>
