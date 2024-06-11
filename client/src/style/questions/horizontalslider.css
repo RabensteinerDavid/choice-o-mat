@@ -2,11 +2,12 @@
     
     display: flex;
     flex-direction: column;
-    justify-content:space-around;
+    justify-content: center;
+    align-items: center;
     padding: 0vh;
-
+ 
     width: 80%;
-    
+    height: 100%;
 
     /*border: 3px solid rgb(131, 3, 3); /* DEBUG */
 }
