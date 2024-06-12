@@ -56,6 +56,7 @@
 .navigatio-item.visited {
   border: 2px solid var(--main-green);
   box-sizing: border-box !important;
+  /*hier möchte ich das*/
 }
 
 .fox-nav {
@@ -129,4 +130,8 @@
   width: 6px;
   border-bottom: 2px solid #fff;
   border-right: 2px solid #fff;
+}
+.navigatio-item img {
+  width: 20px;
+  height: 20px;
 }
