@@ -1,93 +1,94 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import "../style/stepprogressbar.css";
-import { getMaxPageValue } from "./LoadQuestion";
-import { Player } from "@lottiefiles/react-lottie-player";
-import Eyes from "./Eyes";
-import useWindowDimensions from "./useWindowSize";
-import checkmark from "../images/checkmark.png";
+import React, { useEffect, useRef, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import '../style/stepprogressbar.css'
+import { getMaxPageValue } from './LoadQuestion'
+import { Player } from '@lottiefiles/react-lottie-player'
+import Eyes from './Eyes'
+import useWindowDimensions from './useWindowSize'
+import checkmark from '../images/checkmark.png'
+import arrow from '../images/arrow_white_noBG_green.png'
 
 const StepProgressBar = ({ prevQuestion, nextQuestion, saveAnswers }) => {
-  const navigate = useNavigate();
-  const [maxPageSide, setMaxPageSide] = useState(0);
-  const { id: page_id } = useParams();
-  const maxPageSideRef = useRef(0);
-  const { height, width } = useWindowDimensions();
+  const navigate = useNavigate()
+  const [maxPageSide, setMaxPageSide] = useState(0)
+  const { id: page_id } = useParams()
+  const maxPageSideRef = useRef(0)
+  const { height, width } = useWindowDimensions()
 
   useEffect(() => {
     const fetchMaxPageSide = async () => {
-      const maxPageValue = await getMaxPageValue();
-      setMaxPageSide(maxPageValue);
-      maxPageSideRef.current = maxPageValue;
-    };
+      const maxPageValue = await getMaxPageValue()
+      setMaxPageSide(maxPageValue)
+      maxPageSideRef.current = maxPageValue
+    }
 
-    fetchMaxPageSide();
-  }, []);
+    fetchMaxPageSide()
+  }, [])
 
-  const handleNavigation = (questionId) => {
-    navigate(`/questions/${questionId}`);
-  };
-  const handleNavigationSaveQuestion = (questionId) => {
-    saveAnswers();
-    navigate(`/questions/${questionId}`);
-  };
+  const handleNavigation = questionId => {
+    navigate(`/questions/${questionId}`)
+  }
+  const handleNavigationSaveQuestion = questionId => {
+    saveAnswers()
+    navigate(`/questions/${questionId}`)
+  }
 
-  const handleNavigationButton = (questionId) => {
-    saveAnswers();
-    navigate(`/questions/${questionId}`);
-  };
+  const handleNavigationButton = questionId => {
+    saveAnswers()
+    navigate(`/questions/${questionId}`)
+  }
 
-  const isValidQuestionId = (questionId) => {
-    return questionId > 0 && questionId <= maxPageSideRef.current + 1;
-  };
+  const isValidQuestionId = questionId => {
+    return questionId > 0 && questionId <= maxPageSideRef.current + 1
+  }
 
   const redirect = () => {
-    saveAnswers();
-    navigate("/result");
-  };
+    saveAnswers()
+    navigate('/result')
+  }
 
   return (
-    <div className="bottom-header">
+    <div className='bottom-header'>
       {isValidQuestionId(prevQuestion) && (
         <span
-          className="nav-link"
+          className='nav-link'
           onClick={() => handleNavigation(prevQuestion)}
         >
-          {"<"}
+       {""}
         </span>
       )}
-      <div className="anim-border"></div>
+      <div className='anim-border'></div>
 
       {width > 1005 ? (
-        <div className="navigation-position">
+        <div className='navigation-position'>
           {page_id == 1 && (
             <div>
               <Eyes />
               <Player
-                src="/lottie/navbar-fox.json"
-                className="fox-nav"
+                src='/lottie/navbar-fox.json'
+                className='fox-nav'
                 loop
                 autoplay
                 style={{
-                  height: "100px",
-                  width: "100px",
-                  marginTop: "-100px",
-                  marginLeft: "-30px",
+                  height: '100px',
+                  width: '100px',
+                  marginTop: '-100px',
+                  marginLeft: '-30px'
                 }}
               />
             </div>
           )}
           <div
             className={`navigatio-item ${
-              page_id == 1 ? "current" : ""
+              page_id == 1 ? 'current' : ''
             } visited`}
             onClick={() => handleNavigationButton(1)}
           >
             {page_id != 1 ? (
               <img
                 src={checkmark}
-                alt="checkmark"
-                style={{ width: "20px", height: "20px" }}
+                alt='checkmark'
+                style={{ width: '20px', height: '20px' }}
               />
             ) : (
               1
@@ -98,37 +99,37 @@ const StepProgressBar = ({ prevQuestion, nextQuestion, saveAnswers }) => {
               <React.Fragment key={index + 1}>
                 <div
                   className={`navigatio-item-bridge${
-                    index + 1 < page_id ? " visited" : ""
+                    index + 1 < page_id ? ' visited' : ''
                   }`}
                 ></div>
                 {page_id == index + 2 && (
                   <div>
                     <Eyes />
                     <Player
-                      src="/lottie/navbar-fox.json"
-                      className="fox-nav"
+                      src='/lottie/navbar-fox.json'
+                      className='fox-nav'
                       loop
                       autoplay
                       style={{
-                        height: "100px",
-                        width: "100px",
-                        marginTop: "-100px",
-                        marginLeft: "-30px",
+                        height: '100px',
+                        width: '100px',
+                        marginTop: '-100px',
+                        marginLeft: '-30px'
                       }}
                     />
                   </div>
                 )}
                 <div
                   className={`navigatio-item ${
-                    page_id == index + 2 ? "current" : ""
-                  } ${index + 1 < page_id ? "visited" : ""}`}
-                  onClick={() => handleNavigationButton(index + 2)}
+                    page_id == index + 2 ? 'current' : ''
+                  } ${index + 1 < page_id ? 'visited' : ''}`}
+                  // onClick={() => handleNavigationButton(index + 2)}
                 >
                   {index + 2 < page_id ? (
                     <img
                       src={checkmark}
-                      alt="checkmark"
-                      style={{ width: "20px", height: "20px" }}
+                      alt='checkmark'
+                      style={{ width: '20px', height: '20px' }}
                     />
                   ) : (
                     index + 2
@@ -138,29 +139,33 @@ const StepProgressBar = ({ prevQuestion, nextQuestion, saveAnswers }) => {
             ))}
         </div>
       ) : (
-        <div className="navigation-position">
-          <p className="nav-link bottom">
+        <div className='navigation-position'>
+          <p className='nav-link bottom'>
             {page_id} / {maxPageSide}
           </p>
         </div>
       )}
       {isValidQuestionId(nextQuestion) && page_id != maxPageSide && (
         <span
-          className="nav-link"
+          className='nav-link'
           onClick={() => handleNavigationSaveQuestion(nextQuestion)}
         >
-          {">"}
+            <img
+            src={arrow}
+            alt='checkmark'
+            style={{ width: '40px', height: '40px' }}
+          />
         </span>
       )}
       {page_id == maxPageSide && (
-        <div className="cross-wrapper" onClick={redirect}>
-          <div className="circle-progress-bar">
-            <div className="checkMark-progress-bar"></div>
+        <div className='cross-wrapper' onClick={redirect}>
+          <div className='circle-progress-bar'>
+            <div className='checkMark-progress-bar'></div>
           </div>
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default StepProgressBar;
+export default StepProgressBar
