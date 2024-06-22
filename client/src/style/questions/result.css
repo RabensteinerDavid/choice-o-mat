@@ -145,6 +145,9 @@
   .da.smaller {
     width: 100% !important;
   }
+  .mtd.smaller {
+    width: 100% !important;
+}
   .percentage.end {
     margin: 20px 15px 0 0 !important;
     align-self: flex-end;
