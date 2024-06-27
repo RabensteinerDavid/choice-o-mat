@@ -177,6 +177,7 @@
   height: 100%;
   width: 100%;
   flex-direction: column;
+  z-index: -1;
 }
 
 .answer-wrapper-bottom {
@@ -485,3 +486,6 @@
   }
 }
 
+.ReactModal__Overlay.ReactModal__Overlay--after-open{
+  z-index: 3;
+}
