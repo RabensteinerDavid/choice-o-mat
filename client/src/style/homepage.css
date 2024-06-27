@@ -61,6 +61,7 @@ button {
   height: 100% !important;
 }
 
+/*inhalt der box*/
 .modal-explanations {
   display: flex;
   flex-direction: column;
@@ -71,13 +72,25 @@ button {
   border-radius: 10px;
 }
 
+
+
 .modal-explanations-button {
   width: 100%;
   display: flex;
-  justify-content: start;
+  justify-content: end;
 }
 
 .explanation-text-modal {
   word-wrap: break-word;
   hyphens: auto;
+  width: 100%;
+}
+
+/*außenbox*/
+.ReactModal__Content {
+  width: 60%; /* 3/4 der Seitenbreite */
+  height: auto; /* passt sich automatisch der Höhe des Inhalts an */
+  border-radius: 8px !important; 
+  transform: translateX(45%); /* verschiebt das Modal um 50% seiner eigenen Breite nach links */
+ 
 }
