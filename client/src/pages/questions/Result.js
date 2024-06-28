@@ -105,7 +105,7 @@ function Result () {
 
       {result && (
         <>
-          {result.mtd >= result.da ? (
+          {result.mtd > result.da ? (
             <>
               <div className='mtd bigger'>
                 <div className='mtd-wrapper'>
@@ -114,9 +114,7 @@ function Result () {
                   <MoreInformationMtd />
                 </div>
                 <a className='percentage start' id='mtd-tooltip'>
-                  {!isNaN(result.mtd)
-                    ? `${result.mtd}%`
-                    : ''}
+                  {!isNaN(result.mtd) ? `${result.mtd}%` : ''}
                 </a>
 
                 <Tooltip className='tooltip' anchorSelect='#mtd-tooltip'>
@@ -130,16 +128,14 @@ function Result () {
                   <MoreInformationDa />
                 </div>
                 <a className='percentage end' id='da-tooltip'>
-                  {!isNaN(result.da)
-                    ? `${result.da}%`
-                    : ''}
+                  {!isNaN(result.da) ? `${result.da}%` : ''}
                 </a>
                 <Tooltip className='tooltip' anchorSelect='#da-tooltip'>
                   Du stimmst zu {result.da}% mit DA überein{' '}
                 </Tooltip>
               </div>
             </>
-          ) : (
+          ) : result.mtd < result.da ? (
             <>
               <div className='da bigger'>
                 <div className='da-wrapper'>
@@ -148,12 +144,10 @@ function Result () {
                   <MoreInformationDa />
                 </div>
                 <a className='percentage start' id='da-tooltip'>
-                  {!isNaN(result.da)
-                    ? `${result.da}%`
-                    : ''}
+                  {!isNaN(result.da) ? `${result.da}%` : ''}
                 </a>
                 <Tooltip className='tooltip' anchorSelect='#da-tooltip'>
-                  Du stimmst zu {result.da}% mit MTD überein
+                  Du stimmst zu {result.da}% mit DA überein
                 </Tooltip>
               </div>
               <div className='mtd smaller'>
@@ -163,12 +157,40 @@ function Result () {
                   <MoreInformationMtd />
                 </div>
                 <a className='percentage end' id='mtd-tooltip'>
-                  {!isNaN(result.mtd)
-                    ? `${result.mtd}%`
-                    : ''}
+                  {!isNaN(result.mtd) ? `${result.mtd}%` : ''}
                 </a>
                 <Tooltip className='tooltip' anchorSelect='#mtd-tooltip'>
                   Du stimmst zu {result.mtd}% mit MTD überein
+                </Tooltip>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className='mtd bigger'>
+                <div className='mtd-wrapper'>
+                  <h1>MTD</h1>
+                  <p className='result-text'>{resultTextMtd}</p>
+                  <MoreInformationMtd />
+                </div>
+                <a className='percentage start' id='mtd-tooltip'>
+                  {!isNaN(result.mtd) ? `${result.mtd}%` : ''}
+                </a>
+
+                <Tooltip className='tooltip' anchorSelect='#mtd-tooltip'>
+                  Du stimmst zu {result.mtd}% mit MTD überein
+                </Tooltip>
+              </div>
+              <div className='da middle'>
+                <div className='da-wrapper'>
+                  <h1>DA</h1>
+                  <p className='result-text'>{resultTextDa}</p>
+                  <MoreInformationDa />
+                </div>
+                <a className='percentage end' id='da-tooltip'>
+                  {!isNaN(result.da) ? `${result.da}%` : ''}
+                </a>
+                <Tooltip className='tooltip' anchorSelect='#da-tooltip'>
+                  Du stimmst zu {result.da}% mit DA überein{' '}
                 </Tooltip>
               </div>
             </>
