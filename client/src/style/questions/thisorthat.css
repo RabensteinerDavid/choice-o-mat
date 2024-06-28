@@ -78,6 +78,38 @@
   border-right: 0px;
 }
 
+.answer-button3.left:hover {
+  background-color: #5e8035;
+  color: #ececec;
+  border-right: 0px;
+}
+
+.answer-button3.right:hover {
+  background-color: #5e8035;
+  color: #ececec;
+  border-left: 0px;
+}
+
+/* .answer-button3.right:hover {
+  border: 6px solid #5e8035;
+  border-left: 0px;
+} */
+
+/* .answer-button3.left.selected:hover{
+  border: 6px solid #ececec;
+  border-right: 0px;
+}
+
+.answer-button3.right.selected:hover{
+  border: 6px solid #ececec;
+  border-left: 0px;
+}
+
+.answer-button3.left:hover {
+  border: 6px solid #5e8035;
+  border-right: 0px;
+} */
+
 .answer-button3.selected.answer-button3.right {
   background-color: #5e8035;
   color: #ececec;
