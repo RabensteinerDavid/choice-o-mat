@@ -42,6 +42,7 @@
   width: 30px;
   height: 30px;
   position: relative;
+  cursor: pointer;
 }
 
 .cross:before,
@@ -67,4 +68,8 @@
 .react-joyride__spotlight{
   background-color: rgba(255, 255, 255, 0.5) !important;
 
+}
+
+.questionmark{
+  cursor: pointer;
 }

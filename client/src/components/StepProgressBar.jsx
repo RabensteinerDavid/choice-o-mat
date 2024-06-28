@@ -151,6 +151,7 @@ const StepProgressBar = ({ prevQuestion, nextQuestion, saveAnswers }) => {
           onClick={() => handleNavigationSaveQuestion(nextQuestion)}
         >
             <img
+            className='arrow-right'
             src={arrow}
             alt='checkmark'
             style={{ width: '40px', height: '40px' }}

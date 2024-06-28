@@ -17,6 +17,7 @@
   color: white;
   transition: all 0.5s ease-out;
   font-size: 1.5rem; /* Standard-Schriftgröße */
+  cursor: pointer;
 }
 
 .order-selection-item.pressed {
