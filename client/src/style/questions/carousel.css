@@ -47,15 +47,14 @@
 
 
 /* SIEHT MAN GERADE NOCH NICHT*/
-.swiper-button-next:after{
-    /* margin-right: 300px !important; */
-    position: absolute;
-    right: -20px; /* Anpassen je nach gewünschtem Abstand */
-    top: 50%; /* Zentrieren vertikal */
-    transform: translateY(-50%);
+.swiper-button-next, .swiper-rtl .swiper-button-prev {
+    right: 2.5% !important;
+    left: auto;
 }
-.swiper-button-prev:after{
-    margin-left: 300px !important;
+
+.swiper-button-prev, .swiper-rtl .swiper-button-next {
+    left: 2.5% !important;
+    right: auto;
 }
 
 
@@ -160,4 +159,10 @@
     .swiper-button-next:after, .swiper-button-prev:after {
         transform: scale(0.6);
         }
+}
+
+@media (orientation: portrait) {
+    .swiper-button-next, .swiper-rtl .swiper-button-prev,  .swiper-button-prev, .swiper-rtl .swiper-button-next  {
+       display: none !important;
+    }
 }
