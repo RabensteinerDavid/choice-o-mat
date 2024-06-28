@@ -94,3 +94,11 @@ button {
   transform: translateX(45%); /* verschiebt das Modal um 50% seiner eigenen Breite nach links */
  
 }
+
+
+@media (orientation: portrait) {
+  .main {
+    padding-bottom: 12vh;
+  }
+}
+
