@@ -1,134 +1,135 @@
-.yesno{
-    font-size: 24px;
-    text-align: end;
-    font-style:inherit;
-    padding-bottom: -20px;
+.yesno {
+  font-size: 24px;
+  text-align: end;
+  font-style: inherit;
+  padding-bottom: -20px;
 }
 .answer-wrapper3 {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 20px;
-    padding: 20px;
-    border-bottom: 1px solid #a4a1a1; /* Add border-bottom to create a line */
-    padding-bottom: 20px; /* Adjust padding-bottom to control the spacing between the text and the line */
-  }
-  
-  .buttons3 {
-    display: flex;
-    align-items: center;
-  }
-  
-  .button-group {
-    display: flex;
-    align-items: center;
-  }
-  
-  .answer-text3 {
-    color: #000000;
-    font-family: "Poppins-Regular", Helvetica;
-    font-size: 24px;
-    font-weight: 400;
-    flex: 1;
-    text-align: left;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-bottom: 1px solid #a4a1a1; /* Add border-bottom to create a line */
+  padding-bottom: 20px; /* Adjust padding-bottom to control the spacing between the text and the line */
+}
 
-  .answer-divider {
-    height: 100%;
-    width: 1px;
-    background-color: #000;
-    margin: 0 20px; /* Anpassen des Abstands zwischen den Antworttexten */
+.buttons3 {
+  display: flex;
+  align-items: center;
+}
+
+.button-group {
+  display: flex;
+  align-items: center;
+}
+
+.answer-text3 {
+  color: #000000;
+  font-family: 'Poppins-Regular', Helvetica;
+  font-size: 24px;
+  font-weight: 400;
+  flex: 1;
+  text-align: left;
+}
+
+.answer-divider {
+  height: 100%;
+  width: 1px;
+  background-color: #000;
+  margin: 0 20px; /* Anpassen des Abstands zwischen den Antworttexten */
+}
+
+.answer-button3 {
+  background-color: #ececec;
+  border: 6px solid #ececec;
+
+  border-radius: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  color: #000;
+  font-family: 'Poppins-Medium', Helvetica;
+  font-size: 24px;
+  font-weight: 500;
+  height: 48px;
+  width: 80px;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* flex: 1; */
+}
+
+.answer-button3.left {
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  /* margin-left: 10px; */
+}
+
+.answer-button3.right {
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.answer-button3.selected.answer-button3.left {
+  background-color: #5e8035;
+  color: #ececec;
+  border-right: 0px;
+}
+
+.answer-button3.selected.answer-button3.right {
+  background-color: #5e8035;
+  color: #ececec;
+  border-left: 0px;
+}
+
+.divider {
+  height: 48px;
+  width: 1.5px;
+  background-color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 1024px) {
+  .yesno {
+    font-size: 20px; /* Reduziere die Schriftgröße für kleinere Bildschirme */
   }
-  
   .answer-button3 {
-    background-color: #ececec;
-    border: 6px solid #ececec;
-    
-    border-radius: 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    color: #000;
-    font-family: "Poppins-Medium", Helvetica;
-    font-size: 24px;
-    font-weight: 500;
-    height: 48px;
-    width: 80px;
-    padding: 0;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
+    font-size: 20px;
   }
-  
-  .answer-button3.left {
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-    margin-left: 10px;
-    
+  .answer-text3 {
+    font-size: 20px;
   }
-  
-  .answer-button3.right {
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-  }
+}
 
- 
-  
-  .answer-button3.selected.answer-button3.left {
-    background-color: #5e8035;
-    color: #ececec;
-    border-right: 0px;
+@media (max-width: 768px) {
+  .yesno {
+    font-size: 18px; /* Weitere Reduzierung der Schriftgröße für noch kleinere Bildschirme */
   }
+  .answer-button3 {
+    font-size: 18px; /* Weitere Reduzierung der Schriftgröße für noch kleinere Bildschirme */
+  }
+  .answer-text3 {
+    font-size: 18px;
+  }
+}
 
-  .answer-button3.selected.answer-button3.right {
-    background-color: #5e8035;
-    color: #ececec;
-    border-left: 0px;
+@media (max-width: 480px) {
+  .yesno {
+    font-size: 16px; /* Noch kleinere Schriftgröße für sehr kleine Bildschirme */
   }
-  
-  .divider {
-    height: 48px;
-    width: 1.5px;
-    background-color: #000;
-    margin: 0;
-    padding: 0;
-    
+  .answer-button3 {
+    font-size: 16px; /* Noch kleinere Schriftgröße für sehr kleine Bildschirme */
   }
-  
+  .answer-text3 {
+    font-size: 16px;
+  }
+}
 
-  @media (max-width: 1024px) {
-    .yesno {
-      font-size: 20px; /* Reduziere die Schriftgröße für kleinere Bildschirme */
-    }
-    .answer-button3 {
-      font-size: 20px; 
-    }
-    .answer-text3{
-        font-size: 20px;
-    }
+@media (orientation: portrait) {
+  .answer-wrapper3 {
+    width: 80vw;
   }
-  
-  @media (max-width: 768px) {
-    .yesno {
-      font-size: 18px; /* Weitere Reduzierung der Schriftgröße für noch kleinere Bildschirme */
-    }
-    .answer-button3 {
-      font-size: 18px; /* Weitere Reduzierung der Schriftgröße für noch kleinere Bildschirme */
-    }
-    .answer-text3{
-        font-size: 18px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .yesno {
-      font-size: 16px; /* Noch kleinere Schriftgröße für sehr kleine Bildschirme */
-    }
-    .answer-button3 {
-      font-size: 16px; /* Noch kleinere Schriftgröße für sehr kleine Bildschirme */
-    }
-    .answer-text3{
-        font-size: 16px;
-    }
-  }
+}
