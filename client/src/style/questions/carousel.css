@@ -81,7 +81,7 @@
 
 
 .player-wrapper{
-    background-color:#4f4047;
+    /* background-color:#4f4047; */
     width: calc(100%* 0.90); 
     height: calc(100%* 0.75); 
     border-radius: 1rem;
