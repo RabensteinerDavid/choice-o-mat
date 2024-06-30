@@ -293,3 +293,10 @@
 .cross-result:after {
   transform: rotate(-45deg);
 }
+
+.modal-result-fox-big-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

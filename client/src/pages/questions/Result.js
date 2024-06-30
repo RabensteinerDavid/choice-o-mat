@@ -130,15 +130,17 @@ function Result () {
         contentLabel='Result Modal'
         style={customStyles}
       >
-        <Player
-          src='/lottie/result-fox.json'
-          className='result-fox-big'
-          loop
-          autoplay
-          style={{
-            height: '800px',
-          }}
-        />
+        <div className='modal-result-fox-big-wrapper'>
+          <Player
+            src='/lottie/result-fox.json'
+            className='result-fox-big'
+            loop
+            autoplay
+            style={{
+              height: '800px'
+            }}
+          />
+        </div>
       </Modal>
       <div className='result-nav-wrapper'>
         <Link to='/' className='nav-link cross-result'></Link>
