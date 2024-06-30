@@ -5,11 +5,15 @@ import { getResultLocalStorage } from '../../components/LoadQuestion'
 import '../../style/questions/result.css'
 import { Tooltip } from 'react-tooltip'
 import { getResults } from '../../api'
+import Modal from 'react-modal'
+
+Modal.setAppElement('#root')
 
 function Result () {
   const [result, setResult] = useState(null)
   const [resultTextMtd, setResultTextMtd] = useState('')
   const [resultTextDa, setResultTextDa] = useState('')
+  const [modalIsOpen, setModalIsOpen] = useState(true)
 
   useEffect(() => {
     async function fetchResult () {
@@ -22,6 +26,14 @@ function Result () {
     }
 
     fetchResult()
+  }, [])
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setModalIsOpen(false)
+    }, 4000)
+
+    return () => clearTimeout(timer)
   }, [])
 
   useEffect(() => {
@@ -97,12 +109,40 @@ function Result () {
 
   const isMtdLarger = result && result.mtd >= result.da
 
+  const customStyles = {
+    content: {
+      width: '100%',
+      height: '100%',
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      backgroundColor: '#5e8035'
+    }
+  }
+
   return (
     <div className={`result-body ${isMtdLarger ? 'mtd-first' : 'da-first'}`}>
+      <Modal
+        isOpen={modalIsOpen}
+        contentLabel='Result Modal'
+        style={customStyles}
+      >
+        <Player
+          src='/lottie/result-fox.json'
+          className='result-fox-big'
+          loop
+          autoplay
+          style={{
+            height: '800px',
+          }}
+        />
+      </Modal>
       <div className='result-nav-wrapper'>
         <Link to='/' className='nav-link cross-result'></Link>
       </div>
-
       {result && (
         <>
           {result.mtd > result.da ? (
