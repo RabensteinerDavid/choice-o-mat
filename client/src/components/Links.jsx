@@ -99,7 +99,7 @@ class Links extends Component {
       )
     ) : (
       <div>
-        <p>No explanations</p>
+        <p>Keine Erklärungen</p>
       </div>
     )
     if (isTourCompleted) {
