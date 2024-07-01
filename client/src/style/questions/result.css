@@ -22,12 +22,16 @@
   background-color: #ed6a2a;
 }
 
+.da.middle {
+  width: 100% !important;
+}
+
 .da.smaller {
-  width: 60% !important;
+  width: 80% !important;
 }
 
 .mtd.smaller {
-  width: 60% !important;
+  width: 80% !important;
 }
 
 .da.bigger {
@@ -49,7 +53,7 @@
 }
 
 .result-body p {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: lighter;
   margin: 0;
 }
@@ -288,4 +292,11 @@
 
 .cross-result:after {
   transform: rotate(-45deg);
+}
+
+.modal-result-fox-big-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }

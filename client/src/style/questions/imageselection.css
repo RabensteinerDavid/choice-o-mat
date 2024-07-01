@@ -23,7 +23,7 @@
   box-shadow: 5px 5px 8px 0px rgba(61, 61, 61, 0.169);
   background-color: #F3F3F3;
   position: relative;
-  width: 300px !important; /* Breite der Kästchen */
+  width: 200px !important; /* Breite der Kästchen */
   height: 200px !important; /* Höhe der Kästchen */
   display: flex;
   align-items: center;
@@ -54,7 +54,7 @@
 
 .answer-button img {
   width: 100%;
-  height: 100px;
+  height: 100%;
   object-fit: cover;
   border-radius: 0.5rem;
 }

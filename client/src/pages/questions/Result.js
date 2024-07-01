@@ -5,11 +5,15 @@ import { getResultLocalStorage } from '../../components/LoadQuestion'
 import '../../style/questions/result.css'
 import { Tooltip } from 'react-tooltip'
 import { getResults } from '../../api'
+import Modal from 'react-modal'
+
+Modal.setAppElement('#root')
 
 function Result () {
   const [result, setResult] = useState(null)
   const [resultTextMtd, setResultTextMtd] = useState('')
   const [resultTextDa, setResultTextDa] = useState('')
+  const [modalIsOpen, setModalIsOpen] = useState(true)
 
   useEffect(() => {
     async function fetchResult () {
@@ -22,6 +26,14 @@ function Result () {
     }
 
     fetchResult()
+  }, [])
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setModalIsOpen(false)
+    }, 4000)
+
+    return () => clearTimeout(timer)
   }, [])
 
   useEffect(() => {
@@ -97,15 +109,45 @@ function Result () {
 
   const isMtdLarger = result && result.mtd >= result.da
 
+  const customStyles = {
+    content: {
+      width: '100%',
+      height: '100%',
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      backgroundColor: '#5e8035'
+    }
+  }
+
   return (
     <div className={`result-body ${isMtdLarger ? 'mtd-first' : 'da-first'}`}>
+      <Modal
+        isOpen={modalIsOpen}
+        contentLabel='Result Modal'
+        style={customStyles}
+      >
+        <div className='modal-result-fox-big-wrapper'>
+          <Player
+            src='/lottie/result-fox.json'
+            className='result-fox-big'
+            loop
+            autoplay
+            style={{
+              height: '800px'
+            }}
+          />
+        </div>
+      </Modal>
       <div className='result-nav-wrapper'>
         <Link to='/' className='nav-link cross-result'></Link>
       </div>
-
       {result && (
         <>
-          {result.mtd >= result.da ? (
+          {result.mtd > result.da ? (
             <>
               <div className='mtd bigger'>
                 <div className='mtd-wrapper'>
@@ -114,9 +156,7 @@ function Result () {
                   <MoreInformationMtd />
                 </div>
                 <a className='percentage start' id='mtd-tooltip'>
-                  {!isNaN(result.mtd)
-                    ? `${result.mtd}%`
-                    : ''}
+                  {!isNaN(result.mtd) ? `${result.mtd}%` : ''}
                 </a>
 
                 <Tooltip className='tooltip' anchorSelect='#mtd-tooltip'>
@@ -130,16 +170,14 @@ function Result () {
                   <MoreInformationDa />
                 </div>
                 <a className='percentage end' id='da-tooltip'>
-                  {!isNaN(result.da)
-                    ? `${result.da}%`
-                    : ''}
+                  {!isNaN(result.da) ? `${result.da}%` : ''}
                 </a>
                 <Tooltip className='tooltip' anchorSelect='#da-tooltip'>
                   Du stimmst zu {result.da}% mit DA überein{' '}
                 </Tooltip>
               </div>
             </>
-          ) : (
+          ) : result.mtd < result.da ? (
             <>
               <div className='da bigger'>
                 <div className='da-wrapper'>
@@ -148,12 +186,10 @@ function Result () {
                   <MoreInformationDa />
                 </div>
                 <a className='percentage start' id='da-tooltip'>
-                  {!isNaN(result.da)
-                    ? `${result.da}%`
-                    : ''}
+                  {!isNaN(result.da) ? `${result.da}%` : ''}
                 </a>
                 <Tooltip className='tooltip' anchorSelect='#da-tooltip'>
-                  Du stimmst zu {result.da}% mit MTD überein
+                  Du stimmst zu {result.da}% mit DA überein
                 </Tooltip>
               </div>
               <div className='mtd smaller'>
@@ -163,12 +199,40 @@ function Result () {
                   <MoreInformationMtd />
                 </div>
                 <a className='percentage end' id='mtd-tooltip'>
-                  {!isNaN(result.mtd)
-                    ? `${result.mtd}%`
-                    : ''}
+                  {!isNaN(result.mtd) ? `${result.mtd}%` : ''}
                 </a>
                 <Tooltip className='tooltip' anchorSelect='#mtd-tooltip'>
                   Du stimmst zu {result.mtd}% mit MTD überein
+                </Tooltip>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className='mtd bigger'>
+                <div className='mtd-wrapper'>
+                  <h1>MTD</h1>
+                  <p className='result-text'>{resultTextMtd}</p>
+                  <MoreInformationMtd />
+                </div>
+                <a className='percentage start' id='mtd-tooltip'>
+                  {!isNaN(result.mtd) ? `${result.mtd}%` : ''}
+                </a>
+
+                <Tooltip className='tooltip' anchorSelect='#mtd-tooltip'>
+                  Du stimmst zu {result.mtd}% mit MTD überein
+                </Tooltip>
+              </div>
+              <div className='da middle'>
+                <div className='da-wrapper'>
+                  <h1>DA</h1>
+                  <p className='result-text'>{resultTextDa}</p>
+                  <MoreInformationDa />
+                </div>
+                <a className='percentage end' id='da-tooltip'>
+                  {!isNaN(result.da) ? `${result.da}%` : ''}
+                </a>
+                <Tooltip className='tooltip' anchorSelect='#da-tooltip'>
+                  Du stimmst zu {result.da}% mit DA überein{' '}
                 </Tooltip>
               </div>
             </>

@@ -99,10 +99,9 @@ class Links extends Component {
       )
     ) : (
       <div>
-        <p>No explanations</p>
+        <p>Keine Erklärungen</p>
       </div>
     )
-
     if (isTourCompleted) {
       return (
         <nav>
@@ -110,7 +109,6 @@ class Links extends Component {
             <div className='cross-wrapper'>
               <Link to='/' className='nav-link cross'></Link>
             </div>
-
             <Link className='nav-link questionmark' onClick={this.openModal}>
               ?
             </Link>
@@ -137,7 +135,6 @@ class Links extends Component {
         </nav>
       )
     }
-
     return (
       <nav>
         <Joyride
@@ -150,6 +147,11 @@ class Links extends Component {
             options: {
               primaryColor: '#5e8035',
               textColor: '#5e8035'
+            },
+            spotlight: {
+              width: 10,
+              height: 50,
+              borderRadius: '100%'
             }
           }}
         />
