@@ -75,8 +75,8 @@ const OrderSelection = ({ question, setFinalAnswers }) => {
       const percentMtd = isNaN(parseInt(points.mtd) / totalMtd)
         ? 0
         : parseInt(points.mtd) / totalMtd;
-      finalAnswersResult['da'] += percentDa * 100;
-      finalAnswersResult['mtd'] += percentMtd * 100;
+      finalAnswersResult['da'] += percentDa;
+      finalAnswersResult['mtd'] += percentMtd;
     });
 
     setFinalAnswers(finalAnswersResult);

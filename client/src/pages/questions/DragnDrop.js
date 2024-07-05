@@ -39,9 +39,9 @@ const DragnDrop = ({ question, setFinalAnswers }) => {
     for (const key in finalAnswers) {
       const value = finalAnswers[key]
       finalAnswersResult['da'] +=
-        parseInt(findPointsToAnswer(answers, value).da) / 4
+        parseInt(findPointsToAnswer(answers, value).da) / 8
       finalAnswersResult['mtd'] +=
-        parseInt(findPointsToAnswer(answers, value).mtd) / 4
+        parseInt(findPointsToAnswer(answers, value).mtd) / 8
     }
     setFinalAnswers(finalAnswersResult)
   }, [finalAnswers])

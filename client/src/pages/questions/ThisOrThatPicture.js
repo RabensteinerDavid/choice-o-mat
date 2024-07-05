@@ -51,9 +51,9 @@ const ThisOrThatPicture = ({ question, setFinalAnswers }) => {
     for (const key in focusedButtons) {
       const value = focusedButtons[key]
       finalAnswersResult['da'] +=
-        parseInt(findPointsToAnswer(answers, value).da) / 3
+        parseInt(findPointsToAnswer(answers, value).da) / 6
       finalAnswersResult['mtd'] +=
-        parseInt(findPointsToAnswer(answers, value).mtd) / 3
+        parseInt(findPointsToAnswer(answers, value).mtd) / 6
     }
     setFinalAnswers(finalAnswersResult)
   }, [focusedButtons])

@@ -52,9 +52,9 @@ const Carousel = ({ question, setFinalAnswers }) => {
     for (const key in focusedButtons) {
       const value = focusedButtons[key]
       finalAnswersResult['da'] +=
-        parseInt(findPointsToAnswer(answers, value).da) / 2
+        parseInt(findPointsToAnswer(answers, value).da) / 2 / 6
       finalAnswersResult['mtd'] +=
-        parseInt(findPointsToAnswer(answers, value).mtd) / 2
+        parseInt(findPointsToAnswer(answers, value).mtd) / 2 / 6
     }
     setFinalAnswers(finalAnswersResult)
   }, [focusedButtons])

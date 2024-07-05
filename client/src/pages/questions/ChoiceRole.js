@@ -39,9 +39,9 @@ const ChoiceRole = ({ question, setFinalAnswers }) => {
     console.log(finalAnswer)
     if (finalAnswer) {
       finalAnswersResult['da'] +=
-        parseInt(findPointsToAnswer(answers, finalAnswer).da) / 1
+        parseInt(findPointsToAnswer(answers, finalAnswer).da) / 6
       finalAnswersResult['mtd'] +=
-        parseInt(findPointsToAnswer(answers, finalAnswer).mtd) / 1
+        parseInt(findPointsToAnswer(answers, finalAnswer).mtd) / 6
     }
     setFinalAnswers(finalAnswersResult)
   }, [finalAnswer])
