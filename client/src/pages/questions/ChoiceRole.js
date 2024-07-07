@@ -84,10 +84,12 @@ const ChoiceRole = ({ question, setFinalAnswers }) => {
                     //style={{ height: '400px', width: '400px' }}
                   />
                 ) : (
-                  <img
-                    src='/PlaceholderImageQ10.png'
-                    alt='Platzhalterbild'
-                    //style={{ height: '400px', width: '400px' }}
+                  <Player
+                    src='/lottie/Fox_Hello.json'
+                    alt="placeholderImage"
+                    className='player'
+                    loop
+                    autoplay
                   />
                 )}
               </div>
