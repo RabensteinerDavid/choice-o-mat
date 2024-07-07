@@ -110,7 +110,7 @@
 }
 
 @media (orientation: landscape) {
-    .answer-element {
+    .answer-element.thisorthat {
         width: auto !important;
         height: auto !important;
     }

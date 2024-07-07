@@ -69,7 +69,7 @@ const ThisOrThatPicture = ({ question, setFinalAnswers }) => {
               {answers.map((answer, index) => (
                 <React.Fragment key={answer._id}>
                   <div
-                    className={`answer-element ${
+                    className={`answer-element thisorthat ${
                       focusedButtons.includes(answer._id) ? 'focused' : ''
                     }`}
                     onClick={() => toggleFocus(answer._id)}

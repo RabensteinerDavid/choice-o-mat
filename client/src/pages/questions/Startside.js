@@ -4,12 +4,11 @@ import '../../style/startside.css'
 import '@fontsource/poppins'
 import '@fontsource/poppins/700.css'
 import '@fontsource/poppins/200.css'
-import fhLogo from '../../images/fh_ooe_logo.png'
 import fhLogoLight from '../../images/fh_ooe_logo_light.png'
 import '../../style/homepage.css'
 import { resetResult } from '../../components/LoadQuestion'
 import useWindowDimensions from '../../components/useWindowSize'
-import NavBar from '../../components/NavBar'
+import { Player } from '@lottiefiles/react-lottie-player'
 
 function StartButton () {
   return (
@@ -30,7 +29,15 @@ function Startside () {
   return width > height ? (
     <div className='app'>
       <div className='app-item'>
-        <img className='fh-logo' src={fhLogo} alt='fhooe.logo' width='20%' />
+      <Player
+          src='/lottie/landscape.json'
+          className='fox-nav-startside'
+          loop
+          autoplay
+          style={{
+            height: '100%'
+          }}
+        />
       </div>
       <div className='app-item hero'>
         <h1 className='hero-heading'>MTD oder DA?</h1>
@@ -40,7 +47,6 @@ function Startside () {
         </p>
         <StartButton />
       </div>
-      <div className='background-image'></div>
     </div>
   ) : (
     <div className='app portrait'>
@@ -51,8 +57,15 @@ function Startside () {
           alt='fhooe.logo'
           width='40%'
         />
+        <Player
+          src='/lottie/portrait.json'
+          loop
+          autoplay
+          style={{
+            width: '100%'
+          }}
+        />
       </div>
-      <div className='hero-light'></div>
       <div className='app-item-text-wrapper'>
         <div className='app-item-text heading'>MTD oder DA?</div>
         <div className='app-item-text details'>

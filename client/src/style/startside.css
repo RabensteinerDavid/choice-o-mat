@@ -81,8 +81,8 @@
 }
 
 .hero-light {
-  height: 40vh;
-  background: var(--main-green);
+  height: 30vh;
+  /* background: var(--main-green); */
 }
 
 .app-item.light {
@@ -142,5 +142,35 @@
     padding: 26px;
     font-size: 1.25rem;
     width: 180px;
+  }
+}
+
+.fox-nav-startside {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  height: 100%;
+}
+
+@media (orientation: landscape) and (max-width: 1200px) {
+  .hero-heading {
+    font-size: 3.5rem;
+  }
+}
+
+@media (orientation: landscape) and (max-width: 970px) {
+  .hero-heading {
+    font-size: 2.5rem;
+  }
+}
+@media (orientation: portrait)  {
+  .app-item-text-wrapper {
+    flex: 0 1 auto !important; 
+  }
+}
+@media (orientation: portrait) and (min-width: 500px)and (max-width: 1000px) {
+  .app-item-text-wrapper {
+    padding-bottom: 150px;
   }
 }
