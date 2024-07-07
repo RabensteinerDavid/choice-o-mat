@@ -1,3 +1,4 @@
+/* Allgemeine Stile */
 .main {
   display: flex;
   flex-direction: column;
@@ -83,14 +84,11 @@
   color: white;
 }
 
-
-
-/* Mobile Styles */
-@media (max-width: 1000px) {
+/* iPad */
+@media (min-width: 700px) and (max-width: 1000px) {
   .content {
     gap: 6vh;
     padding-top: 8vh;
-    
   }
 
   .left-column,
@@ -116,7 +114,8 @@
   }
 }
 
-@media (max-width: 800px) {
+/* Tablets und kleine Laptops */
+@media (min-width: 700px) and (max-width: 800px) {
   .button {
     height: 5.5vh;
     width: 18vh;
@@ -130,27 +129,28 @@
 
   .player,
   .middle-column img {
-    height: 30vh;
-    width: 30vh;
+    height: 25vh;
+    width: 25vh;
   }
   
   .right-column,
-  .left-column{
+  .left-column {
     gap: 6vh;
   }
 
   .main.choicerole {
     padding-bottom: 1vh; 
   }
-
-  
 }
+  
 
+
+/* Handy Ansicht (kleiner als 700px) */
 @media (max-width: 700px) {
   .content {
     flex-direction: column;
-    gap: 0.5vh;
-    padding-top: 2vh; 
+    gap: 1vh;
+    padding-top: 10vh;
   }
 
   .left-column,
@@ -171,41 +171,6 @@
   }
 
   .button {
-    height: 5.5vh;
-    width: 19vh;
-    font-size: 1.5vh;
-  }
-
-  .button-icon {
-    height: 4vh;
-    width: 4vh;
-  }
-
-  .middle-column {
-    justify-content: center;
-    align-items: center;
-  }
-
-  .player,
-  .middle-column img {
-    height: 25vh !important;
-    width: 25vh !important;
-  }
-
-  .left-column > button:nth-child(2) {
-    transform: translateY(-6vh);
-  }
-
-  .right-column > button:nth-child(2) {
-    transform: translateY(6vh) !important;
-  }
-
-  
-}
-
-
-@media (max-width: 600px) {
-  .button {
     height: 4vh;
     width: 13vh;
     font-size: 1.2vh;
@@ -216,19 +181,22 @@
     width: 3vh;
   }
 
+  .middle-column {
+    justify-content: center;
+    align-items: center;
+  }
+
   .player,
   .middle-column img {
-    height: 20vh;
-    width: 20vh;
+    height: 20vh !important;
+    width: 20vh !important;
   }
 
-  .left-column,
-  .right-column{
-    gap: 1vh;
+  .left-column > button:nth-child(2) {
+    transform: translateY(-6vh);
   }
 
-  .content{
-    gap: 1vh;
-    padding-top: 8vh;
+  .right-column > button:nth-child(2) {
+    transform: translateY(6vh) !important;
   }
 }
