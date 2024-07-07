@@ -136,6 +136,7 @@
   height: 20px;
 }
 
-.arrow-right{
+.arrow-right {
   cursor: pointer;
+  padding-right: 2.5vw;
 }

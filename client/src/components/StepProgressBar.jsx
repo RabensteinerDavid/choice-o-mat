@@ -154,7 +154,7 @@ const StepProgressBar = ({ prevQuestion, nextQuestion, saveAnswers }) => {
             className='arrow-right'
             src={arrow}
             alt='checkmark'
-            style={{ width: '40px', height: '40px' }}
+            style={{ width: '80%', height: '80%' }}
           />
         </span>
       )}
