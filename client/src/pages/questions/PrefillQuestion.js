@@ -55,14 +55,14 @@ export const prefilledQuestions = [
       "type": "ImageSelection",
       "page": 4,
       "answers": [
-        { "text": "Kino", "photo": "example.png", "points": { "da": 6, "mtd": 4 } },
-        { "text": "Museum", "photo": "example.png", "points": { "da": 5, "mtd": 5 } },
-        { "text": "Influencer", "photo": "example.png", "points": { "da": 3, "mtd": 7 } },
-        { "text": "Gaming mit Headset ", "photo": "example.png", "points": { "da": 3, "mtd": 7 } },
-        { "text": "Zeichnen", "photo": "example.png", "points": { "da": 9, "mtd": 1 } },
-        { "text": "It-Projekt zusammen", "photo": "example.png", "points": { "da": 1, "mtd": 9 } },
-        { "text": "Programmieren", "photo": "example.png", "points": { "da": 1, "mtd": 9 } },
-        { "text": "Tagebuch schreiben", "photo": "example.png", "points": { "da": 7, "mtd": 3 } }
+        { "text": "Kino", "points": { "da": 6, "mtd": 4 } },
+        { "text": "Museum", "points": { "da": 5, "mtd": 5 } },
+        { "text": "Influencer", "points": { "da": 3, "mtd": 7 } },
+        { "text": "Gaming mit Headset ", "points": { "da": 3, "mtd": 7 } },
+        { "text": "Zeichnen", "points": { "da": 9, "mtd": 1 } },
+        { "text": "It-Projekt zusammen", "points": { "da": 1, "mtd": 9 } },
+        { "text": "Programmieren", "points": { "da": 1, "mtd": 9 } },
+        { "text": "Tagebuch schreiben", "points": { "da": 7, "mtd": 3 } }
         
       ]
     },
