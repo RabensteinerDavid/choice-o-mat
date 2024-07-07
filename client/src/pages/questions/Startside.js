@@ -17,9 +17,9 @@ function StartButton () {
         Jetzt Starten
       </Link>
       <br></br>
-      <Link to='/question' className='add-question-button'>
+      {/* <Link to='/question' className='add-question-button'>
         Add new Question
-      </Link>
+      </Link> */}
     </div>
   )
 }

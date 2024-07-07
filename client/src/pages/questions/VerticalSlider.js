@@ -66,7 +66,7 @@ const VerticalSlider = ({ question, pageNumber, maxPage, setFinalAnswers }) => {
                   </div>
                   <div className='vertical-slider-agenda-item'>
                     <span className='down-arrow'></span>
-                    <h2 className='arrow-container'>Schlecht</h2>
+                    <h2 className='arrow-container'>Weniger gut</h2>
                   </div>
                 </div>
                 <div className='vertical-slider-item-wrapper'>
@@ -92,7 +92,7 @@ const VerticalSlider = ({ question, pageNumber, maxPage, setFinalAnswers }) => {
                   </div>
                   <div className='vertical-slider-agenda-item-horizontal right'>
                     <h2 className='arrow-container-horizontal'>
-                      <span className='right-arrow'></span> Schlecht
+                      <span className='right-arrow'></span> Weniger gut
                     </h2>
                   </div>
                 </div>

@@ -88,17 +88,23 @@ button {
 
 /*außenbox*/
 .ReactModal__Content {
-  width: 60%; /* 3/4 der Seitenbreite */
-  height: auto; /* passt sich automatisch der Höhe des Inhalts an */
+  width: 60%; 
+  height: auto; 
   border-radius: 8px !important; 
-  transform: translateX(52%); /* verschiebt das Modal um 50% seiner eigenen Breite nach links */
- 
+  transform: translateX(52%); 
 }
 
 
 @media (orientation: portrait) {
   .main {
     padding-bottom: 12vh;
+  }
+
+  .ReactModal__Content {
+    width: 70%; 
+    height: auto; 
+    border-radius: 8px !important; 
+    transform: translateX(0%); 
   }
 }
 
